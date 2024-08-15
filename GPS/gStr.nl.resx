@@ -531,4 +531,43 @@
   <data name="gsXTEChart" xml:space="preserve">
     <value>XTE Grafiek</value>
   </data>
+  <data name="gsAutoConfigOff" xml:space="preserve">
+    <value>Auto config uit!</value>
+  </data>
+  <data name="gsAutoSwitchOff" xml:space="preserve">
+    <value>Autoschakelaar staat uit!</value>
+  </data>
+  <data name="gsCurrentPloughWidth" xml:space="preserve">
+    <value>Huidige ploeg breedte</value>
+  </data>
+  <data name="gsDeadzoneinmm" xml:space="preserve">
+    <value>Deadzone in mm</value>
+  </data>
+  <data name="gsDesiredPloughWidth" xml:space="preserve">
+    <value>Gewenste ploeg breedte</value>
+  </data>
+  <data name="gsHoldPlough" xml:space="preserve">
+    <value>Vast</value>
+  </data>
+  <data name="gsMax" xml:space="preserve">
+    <value>Max breedte</value>
+  </data>
+  <data name="gsMin" xml:space="preserve">
+    <value>Min breedte</value>
+  </data>
+  <data name="gsNoline" xml:space="preserve">
+    <value>Geen AB-Lijn</value>
+  </data>
+  <data name="gsPloughControl" xml:space="preserve">
+    <value>Ploeg besturing</value>
+  </data>
+  <data name="gsSectionoff" xml:space="preserve">
+    <value>Sectie knop staat uit!</value>
+  </data>
+  <data name="gsSmaller" xml:space="preserve">
+    <value>Smaller</value>
+  </data>
+  <data name="gsWider" xml:space="preserve">
+    <value>Breder</value>
+  </data>
 </root>

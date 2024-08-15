@@ -545,6 +545,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>gStr.lv.resx</DependentUpon>
     </Compile>
+    <Compile Include="gStr.nl.Designer.cs" />
+    <Compile Include="gStr.nl1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>gStr.nl.resx</DependentUpon>
+    </Compile>
     <Compile Include="gStr.no.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -854,6 +860,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>gStr.lv.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="gStr.nl.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>gStr.nl1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="gStr.no.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>gStr.no.Designer.cs</LastGenOutput>
@@ -981,6 +991,8 @@
     <None Include="Resources\invert.png" />
     <None Include="Resources\ploughoff.png" />
     <None Include="Resources\ploughon.png" />
+    <None Include="Resources\plauto1.png" />
+    <None Include="Resources\plman.png" />
     <Content Include="Resources\TF012.WAV" />
     <None Include="Resources\SectionOn.wav" />
     <None Include="Resources\SectionOff.wav" />

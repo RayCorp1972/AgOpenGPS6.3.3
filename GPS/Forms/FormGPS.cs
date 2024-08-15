@@ -1,5 +1,8 @@
 ﻿//Please, if you use this, share the improvements
 
+// added plough control
+
+
 using AgOpenGPS;
 using AgOpenGPS.Properties;
 using OpenTK;
@@ -352,6 +355,48 @@ namespace AgOpenGPS
             shape = new ShapeFile(this);
         }
 
+        private void btnPloughControl_Click(object sender, EventArgs e)
+        {
+            if (isPlougOn)
+            {
+                // Load images from resources
+                Image plAuto1 = Resources.plAuto1;
+                Image plMan = Resources.plMan;
+
+
+                if (IsSameImage(btnPloughControl.BackgroundImage, plAuto1))
+                {
+                    btnPloughControl.BackgroundImage = plMan;
+                    PlAuto = false;
+
+                }
+
+                else if (IsSameImage(btnPloughControl.BackgroundImage, plMan))
+                {
+
+                    btnPloughControl.BackgroundImage = plAuto1;
+                    PlAuto = true;
+                }
+            }
+        }
+
+
+        private bool IsSameImage(Image img1, Image img2)
+        {
+            if (img1 == null || img2 == null)
+            {
+                return false;
+            }
+
+            using (MemoryStream ms1 = new MemoryStream(), ms2 = new MemoryStream())
+            {
+                img1.Save(ms1, img1.RawFormat);
+                img2.Save(ms2, img2.RawFormat);
+                return ms1.ToArray().SequenceEqual(ms2.ToArray());
+            }
+        }
+
+
         private void FormGPS_Load(object sender, EventArgs e)
         {
 
@@ -368,6 +413,7 @@ namespace AgOpenGPS
             else
             {
                 //btnPloughControl.Visible = false;
+                PlAuto = false;
             }
             this.MouseWheel += ZoomByMouseWheel;
 
