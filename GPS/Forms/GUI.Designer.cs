@@ -1355,6 +1355,27 @@ namespace AgOpenGPS
                         }
                     }
 
+                    //Pwm plough Minus
+                    if (point.X > 150 && point.X < 170)
+                    {
+                        if (point.Y > 60 && point.Y < 365)
+                        {
+                            PwmPloughManualSetMin();
+
+                        }
+                    }
+
+                    //Pwm plough Plus
+
+                    if (point.X > 48 && point.X < 90)
+                    {
+                        if (point.Y > 60 && point.Y < 365)
+                        {
+
+                            PwmPloughManualSetPlus();
+                        }
+                    }
+
                     //tram override
                     if (tool.isDisplayTramControl && (point.Y > 68 && point.Y < 120))
                     {

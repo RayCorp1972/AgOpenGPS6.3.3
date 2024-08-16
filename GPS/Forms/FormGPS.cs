@@ -864,6 +864,36 @@ namespace AgOpenGPS
             }
         }
 
+        public void PwmPloughManualSetPlus()
+        {
+
+
+            ploughWidth = Properties.Settings.Default.setArdMac_user1;
+            byte incrementAmount = Properties.Settings.Default.setArdMac_user8; // You can adjust this value to change the increment amount
+            ploughWidth += incrementAmount;
+            Properties.Settings.Default.setArdMac_user1 = (byte)ploughWidth;
+            p_238.pgn[p_238.user1] = (byte)ploughWidth;
+            SendPgnToLoop(p_238.pgn);
+            Properties.Settings.Default.Save();
+
+        }
+
+
+        public void PwmPloughManualSetMin()
+        {
+            ploughWidth = Properties.Settings.Default.setArdMac_user1;
+            byte decrementAmount = Properties.Settings.Default.setArdMac_user8;
+            ploughWidth -= decrementAmount;
+            Properties.Settings.Default.setArdMac_user1 = (byte)ploughWidth;
+            p_238.pgn[p_238.user1] = (byte)ploughWidth;
+            SendPgnToLoop(p_238.pgn);
+            Properties.Settings.Default.Save();
+
+
+
+
+        }
+
         public void KeyboardToText(TextBox sender, Form owner)
         {
             var colour = sender.BackColor;

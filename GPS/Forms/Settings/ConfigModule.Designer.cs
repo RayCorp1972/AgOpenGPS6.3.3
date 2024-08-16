@@ -18,6 +18,29 @@ namespace AgOpenGPS
         }
 
         #endregion
+
+
+        private void aPlough_Enter(object sender, EventArgs e)
+        {
+            nudUser1.Value = Properties.Settings.Default.setArdMac_user1;
+            nudUser3.Value = 0;
+            nudUser4.Value = 0;
+            nudPwmMax.Value = Properties.Settings.Default.setArdMac_user6;
+            nudPwmMin.Value = Properties.Settings.Default.setArdMac_user7;
+            nudDeadzone.Value = Properties.Settings.Default.setArdMac_user5;
+            nudPwmSet.Value = Properties.Settings.Default.setArdMac_user11;
+
+
+            mf.p_238.pgn[mf.p_238.user2] = 0;
+
+            btnSendMachinePGN.Focus();
+
+        }
+
+        private void aPlough_Leave(object sender, EventArgs e)
+        {
+            SaveSettingsMachine();
+        }
         private void Enable_AlertM_Click(object sender, EventArgs e)
         {
             pboxSendMachine.Visible = true;
@@ -54,10 +77,10 @@ namespace AgOpenGPS
             nudRaiseTime.Value = (decimal)Properties.Settings.Default.setArdMac_hydRaiseTime;
             nudLowerTime.Value = (decimal)Properties.Settings.Default.setArdMac_hydLowerTime;
 
-            nudUser1Old.Value = Properties.Settings.Default.setArdMac_user1;
-            nudUser2.Value = Properties.Settings.Default.setArdMac_user2;
-            nudUser3.Value = Properties.Settings.Default.setArdMac_user3;
-            nudUser4Old.Value = Properties.Settings.Default.setArdMac_user4;
+            //nudUser1.Value = Properties.Settings.Default.setArdMac_user1;
+            //nudUser2.Value = Properties.Settings.Default.setArdMac_user2;
+            //nudUser3.Value = Properties.Settings.Default.setArdMac_user3;
+            //nudUser4.Value = Properties.Settings.Default.setArdMac_user4;
 
             btnSendMachinePGN.Focus();
 
@@ -69,7 +92,7 @@ namespace AgOpenGPS
         }
 
 
-        private void nudPwmMin_Click(object sender, EventArgs e)
+        private void nudDeadzone_Click(object sender, EventArgs e)
         {
             if (mf.KeypadToNUD((NudlessNumericUpDown)sender, this))
             {
@@ -77,7 +100,16 @@ namespace AgOpenGPS
             }
         }
 
+
         private void nudPwmMax_Click(object sender, EventArgs e)
+        {
+            if (mf.KeypadToNUD((NudlessNumericUpDown)sender, this))
+            {
+                pboxSendMachine.Visible = true;
+            }
+        }
+
+        private void nudPwmMin_Click(object sender, EventArgs e)
         {
             if (mf.KeypadToNUD((NudlessNumericUpDown)sender, this))
             {
@@ -143,6 +175,19 @@ namespace AgOpenGPS
                 pboxSendMachine.Visible = true;
             }
         }
+
+
+        private void nudPwmSet_Click(object sender, EventArgs e)
+        {
+            if (mf.KeypadToNUD((NudlessNumericUpDown)sender, this))
+            {
+                pboxSendMachine.Visible = true;
+            }
+        }
+
+
+
+
         private void cboxIsHydOn_CheckStateChanged(object sender, EventArgs e)
         {
             if (cboxIsHydOn.Checked)
@@ -164,42 +209,62 @@ namespace AgOpenGPS
 
         private void SaveSettingsMachine()
         {
-            int set = 1;
-            int reset = 2046;
-            int sett = 0;
+            {
+                int set = 1;
+                int reset = 2046;
+                int sett = 0;
 
-            if (cboxMachInvertRelays.Checked) sett |= set;
-            else sett &= reset;
+                if (cboxMachInvertRelays.Checked) sett |= set;
+                else sett &= reset;
 
-            set <<= 1;
-            reset <<= 1;
-            reset += 1;
-            if (cboxIsHydOn.Checked) sett |= set;
-            else sett &= reset;
+                set <<= 1;
+                reset <<= 1;
+                reset += 1;
+                if (cboxIsHydOn.Checked) sett |= set;
+                else sett &= reset;
 
-            Properties.Settings.Default.setArdMac_setting0 = (byte)sett;
-            Properties.Settings.Default.setArdMac_hydRaiseTime = (byte)nudRaiseTime.Value;
-            Properties.Settings.Default.setArdMac_hydLowerTime = (byte)nudLowerTime.Value;
+                Properties.Settings.Default.setArdMac_setting0 = (byte)sett;
+                Properties.Settings.Default.setArdMac_hydRaiseTime = (byte)nudRaiseTime.Value;
+                Properties.Settings.Default.setArdMac_hydLowerTime = (byte)nudLowerTime.Value;
 
-            Properties.Settings.Default.setArdMac_user1 = (byte)nudUser1Old.Value;
-            Properties.Settings.Default.setArdMac_user2 = (byte)nudUser2.Value;
-            Properties.Settings.Default.setArdMac_user3 = (byte)nudUser3.Value;
-            Properties.Settings.Default.setArdMac_user4 = (byte)nudUser4Old.Value;
 
-            Properties.Settings.Default.setVehicle_hydraulicLiftLookAhead = (double)nudHydLiftLookAhead.Value;
-            mf.vehicle.hydLiftLookAheadTime = Properties.Settings.Default.setVehicle_hydraulicLiftLookAhead;
+                Properties.Settings.Default.setArdMac_user1 = (byte)(nudUser1.Value);
+                Properties.Settings.Default.setArdMac_user2 = 0;
+                Properties.Settings.Default.setArdMac_user3 = 0;
+                Properties.Settings.Default.setArdMac_user4 = 0;
+                Properties.Settings.Default.setArdMac_user5 = (byte)nudDeadzone.Value; // Deadzone
+                Properties.Settings.Default.setArdMac_user6 = (byte)nudPwmMax.Value; // Pwm max
+                Properties.Settings.Default.setArdMac_user7 = (byte)nudPwmMin.Value; // Pwm Min
+                Properties.Settings.Default.setArdMac_user8 = (byte)nudPwmSet.Value; // PwmSet
 
-            mf.p_238.pgn[mf.p_238.set0] = (byte)sett;
-            mf.p_238.pgn[mf.p_238.raiseTime] = (byte)nudRaiseTime.Value;
-            mf.p_238.pgn[mf.p_238.lowerTime] = (byte)nudLowerTime.Value;
 
-            mf.p_238.pgn[mf.p_238.user1] = (byte)nudUser1Old.Value;
-            mf.p_238.pgn[mf.p_238.user2] = (byte)nudUser2.Value;
-            mf.p_238.pgn[mf.p_238.user3] = (byte)nudUser3.Value;
-            mf.p_238.pgn[mf.p_238.user4] = (byte)nudUser4Old.Value;
+                Properties.Settings.Default.setVehicle_hydraulicLiftLookAhead = (double)nudHydLiftLookAhead.Value;
+                mf.vehicle.hydLiftLookAheadTime = Properties.Settings.Default.setVehicle_hydraulicLiftLookAhead;
 
-            mf.SendPgnToLoop(mf.p_238.pgn);
-            pboxSendMachine.Visible = false;
+                mf.p_238.pgn[mf.p_238.set0] = (byte)sett;
+                mf.p_238.pgn[mf.p_238.raiseTime] = (byte)nudRaiseTime.Value;
+                mf.p_238.pgn[mf.p_238.lowerTime] = (byte)nudLowerTime.Value;
+
+                mf.p_238.pgn[mf.p_238.user1] = (byte)(nudUser1.Value);                        //Target width cm 
+                mf.p_238.pgn[mf.p_238.user5] = (byte)nudDeadzone.Value;
+                mf.p_238.pgn[mf.p_238.user6] = (byte)nudPwmMax.Value;
+                mf.p_238.pgn[mf.p_238.user7] = (byte)nudPwmMin.Value;
+                mf.p_238.pgn[mf.p_238.user8] = (byte)nudPwmSet.Value;
+
+
+                int calValue = (int)nudUser4.Value;
+                mf.p_238.pgn[mf.p_238.user3] = (byte)calValue;                      //Calabration value L
+                mf.p_238.pgn[mf.p_238.user4] = (byte)(calValue >> 8);               //Calabration value H
+
+
+
+
+
+                mf.SendPgnToLoop(mf.p_238.pgn);
+                pboxSendMachine.Visible = false;
+                mf.p_238.pgn[mf.p_238.user2] = 0;                                   //mf.p_238.pgn[mf.p_238.user2] = (byte)nudUser2.Value;              //Calabration instruction
+
+            }
         }
 
         private void btnSendMachinePGN_Click(object sender, EventArgs e)

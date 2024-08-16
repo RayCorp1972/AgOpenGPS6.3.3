@@ -75,10 +75,10 @@ namespace AgOpenGPS
             nudRaiseTime.Controls[0].Enabled = false;
             nudLowerTime.Controls[0].Enabled = false;
 
-            nudUser1Old.Controls[0].Enabled = false;
+            nudUser1.Controls[0].Enabled = false;
             nudUser2.Controls[0].Enabled = false;
             nudUser3.Controls[0].Enabled = false;
-            nudUser4Old.Controls[0].Enabled = false;
+            nudUser4.Controls[0].Enabled = false;
 
             nudTramWidth.Controls[0].Enabled = false;
 
@@ -346,6 +346,72 @@ namespace AgOpenGPS
             //FormConfig_Load(this, e);
         }
 
+
+
+
+
+        private void btnSetDeadzone_Click(object sender, EventArgs e)
+        {
+            SaveSettingsMachine();
+
+            Properties.Settings.Default.Save();
+        }
+
+        private void btnSetPwmMax_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.setArdMac_user6 = (byte)nudPwmMax.Value;
+            SaveSettingsMachine();
+            Properties.Settings.Default.Save();
+        }
+
+        private void btnSetPwmMin_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.setArdMac_user7 = (byte)nudPwmMin.Value;
+            SaveSettingsMachine();
+            Properties.Settings.Default.Save();
+        }
+
+        private void btnSetPwm_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.setArdMac_user8 = (byte)nudPwmSet.Value;
+            SaveSettingsMachine();
+            Properties.Settings.Default.Save();
+
+        }
+
+
+      
+
        
+
+        private void btnSetWidth_Click(object sender, EventArgs e)
+        {
+           
+                SaveSettingsMachine();
+
+                Properties.Settings.Default.Save();
+
+                mf.TimedMessageBox(1000, gStr.gsMachinePort, gStr.gsSentToMachineModule);
+
+           
+        }
+
+        private void btn_calMin_Click(object sender, EventArgs e)
+        {
+            mf.p_238.pgn[mf.p_238.user2] = 111; //Cal min command
+            SaveSettingsMachine();
+
+            Properties.Settings.Default.Save();
+        }
+
+        private void btn_calMax_Click(object sender, EventArgs e)
+        {
+            mf.p_238.pgn[mf.p_238.user2] = 222; //Cal max command
+
+            SaveSettingsMachine();
+
+            Properties.Settings.Default.Save();
+        }
     }
+    
 }

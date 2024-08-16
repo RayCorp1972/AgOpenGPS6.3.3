@@ -198,15 +198,21 @@ namespace AgOpenGPS
             /// PGN - 238 - EE 
             /// raiseTime=5  lowerTime=6   enableHyd= 7 set0 = 8
             /// </summary>
-            public byte[] pgn = new byte[] { 0x80, 0x81, 0x7f, 0xEE, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0xCC };
+            public byte[] pgn = new byte[] { 0x80, 0x81, 0x7f, 0xEE, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0xCC };
             public int raiseTime = 5;
             public int lowerTime = 6;
             public int enableHyd = 7;
             public int set0 = 8;
-            public int user1 = 9;
-            public int user2 = 10;
-            public int user3 = 11;
-            public int user4  = 12;
+            public int user1 = 9;       //Target width (+200cm)                                            5  
+            public int user2 = 10;      //Calabration command instrction                                   
+            public int user3 = 11;      //Set value L
+            public int user4 = 12;      //Set value H
+            public int user5 = 13;      //deadBand
+            public int user6 = 14;      //Pwm High
+            public int user7 = 15;      //Pwm Low
+            public int user8 = 16;      //Pwm / Black-White
+            public int user9 = 17;      //manual wider
+            public int user10 = 18;      //manual wider     
 
             // PGN  - 127.239 0x7FEF
             int crc = 0;
