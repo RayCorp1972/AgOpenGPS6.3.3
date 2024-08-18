@@ -2590,6 +2590,7 @@ namespace AgOpenGPS
             String Narrow = (gStr.gsSmaller);
             String Abline = (gStr.gsNoline);
             String SectionOff = (gStr.gsSectionoff);
+            String Both = (gStr.gsBoth);
 
 
 
@@ -2613,6 +2614,7 @@ namespace AgOpenGPS
             else if (ploughMode == 6) font.DrawText(center + 10, 270, Narrow, 1);
             else if (ploughMode == 7) font.DrawText(center + 10, 270, Min, 1);
             else if (ploughMode == 8) font.DrawText(center + 10, 270, Abline, 1);
+            else if (ploughMode == 9) font.DrawText(center + 10, 270, Both, 1);
 
             if (PlAuto == false)
             {

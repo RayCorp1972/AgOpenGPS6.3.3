@@ -178,6 +178,15 @@ namespace AgOpenGPS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Section And Switch off.
+        /// </summary>
+        public static string gsBoth {
+            get {
+                return ResourceManager.GetString("gsBoth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Boundary.
         /// </summary>
         public static string gsBoundary {

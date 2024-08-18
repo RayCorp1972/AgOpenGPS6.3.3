@@ -785,5 +785,8 @@
     <Setting Name="setArdMac_user11" Type="System.Byte" Scope="User">
       <Value Profile="(Default)">11</Value>
     </Setting>
+    <Setting Name="setArdMac_user12" Type="System.Byte" Scope="User">
+      <Value Profile="(Default)">12</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

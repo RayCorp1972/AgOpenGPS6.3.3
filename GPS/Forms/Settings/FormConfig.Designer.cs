@@ -561,6 +561,7 @@
             this.btnOK = new System.Windows.Forms.Button();
             this.label22 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.nudInvert = new AgOpenGPS.NudlessNumericUpDown();
             this.panelLeftSideMenu.SuspendLayout();
             this.panelArduinoSubMenu.SuspendLayout();
             this.panelDataSourcesSubMenu.SuspendLayout();
@@ -681,6 +682,7 @@
             this.panelOpacity.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pboxAlpha)).BeginInit();
             this.panelBottom.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudInvert)).BeginInit();
             this.SuspendLayout();
             // 
             // panelLeftSideMenu
@@ -1288,6 +1290,7 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.nudInvert);
             this.groupBox6.Controls.Add(this.nudUser3);
             this.groupBox6.Controls.Add(this.nudUser2);
             this.groupBox6.Controls.Add(this.label179);
@@ -1499,7 +1502,6 @@
             this.btnSetPwmMin.TabIndex = 534;
             this.btnSetPwmMin.Text = "Set";
             this.btnSetPwmMin.UseVisualStyleBackColor = true;
-            //this.btnSetPwmMin.Click += new System.EventHandler(this.btnSetPwmMin_Click_1);
             // 
             // btnSetPwmMax
             // 
@@ -9883,6 +9885,29 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // nudInvert
+            // 
+            this.nudInvert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudInvert.BackColor = System.Drawing.Color.AliceBlue;
+            this.nudInvert.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudInvert.InterceptArrowKeys = false;
+            this.nudInvert.Location = new System.Drawing.Point(666, 149);
+            this.nudInvert.Maximum = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            this.nudInvert.Name = "nudInvert";
+            this.nudInvert.ReadOnly = true;
+            this.nudInvert.Size = new System.Drawing.Size(114, 52);
+            this.nudInvert.TabIndex = 548;
+            this.nudInvert.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudInvert.Value = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            // 
             // FormConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -10049,6 +10074,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pboxAlpha)).EndInit();
             this.panelBottom.ResumeLayout(false);
             this.panelBottom.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudInvert)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -10584,5 +10610,6 @@
         private System.Windows.Forms.Button btnSubPlough;
         public NudlessNumericUpDown nudUser3;
         public NudlessNumericUpDown nudUser2;
+        public NudlessNumericUpDown nudInvert;
     }
 }

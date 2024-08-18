@@ -247,9 +247,11 @@ namespace AgOpenGPS
                 mf.p_238.pgn[mf.p_238.user6] = (byte)nudPwmMax.Value;
                 mf.p_238.pgn[mf.p_238.user7] = (byte)nudPwmMin.Value;
                 mf.p_238.pgn[mf.p_238.user8] = (byte)nudPwmSet.Value;
+           
+                //mf.p_238.pgn[mf.p_238.user12] = (byte)nudInvert.Value;
 
 
-                int calValue = (int)nudUser4.Value;
+            int calValue = (int)nudUser4.Value;
             
                 mf.p_238.pgn[mf.p_238.user3] = (byte)calValue;                      //Calabration value L
                 mf.p_238.pgn[mf.p_238.user4] = (byte)(calValue >> 8);               //Calabration value H

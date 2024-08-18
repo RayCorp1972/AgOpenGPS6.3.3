@@ -603,4 +603,7 @@
   <data name="gsWider" xml:space="preserve">
     <value>Wider</value>
   </data>
+  <data name="gsBoth" xml:space="preserve">
+    <value>Section And Switch off</value>
+  </data>
 </root>

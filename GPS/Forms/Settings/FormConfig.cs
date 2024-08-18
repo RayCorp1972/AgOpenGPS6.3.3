@@ -104,6 +104,17 @@ namespace AgOpenGPS
             chbBlackWhite.Checked = mf.isBlackWhiteOn;
             chbRotationSensor.Checked = mf.isRotationSensorOn;
             chbInvert.Checked = mf.isInvertOn;
+            if (chbInvert.Checked)
+            {
+                nudInvert.Value = 1;
+                Properties.Settings.Default.setArdMac_user12 = (byte)nudInvert.Value;
+            } else
+            {
+                nudInvert.Value = 0;
+                Properties.Settings.Default.setArdMac_user12 = (byte)nudInvert.Value;
+            }
+
+        
 
             //metric or imp on spinners min/maxes
             if (!mf.isMetric)  FixMinMaxSpinners();            
@@ -179,10 +190,12 @@ namespace AgOpenGPS
             if (chbInvert.Checked)
             {
                 Properties.Settings.Default.setPlough_isInvertOn = true;
+                
             }
             else
             {
                 Properties.Settings.Default.setPlough_isInvertOn = false;
+                
             }
 
             //reload all the settings from default and user.config

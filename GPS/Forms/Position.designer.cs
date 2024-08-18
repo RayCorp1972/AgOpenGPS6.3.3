@@ -1,5 +1,9 @@
 ﻿//Please, if you use this, share the improvements
 
+
+
+// linedsitance bekijken in verband met lijn verschuiven
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;

@@ -153,7 +153,7 @@ namespace AgOpenGPS
             public int hydLift = 7;
             public int tram = 8;
             public int geoStop = 9; //out of bounds etc
-            //public int  = 10;
+            public int lineDistance = 10;
             public int sc1to8 = 11;
             public int sc9to16 = 12;
 
@@ -198,7 +198,7 @@ namespace AgOpenGPS
             /// PGN - 238 - EE 
             /// raiseTime=5  lowerTime=6   enableHyd= 7 set0 = 8
             /// </summary>
-            public byte[] pgn = new byte[] { 0x80, 0x81, 0x7f, 0xEE, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0xCC };
+            public byte[] pgn = new byte[] { 0x80, 0x81, 0x7f, 0xEE, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0xCC };
             public int raiseTime = 5;
             public int lowerTime = 6;
             public int enableHyd = 7;
@@ -212,7 +212,9 @@ namespace AgOpenGPS
             public int user7 = 15;      //Pwm Low
             public int user8 = 16;      //Pwm / Black-White
             public int user9 = 17;      //manual wider
-            public int user10 = 18;      //manual wider     
+            public int user10 = 18;      //manual wider
+            public int user12 = 19;      //reverse left/right
+                                         //
 
             // PGN  - 127.239 0x7FEF
             int crc = 0;
@@ -234,6 +236,7 @@ namespace AgOpenGPS
                 pgn[user8] = Properties.Settings.Default.setArdMac_user8;
                 pgn[user9] = Properties.Settings.Default.setArdMac_user9;
                 pgn[user10] = Properties.Settings.Default.setArdMac_user10;
+                pgn[user12] = Properties.Settings.Default.setArdMac_user12;
 
             }
 
