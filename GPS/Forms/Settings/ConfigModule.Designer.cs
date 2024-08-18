@@ -77,10 +77,7 @@ namespace AgOpenGPS
             nudRaiseTime.Value = (decimal)Properties.Settings.Default.setArdMac_hydRaiseTime;
             nudLowerTime.Value = (decimal)Properties.Settings.Default.setArdMac_hydLowerTime;
 
-            //nudUser1.Value = Properties.Settings.Default.setArdMac_user1;
-            //nudUser2.Value = Properties.Settings.Default.setArdMac_user2;
-            //nudUser3.Value = Properties.Settings.Default.setArdMac_user3;
-            //nudUser4.Value = Properties.Settings.Default.setArdMac_user4;
+           
 
             btnSendMachinePGN.Focus();
 
@@ -204,12 +201,12 @@ namespace AgOpenGPS
                 nudLowerTime.Enabled = false;
                 nudRaiseTime.Enabled = false;
             }
-            //pboxSendMachine.Visible = true;
+            pboxSendMachine.Visible = true;
         }
 
         private void SaveSettingsMachine()
         {
-            {
+            
                 int set = 1;
                 int reset = 2046;
                 int sett = 0;
@@ -253,6 +250,7 @@ namespace AgOpenGPS
 
 
                 int calValue = (int)nudUser4.Value;
+            
                 mf.p_238.pgn[mf.p_238.user3] = (byte)calValue;                      //Calabration value L
                 mf.p_238.pgn[mf.p_238.user4] = (byte)(calValue >> 8);               //Calabration value H
 
@@ -260,11 +258,11 @@ namespace AgOpenGPS
 
 
 
-                mf.SendPgnToLoop(mf.p_238.pgn);
+                 mf.SendPgnToLoop(mf.p_238.pgn);
                 pboxSendMachine.Visible = false;
                 mf.p_238.pgn[mf.p_238.user2] = 0;                                   //mf.p_238.pgn[mf.p_238.user2] = (byte)nudUser2.Value;              //Calabration instruction
 
-            }
+            
         }
 
         private void btnSendMachinePGN_Click(object sender, EventArgs e)

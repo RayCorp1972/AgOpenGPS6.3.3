@@ -118,10 +118,10 @@ namespace AgOpenGPS
                         mf.p_238.pgn[mf.p_238.raiseTime] = Properties.Settings.Default.setArdMac_hydRaiseTime;
                         mf.p_238.pgn[mf.p_238.lowerTime] = Properties.Settings.Default.setArdMac_hydLowerTime;
 
-                        mf.p_238.pgn[mf.p_238.user1] = Properties.Settings.Default.setArdMac_user1;
-                        mf.p_238.pgn[mf.p_238.user2] = Properties.Settings.Default.setArdMac_user2;
-                        mf.p_238.pgn[mf.p_238.user3] = Properties.Settings.Default.setArdMac_user3;
-                        mf.p_238.pgn[mf.p_238.user4] = Properties.Settings.Default.setArdMac_user4;
+                        //mf.p_238.pgn[mf.p_238.user1] = Properties.Settings.Default.setArdMac_user1;
+                        //mf.p_238.pgn[mf.p_238.user2] = Properties.Settings.Default.setArdMac_user2;
+                        //mf.p_238.pgn[mf.p_238.user3] = Properties.Settings.Default.setArdMac_user3;
+                        //mf.p_238.pgn[mf.p_238.user4] = Properties.Settings.Default.setArdMac_user4;
 
                         mf.SendPgnToLoop(mf.p_238.pgn);
 

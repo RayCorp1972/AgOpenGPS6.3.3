@@ -408,11 +408,11 @@ namespace AgOpenGPS
             if (isPlougOn)
             {
                 PlAuto = true;
-                //btnPloughControl.Visible = true;
+                btnPloughControl.Visible = true;
             }
             else
             {
-                //btnPloughControl.Visible = false;
+                btnPloughControl.Visible = false;
                 PlAuto = false;
             }
             this.MouseWheel += ZoomByMouseWheel;

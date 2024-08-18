@@ -248,6 +248,19 @@ namespace AgOpenGPS
                             break;
                         }
 
+                    case 0xED: //return from machine module (Plough)
+                        {
+                            ploughWidth = (Int16)((data[6] << 8) + data[5]);
+                            ploughMode = data[7];
+                            deadBand = data[13];
+                            //AOG[14] = (uint8_t)pwmMax 
+                            //AOG[15] = (uint8_t)pwmMin;
+                            //AOG[16] = (uint8_t)pwmSet;
+                            //AOG[17] = (uint8_t)pwmManualPlus;
+                            //AOG[18] = (uint8_t)pwmManualMin;
+                        }
+                        break;
+
                     case 250:
                         {                            
                             if (data.Length != 14)

@@ -96,6 +96,8 @@ namespace AgOpenGPS
             //since we reset, save current state
             mf.SaveFormGPSWindowSettings();
 
+
+
             //Plough Control
             chbPloeg.Checked = mf.isPlougOn;
             chbPwm.Checked = mf.isPwmOn;
@@ -402,6 +404,8 @@ namespace AgOpenGPS
             SaveSettingsMachine();
 
             Properties.Settings.Default.Save();
+            mf.TimedMessageBox(1000, gStr.gsMachinePort, gStr.gsSentToMachineModule);
+
         }
 
         private void btn_calMax_Click(object sender, EventArgs e)
@@ -411,7 +415,15 @@ namespace AgOpenGPS
             SaveSettingsMachine();
 
             Properties.Settings.Default.Save();
+            mf.TimedMessageBox(1000, gStr.gsMachinePort, gStr.gsSentToMachineModule);
         }
+
+        private void label150_Click(object sender, EventArgs e)
+        {
+
+        }
+
+       
     }
     
 }

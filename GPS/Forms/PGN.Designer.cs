@@ -228,6 +228,13 @@ namespace AgOpenGPS
                 pgn[user2] = Properties.Settings.Default.setArdMac_user2;
                 pgn[user3] = Properties.Settings.Default.setArdMac_user3;
                 pgn[user4] = Properties.Settings.Default.setArdMac_user4;
+                pgn[user5] = Properties.Settings.Default.setArdMac_user5;
+                pgn[user6] = Properties.Settings.Default.setArdMac_user6;
+                pgn[user7] = Properties.Settings.Default.setArdMac_user7;
+                pgn[user8] = Properties.Settings.Default.setArdMac_user8;
+                pgn[user9] = Properties.Settings.Default.setArdMac_user9;
+                pgn[user10] = Properties.Settings.Default.setArdMac_user10;
+
             }
 
             public void MakeCRC()
