@@ -836,6 +836,17 @@ namespace AgOpenGPS
                 }
             }
 
+            #region Plough
+            //Tony add distance to line to Machine PGN
+            short machineLineDistance = guidanceLineDistanceOff;
+            if (!ABLine.isHeadingSameWay) machineLineDistance *= -1;
+            p_239.pgn[p_239.lineDistanceH] = unchecked((byte)(machineLineDistance >> 8));
+            p_239.pgn[p_239.lineDistanceL] = unchecked((byte)(machineLineDistance));
+
+            #endregion
+
+
+
             // autosteer at full speed of updates
 
             //if the whole path driving driving process is green

@@ -152,8 +152,9 @@ namespace AgOpenGPS
             public int speed = 6;
             public int hydLift = 7;
             public int tram = 8;
-            public int geoStop = 9; //out of bounds etc
-            public int lineDistance = 10;
+            //public int geoStop = 9; //out of bounds etc
+            public int lineDistanceL = 9;       //extra mm +/- needed on working width (mm to the line, *-1 if heading is not same way as ABline)
+            public int lineDistanceH = 10;
             public int sc1to8 = 11;
             public int sc9to16 = 12;
 
@@ -214,7 +215,7 @@ namespace AgOpenGPS
             public int user9 = 17;      //manual wider
             public int user10 = 18;      //manual wider
             public int user12 = 19;      //reverse left/right
-                                         //
+                                         
 
             // PGN  - 127.239 0x7FEF
             int crc = 0;

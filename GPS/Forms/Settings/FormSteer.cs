@@ -46,8 +46,8 @@ namespace AgOpenGPS
 
         private void FormSteer_Load(object sender, EventArgs e)
         {
+           
 
-            
             if (mf.isStanleyUsed) tabControl1.TabPages.Remove(tabInt);
             else tabControl1.TabPages.Remove(tabStan);
 
@@ -401,10 +401,13 @@ namespace AgOpenGPS
                 cboxAutoSteerAuto1.Image = Properties.Resources.AutoSteerOff;
                 cboxAutoSteerAuto1.Text = gStr.gsManual;
             }
+
+           
         }
         private void tabSettings_Leave(object sender, EventArgs e)
         {
             Properties.Settings.Default.setAS_isSteerInReverse = cboxSteerInReverse.Checked;
+            Properties.Settings.Default.setAS_isAutoSteerAutoOn = cboxAutoSteerAuto1.Checked;
             Properties.Settings.Default.Save();
         }
 
@@ -1031,6 +1034,22 @@ namespace AgOpenGPS
             //hSBarFreeDrive.Value = mf.driveFreeSteerAngle;
         }
 
+        private void cboxAutoSteerAuto1_Click(object sender, EventArgs e)
+        {
+            if (cboxAutoSteerAuto1.Checked)
+            {
+                cboxAutoSteerAuto1.Image = Properties.Resources.AutoSteerOn;
+                cboxAutoSteerAuto1.Text = "Remote";
+                mf.ahrs.isAutoSteerAuto = true;
+            }
+            else
+            {
+                cboxAutoSteerAuto1.Image = Properties.Resources.AutoSteerOff;
+                cboxAutoSteerAuto1.Text = gStr.gsManual;
+                mf.ahrs.isAutoSteerAuto = false;
+            }
+        }
+
         private void btnSteerAngleUp_MouseDown(object sender, MouseEventArgs e)
         {
             mf.vehicle.driveFreeSteerAngle++;
@@ -1075,5 +1094,7 @@ namespace AgOpenGPS
             Form form = new FormSteerWiz(mf);
             form.Show(mf);
         }
+
+
     }
 }

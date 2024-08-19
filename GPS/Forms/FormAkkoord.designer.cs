@@ -42,14 +42,14 @@ namespace AgOpenGPS
             this.richTextBox1.Location = new System.Drawing.Point(12, 12);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.richTextBox1.Size = new System.Drawing.Size(503, 356);
+            this.richTextBox1.Size = new System.Drawing.Size(503, 369);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
             // 
             // richTextBox2
             // 
             this.richTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox2.Location = new System.Drawing.Point(12, 391);
+            this.richTextBox2.Location = new System.Drawing.Point(33, 421);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
             this.richTextBox2.Size = new System.Drawing.Size(253, 37);
@@ -64,7 +64,7 @@ namespace AgOpenGPS
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Image = global::AgOpenGPS.Properties.Resources.OK64;
-            this.button1.Location = new System.Drawing.Point(324, 361);
+            this.button1.Location = new System.Drawing.Point(337, 404);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 72);
             this.button1.TabIndex = 2;
@@ -77,7 +77,7 @@ namespace AgOpenGPS
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Image = global::AgOpenGPS.Properties.Resources.Cancel64;
-            this.button2.Location = new System.Drawing.Point(440, 356);
+            this.button2.Location = new System.Drawing.Point(440, 404);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 72);
             this.button2.TabIndex = 3;
@@ -89,7 +89,7 @@ namespace AgOpenGPS
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(514, 440);
+            this.ClientSize = new System.Drawing.Size(525, 488);
             this.ControlBox = false;
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
