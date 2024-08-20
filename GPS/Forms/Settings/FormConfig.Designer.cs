@@ -57,13 +57,13 @@
             this.btnSubAntenna = new System.Windows.Forms.Button();
             this.btnSubDimensions = new System.Windows.Forms.Button();
             this.btnSubVehicleType = new System.Windows.Forms.Button();
+            this.nudUser3 = new AgOpenGPS.NudlessNumericUpDown();
+            this.nudInvert = new AgOpenGPS.NudlessNumericUpDown();
+            this.nudUser2 = new AgOpenGPS.NudlessNumericUpDown();
             this.btnVehicle = new System.Windows.Forms.Button();
             this.tab1 = new System.Windows.Forms.TabControl();
             this.aPlough = new System.Windows.Forms.TabPage();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.nudInvert = new AgOpenGPS.NudlessNumericUpDown();
-            this.nudUser3 = new AgOpenGPS.NudlessNumericUpDown();
-            this.nudUser2 = new AgOpenGPS.NudlessNumericUpDown();
             this.label179 = new System.Windows.Forms.Label();
             this.chbInvert = new System.Windows.Forms.CheckBox();
             this.btnSetPwm = new System.Windows.Forms.Button();
@@ -567,12 +567,12 @@
             this.panelDataSourcesSubMenu.SuspendLayout();
             this.panelToolSubMenu.SuspendLayout();
             this.panelVehicleSubMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudUser3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudInvert)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudUser2)).BeginInit();
             this.tab1.SuspendLayout();
             this.aPlough.SuspendLayout();
             this.groupBox6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudInvert)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudUser3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudUser2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPwmSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPwmMax)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPwmMin)).BeginInit();
@@ -1224,6 +1224,75 @@
             this.btnSubVehicleType.UseVisualStyleBackColor = false;
             this.btnSubVehicleType.Click += new System.EventHandler(this.btnSubVehicleType_Click);
             // 
+            // nudUser3
+            // 
+            this.nudUser3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudUser3.BackColor = System.Drawing.Color.AliceBlue;
+            this.nudUser3.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudUser3.InterceptArrowKeys = false;
+            this.nudUser3.Location = new System.Drawing.Point(0, 157);
+            this.nudUser3.Maximum = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            this.nudUser3.Name = "nudUser3";
+            this.nudUser3.ReadOnly = true;
+            this.nudUser3.Size = new System.Drawing.Size(114, 52);
+            this.nudUser3.TabIndex = 547;
+            this.nudUser3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudUser3.Value = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            // 
+            // nudInvert
+            // 
+            this.nudInvert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudInvert.BackColor = System.Drawing.Color.AliceBlue;
+            this.nudInvert.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudInvert.InterceptArrowKeys = false;
+            this.nudInvert.Location = new System.Drawing.Point(3, 119);
+            this.nudInvert.Maximum = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            this.nudInvert.Name = "nudInvert";
+            this.nudInvert.ReadOnly = true;
+            this.nudInvert.Size = new System.Drawing.Size(114, 52);
+            this.nudInvert.TabIndex = 548;
+            this.nudInvert.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudInvert.Value = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            // 
+            // nudUser2
+            // 
+            this.nudUser2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.nudUser2.BackColor = System.Drawing.Color.AliceBlue;
+            this.nudUser2.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudUser2.InterceptArrowKeys = false;
+            this.nudUser2.Location = new System.Drawing.Point(0, 163);
+            this.nudUser2.Maximum = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            this.nudUser2.Name = "nudUser2";
+            this.nudUser2.ReadOnly = true;
+            this.nudUser2.Size = new System.Drawing.Size(114, 52);
+            this.nudUser2.TabIndex = 546;
+            this.nudUser2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudUser2.Value = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            // 
             // btnVehicle
             // 
             this.btnVehicle.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
@@ -1330,75 +1399,6 @@
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Plough Control";
             // 
-            // nudInvert
-            // 
-            this.nudInvert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudInvert.BackColor = System.Drawing.Color.AliceBlue;
-            this.nudInvert.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudInvert.InterceptArrowKeys = false;
-            this.nudInvert.Location = new System.Drawing.Point(3, 119);
-            this.nudInvert.Maximum = new decimal(new int[] {
-            500,
-            0,
-            0,
-            0});
-            this.nudInvert.Name = "nudInvert";
-            this.nudInvert.ReadOnly = true;
-            this.nudInvert.Size = new System.Drawing.Size(114, 52);
-            this.nudInvert.TabIndex = 548;
-            this.nudInvert.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nudInvert.Value = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            // 
-            // nudUser3
-            // 
-            this.nudUser3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudUser3.BackColor = System.Drawing.Color.AliceBlue;
-            this.nudUser3.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudUser3.InterceptArrowKeys = false;
-            this.nudUser3.Location = new System.Drawing.Point(0, 157);
-            this.nudUser3.Maximum = new decimal(new int[] {
-            500,
-            0,
-            0,
-            0});
-            this.nudUser3.Name = "nudUser3";
-            this.nudUser3.ReadOnly = true;
-            this.nudUser3.Size = new System.Drawing.Size(114, 52);
-            this.nudUser3.TabIndex = 547;
-            this.nudUser3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nudUser3.Value = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            // 
-            // nudUser2
-            // 
-            this.nudUser2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudUser2.BackColor = System.Drawing.Color.AliceBlue;
-            this.nudUser2.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudUser2.InterceptArrowKeys = false;
-            this.nudUser2.Location = new System.Drawing.Point(0, 163);
-            this.nudUser2.Maximum = new decimal(new int[] {
-            500,
-            0,
-            0,
-            0});
-            this.nudUser2.Name = "nudUser2";
-            this.nudUser2.ReadOnly = true;
-            this.nudUser2.Size = new System.Drawing.Size(114, 52);
-            this.nudUser2.TabIndex = 546;
-            this.nudUser2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nudUser2.Value = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            // 
             // label179
             // 
             this.label179.AutoSize = true;
@@ -1414,8 +1414,8 @@
             // 
             this.chbInvert.Appearance = System.Windows.Forms.Appearance.Button;
             this.chbInvert.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.chbInvert.BackgroundImage = global::AgOpenGPS.Properties.Resources.Invert;
-            this.chbInvert.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.chbInvert.BackgroundImage = global::AgOpenGPS.Properties.Resources.PlLeft;
+            this.chbInvert.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.chbInvert.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.chbInvert.FlatAppearance.CheckedBackColor = System.Drawing.Color.MediumAquamarine;
             this.chbInvert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1428,6 +1428,7 @@
             this.chbInvert.TabIndex = 544;
             this.chbInvert.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.chbInvert.UseVisualStyleBackColor = false;
+            this.chbInvert.Click += new System.EventHandler(this.chbInvert_Click);
             // 
             // btnSetPwm
             // 
@@ -9936,13 +9937,13 @@
             this.panelDataSourcesSubMenu.ResumeLayout(false);
             this.panelToolSubMenu.ResumeLayout(false);
             this.panelVehicleSubMenu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nudUser3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudInvert)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudUser2)).EndInit();
             this.tab1.ResumeLayout(false);
             this.aPlough.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudInvert)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudUser3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudUser2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPwmSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPwmMax)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPwmMin)).EndInit();

@@ -22,6 +22,11 @@ namespace AgOpenGPS
 
         private void aPlough_Enter(object sender, EventArgs e)
         {
+
+            int sett = Properties.Settings.Default.setArdMac_setting0;
+            if ((sett & 1) == 0) chbInvert.Checked = false;
+            else chbInvert.Checked = true;
+
             nudUser1.Value = Properties.Settings.Default.setArdMac_user1;
             nudUser3.Value = 0;
             nudUser4.Value = 0;
@@ -51,13 +56,13 @@ namespace AgOpenGPS
         private void tabAMachine_Enter(object sender, EventArgs e)
         {
 
-            int sett = Properties.Settings.Default.setArdMac_setting0;
+            //int sett = Properties.Settings.Default.setArdMac_setting0;
 
-            if ((sett & 1) == 0) cboxMachInvertRelays.Checked = false;
-            else cboxMachInvertRelays.Checked = true;
+            //if ((sett & 1) == 0) cboxMachInvertRelays.Checked = false;
+            //else cboxMachInvertRelays.Checked = true;
 
-            if ((sett & 2) == 0) cboxIsHydOn.Checked = false;
-            else cboxIsHydOn.Checked = true;
+            //if ((sett & 2) == 0) cboxIsHydOn.Checked = false;
+            //else cboxIsHydOn.Checked = true;
 
             if (cboxIsHydOn.Checked)
             {
@@ -211,14 +216,14 @@ namespace AgOpenGPS
                 int reset = 2046;
                 int sett = 0;
 
-                if (cboxMachInvertRelays.Checked) sett |= set;
+                if (chbInvert.Checked) sett |= set;
                 else sett &= reset;
 
                 set <<= 1;
                 reset <<= 1;
                 reset += 1;
-                if (cboxIsHydOn.Checked) sett |= set;
-                else sett &= reset;
+                //if (cboxIsHydOn.Checked) sett |= set;
+                //else sett &= reset;
 
                 Properties.Settings.Default.setArdMac_setting0 = (byte)sett;
                 Properties.Settings.Default.setArdMac_hydRaiseTime = (byte)nudRaiseTime.Value;

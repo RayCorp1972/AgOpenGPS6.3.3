@@ -106,15 +106,18 @@ namespace AgOpenGPS
             chbInvert.Checked = mf.isInvertOn;
             if (chbInvert.Checked)
             {
+
                 nudInvert.Value = 1;
                 Properties.Settings.Default.setArdMac_user12 = (byte)nudInvert.Value;
-            } else
+            }
+            else
             {
                 nudInvert.Value = 0;
                 Properties.Settings.Default.setArdMac_user12 = (byte)nudInvert.Value;
+
             }
 
-        
+
 
             //metric or imp on spinners min/maxes
             if (!mf.isMetric)  FixMinMaxSpinners();            
@@ -436,7 +439,25 @@ namespace AgOpenGPS
 
         }
 
-       
+        private void chbInvert_Click(object sender, EventArgs e)
+        {
+            if (chbInvert.Checked)
+            {
+                chbInvert.BackgroundImage = Properties.Resources.PlRight;
+                nudInvert.Value = 0;
+                Properties.Settings.Default.setArdMac_user12 = (byte)nudInvert.Value;
+                SaveSettingsMachine();
+                Properties.Settings.Default.Save();
+            }
+            else
+            {
+                chbInvert.BackgroundImage = Properties.Resources.PlLeft;
+                nudInvert.Value = 1;
+                Properties.Settings.Default.setArdMac_user12 = (byte)nudInvert.Value;
+                SaveSettingsMachine();
+                Properties.Settings.Default.Save();
+            }
+        }
     }
     
 }
