@@ -418,6 +418,22 @@ namespace AgOpenGPS
 
         }
 
+        private void cboxAutoSteerAuto1_Click(object sender, EventArgs e)
+        {
+            if (cboxAutoSteerAuto1.Checked)
+            {
+                cboxAutoSteerAuto1.Image = Properties.Resources.AutoSteerOn;
+                cboxAutoSteerAuto1.Text = "Remote";
+                mf.ahrs.isAutoSteerAuto = true;
+            }
+            else
+            {
+                cboxAutoSteerAuto1.Image = Properties.Resources.AutoSteerOff;
+                cboxAutoSteerAuto1.Text = gStr.gsManual;
+                mf.ahrs.isAutoSteerAuto = false;
+            }
+        }
+
 
         #region Alarms Tab
 
@@ -1034,21 +1050,7 @@ namespace AgOpenGPS
             //hSBarFreeDrive.Value = mf.driveFreeSteerAngle;
         }
 
-        private void cboxAutoSteerAuto1_Click(object sender, EventArgs e)
-        {
-            if (cboxAutoSteerAuto1.Checked)
-            {
-                cboxAutoSteerAuto1.Image = Properties.Resources.AutoSteerOn;
-                cboxAutoSteerAuto1.Text = "Remote";
-                mf.ahrs.isAutoSteerAuto = true;
-            }
-            else
-            {
-                cboxAutoSteerAuto1.Image = Properties.Resources.AutoSteerOff;
-                cboxAutoSteerAuto1.Text = gStr.gsManual;
-                mf.ahrs.isAutoSteerAuto = false;
-            }
-        }
+     
 
         private void btnSteerAngleUp_MouseDown(object sender, MouseEventArgs e)
         {

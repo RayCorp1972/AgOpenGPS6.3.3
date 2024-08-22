@@ -138,7 +138,7 @@ namespace AgOpenGPS
                 btnAutoSteer.Image = Properties.Resources.AutoSteerOff;
                 //if (yt.isYouTurnBtnOn) btnAutoYouTurn.PerformClick();
                 if (sounds.isSteerSoundOn) sounds.sndAutoSteerOff.Play();
-                //trk.isAutoSnapped = false;
+                trk.isAutoSnapped = false;
             }
             else
             {
@@ -147,11 +147,11 @@ namespace AgOpenGPS
                     isBtnAutoSteerOn = true;
                     btnAutoSteer.Image = Properties.Resources.AutoSteerOn;
                     if (sounds.isSteerSoundOn) sounds.sndAutoSteerOn.Play();
-                    //if (trk.isAutoSnapToPivot)
-                    //{
-                    //    trk.SnapToPivot();
-                    //    trk.isAutoSnapped = true;   
-                    //}
+                    if (trk.isAutoSnapToPivot)
+                    {
+                        trk.SnapToPivot();
+                        trk.isAutoSnapped = true;
+                    }
                 }
                 else
                 {
