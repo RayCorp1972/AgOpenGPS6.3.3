@@ -443,7 +443,7 @@ namespace AgOpenGPS
         {
             if (chbInvert.Checked)
             {
-                chbInvert.BackgroundImage = Properties.Resources.PlRight;
+                chbInvert.BackgroundImage = Properties.Resources.PlLeft;
                 nudInvert.Value = 0;
                 Properties.Settings.Default.setArdMac_user12 = (byte)nudInvert.Value;
                 SaveSettingsMachine();
@@ -451,7 +451,7 @@ namespace AgOpenGPS
             }
             else
             {
-                chbInvert.BackgroundImage = Properties.Resources.PlLeft;
+                chbInvert.BackgroundImage = Properties.Resources.PlRight;
                 nudInvert.Value = 1;
                 Properties.Settings.Default.setArdMac_user12 = (byte)nudInvert.Value;
                 SaveSettingsMachine();
