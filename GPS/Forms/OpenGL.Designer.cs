@@ -2591,6 +2591,7 @@ namespace AgOpenGPS
             String Abline = (gStr.gsNoline);
             String SectionOff = (gStr.gsSectionoff);
             String Both = (gStr.gsBoth);
+            String invert = (gStr.gsInvert);
 
 
 
@@ -2604,7 +2605,7 @@ namespace AgOpenGPS
             font.DrawText(center + 10, 180, DesiredPloughWidth + ": " + (decimal)Properties.Settings.Default.setArdMac_user1 + "cm", 0.7);
             font.DrawText(center + 10, 210, CurrentPloughWidth + ": " + ploughWidth.ToString() + "cm", 0.7);
             font.DrawText(center + 10, 240, Deadzone + ": " + (decimal)Properties.Settings.Default.setArdMac_user5 + "mm", 0.7);
-            
+
             if (ploughMode == 0) font.DrawText(center + 10, 270, SectionOff, 0.7);
             else if (ploughMode == 1) font.DrawText(center + 10, 270, AutoConfig, 1);
             else if (ploughMode == 2) font.DrawText(center + 10, 270, AutoSwitch, 1);
@@ -2616,19 +2617,31 @@ namespace AgOpenGPS
             else if (ploughMode == 8) font.DrawText(center + 10, 270, Abline, 1);
             else if (ploughMode == 9) font.DrawText(center + 10, 270, Both, 1);
 
-            if (PlAuto == false)
+            if (Properties.Settings.Default.setArdMac_user12 == 1)
+            {
+                GL.Color3(0.9652f, 0.9752f, 0.1f); //Yellow
+                font.DrawText(center + 10, 410, invert + ": " + "L", 0.8);
+            }
+            else
+            {
+                GL.Color3(0.9652f, 0.9752f, 0.1f); //Yellow
+                font.DrawText(center + 10, 410, invert + ": " + "R", 0.8);
+            }
+
+            if (PlAuto == true)
             {
                 font.DrawText(center + 25, 295, "" + Wider + "  " + Narrow, 0.8);
                 PlougPwmMinus();
                 PlougPwmPlus();
-                GL.Color3(0.9652f, 0.9752f, 0.1f); //Yellow
-                font.DrawText(center + 35, 410, "" + "L", 1.5);
-
             }
             else
             {
+             // button voor manual toevoegen // weergeven
+
 
             }
+
+           
 
 
         }

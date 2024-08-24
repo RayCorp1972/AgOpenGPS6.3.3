@@ -104,18 +104,20 @@ namespace AgOpenGPS
             chbBlackWhite.Checked = mf.isBlackWhiteOn;
             chbRotationSensor.Checked = mf.isRotationSensorOn;
             chbInvert.Checked = mf.isInvertOn;
-            if (chbInvert.Checked)
-            {
+            //if (chbInvert.Checked)
+            //{
 
-                nudInvert.Value = 1;
-                Properties.Settings.Default.setArdMac_user12 = (byte)nudInvert.Value;
-            }
-            else
-            {
-                nudInvert.Value = 0;
-                Properties.Settings.Default.setArdMac_user12 = (byte)nudInvert.Value;
+            //    nudInvert.Value = 1;
+            //    Properties.Settings.Default.setArdMac_user12 = (byte)nudInvert.Value;
+            //}
+            //else
+            //{
+            //    nudInvert.Value = 0;
+            //    Properties.Settings.Default.setArdMac_user12 = (byte)nudInvert.Value;
 
-            }
+            //}
+
+           
 
 
 
@@ -145,22 +147,25 @@ namespace AgOpenGPS
 
         private void FormConfig_FormClosing(object sender, FormClosingEventArgs e)
         {
+
+
             if (!isClosing)
             {
                 e.Cancel = true;
                 return;
             }
 
-
             // Plough
 
             if (chbPloeg.Checked)
             {
                 Properties.Settings.Default.setPlough_isPlougOn = true;
+                mf.btnPloughControl.Visible = true;
             }
             else
             {
                 Properties.Settings.Default.setPlough_isPlougOn = false;
+                mf.btnPloughControl.Visible = false;
             }
 
             if (chbPwm.Checked)
@@ -193,13 +198,16 @@ namespace AgOpenGPS
             if (chbInvert.Checked)
             {
                 Properties.Settings.Default.setPlough_isInvertOn = true;
-                
+
             }
             else
             {
                 Properties.Settings.Default.setPlough_isInvertOn = false;
-                
+
             }
+
+           
+
 
             //reload all the settings from default and user.config
             mf.LoadSettings();
@@ -366,7 +374,7 @@ namespace AgOpenGPS
 
 
 
-
+        #region Plough Tab
 
         private void btnSetDeadzone_Click(object sender, EventArgs e)
         {
@@ -396,11 +404,6 @@ namespace AgOpenGPS
             Properties.Settings.Default.Save();
 
         }
-
-
-      
-
-       
 
         private void btnSetWidth_Click(object sender, EventArgs e)
         {
@@ -439,25 +442,47 @@ namespace AgOpenGPS
 
         }
 
-        private void chbInvert_Click(object sender, EventArgs e)
+        //private void chbInvert_Click(object sender, EventArgs e)
+        //{
+        //    if (chbInvert.Checked)
+        //    {
+        //        chbInvert.BackgroundImage = Properties.Resources.PlLeft;
+        //        nudInvert.Value = 0;
+        //        Properties.Settings.Default.setArdMac_user12 = (byte)nudInvert.Value;
+        //        SaveSettingsMachine();
+        //        Properties.Settings.Default.Save();
+        //    }
+        //    else
+        //    {
+        //        chbInvert.BackgroundImage = Properties.Resources.PlRight;
+        //        nudInvert.Value = 1;
+        //        Properties.Settings.Default.setArdMac_user12 = (byte)nudInvert.Value;
+        //        SaveSettingsMachine();
+        //        Properties.Settings.Default.Save();
+        //    }
+        //}
+        
+
+        private void chbInvert_CheckedChanged(object sender, EventArgs e)
         {
             if (chbInvert.Checked)
             {
-                chbInvert.BackgroundImage = Properties.Resources.PlLeft;
-                nudInvert.Value = 0;
+                
+                nudInvert.Value = 1;
                 Properties.Settings.Default.setArdMac_user12 = (byte)nudInvert.Value;
                 SaveSettingsMachine();
                 Properties.Settings.Default.Save();
             }
             else
             {
-                chbInvert.BackgroundImage = Properties.Resources.PlRight;
-                nudInvert.Value = 1;
+                
+                nudInvert.Value = 0;
                 Properties.Settings.Default.setArdMac_user12 = (byte)nudInvert.Value;
                 SaveSettingsMachine();
                 Properties.Settings.Default.Save();
             }
         }
+        #endregion
     }
-    
+
 }

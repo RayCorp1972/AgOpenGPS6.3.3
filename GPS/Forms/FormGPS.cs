@@ -405,7 +405,7 @@ namespace AgOpenGPS
                 form.ShowDialog(this);
             }
 
-            if (isPlougOn)
+            if (Properties.Settings.Default.setPlough_isPlougOn == true) 
             {
                 PlAuto = true;
                 btnPloughControl.Visible = true;

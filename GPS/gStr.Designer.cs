@@ -772,6 +772,15 @@ namespace AgOpenGPS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ploughed Area.
+        /// </summary>
+        public static string gsInvert {
+            get {
+                return ResourceManager.GetString("gsInvert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to kmh.
         /// </summary>
         public static string gsKMH {

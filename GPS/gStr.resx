@@ -606,4 +606,7 @@
   <data name="gsBoth" xml:space="preserve">
     <value>Section And Switch off</value>
   </data>
+  <data name="gsInvert" xml:space="preserve">
+    <value>Ploughed Area</value>
+  </data>
 </root>
