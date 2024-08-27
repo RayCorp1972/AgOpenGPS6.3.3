@@ -799,7 +799,8 @@ namespace AgOpenGPS
             Pan, MenuHideShow, 
             ToolWheels, Tire, TramDot,
             RateMap1, RateMap2, RateMap3, 
-            YouTurnU, YouTurnH
+            YouTurnU, YouTurnH,
+            Stop
         }
 
         public void LoadGLTextures()
@@ -863,6 +864,35 @@ namespace AgOpenGPS
                 return false;
             }
         }
+        #region Plough Wider/Smaller Manual/Auto
+        public void PwmPloughManualWider()
+        {
+
+
+            ploughWidth = Properties.Settings.Default.setArdMac_user1;
+            byte incrementAmount = Properties.Settings.Default.setArdMac_user8; // You can adjust this value to change the increment amount
+            ploughWidth += incrementAmount;
+            Properties.Settings.Default.setArdMac_user1 = (byte)ploughWidth;
+            p_238.pgn[p_238.user1] = (byte)ploughWidth;
+            SendPgnToLoop(p_238.pgn);
+            Properties.Settings.Default.Save();
+            //Do not save just send pwm to cytron
+        }
+
+        public void PwmPloughManualNarrow()
+        {
+
+
+            ploughWidth = Properties.Settings.Default.setArdMac_user1;
+            byte decrementAmount = Properties.Settings.Default.setArdMac_user8;
+            ploughWidth -= decrementAmount;
+            //Properties.Settings.Default.setArdMac_user1 = (byte)ploughWidth;
+            p_238.pgn[p_238.user1] = (byte)ploughWidth;
+            SendPgnToLoop(p_238.pgn);
+            //Properties.Settings.Default.Save();
+            //Do not save just send pwm to cytron
+
+        }
 
         public void PwmPloughManualSetPlus()
         {
@@ -881,6 +911,7 @@ namespace AgOpenGPS
 
         public void PwmPloughManualSetMin()
         {
+
             ploughWidth = Properties.Settings.Default.setArdMac_user1;
             byte decrementAmount = Properties.Settings.Default.setArdMac_user8;
             ploughWidth -= decrementAmount;
@@ -893,7 +924,7 @@ namespace AgOpenGPS
 
 
         }
-
+        #endregion 
         public void KeyboardToText(TextBox sender, Form owner)
         {
             var colour = sender.BackColor;

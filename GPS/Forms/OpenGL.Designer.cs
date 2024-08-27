@@ -2636,9 +2636,10 @@ namespace AgOpenGPS
             }
             else
             {
-             // button voor manual toevoegen // weergeven
-
-
+                // button voor manual toevoegen // weergeven
+                //PlougWider();
+                //PlougNarrow();
+                //PlougStop();
             }
 
            
@@ -2673,7 +2674,7 @@ namespace AgOpenGPS
 
 
 
-
+       
         private void PlougPwmPlus()
         {
 
@@ -2693,6 +2694,81 @@ namespace AgOpenGPS
             }
             GL.End();
         }
+
+        /*  uitgezet
+       private void PlougNarrow()
+       {
+
+
+
+           GL.Enable(EnableCap.Texture2D);      // Select Our Texture
+           GL.Color3(0.90f, 0.90f, 0.93f);
+           GL.BindTexture(TextureTarget.Texture2D, texture[(int)FormGPS.textures.ZoomOut48]);        // Select Our Texture
+           GL.Begin(PrimitiveType.Quads);
+
+           int hite = 510;
+           int center2 = oglMain.Width / -2 + 160; // 160 = position on main
+           {
+               GL.TexCoord2(0, 0); GL.Vertex2(center2, hite - 45); // 45 is grote van knop
+               GL.TexCoord2(1, 0); GL.Vertex2(center2 + 45, hite - 45); // 
+               GL.TexCoord2(1, 1); GL.Vertex2(center2 + 45, hite); // 
+               GL.TexCoord2(0, 1); GL.Vertex2(center2, hite); //
+           }
+           GL.End();
+
+           // Check if the background image is plMan
+
+
+       }
+
+       private void PlougStop()
+       {
+
+
+
+           GL.Enable(EnableCap.Texture2D);      // Select Our Texture
+           GL.Color3(0.90f, 0.90f, 0.93f);
+           GL.BindTexture(TextureTarget.Texture2D, texture[(int)FormGPS.textures.ZoomOut48]);        // Select Our Texture
+           GL.Begin(PrimitiveType.Quads);
+
+           int hite = 510;
+           int center2 = oglMain.Width / -2 + 110; // 160 = position on main
+           {
+               GL.TexCoord2(0, 0); GL.Vertex2(center2, hite - 45); // 45 is grote van knop
+               GL.TexCoord2(1, 0); GL.Vertex2(center2 + 45, hite - 45); // 
+               GL.TexCoord2(1, 1); GL.Vertex2(center2 + 45, hite); // 
+               GL.TexCoord2(0, 1); GL.Vertex2(center2, hite); //
+           }
+           GL.End();
+
+           // Check if the background image is plMan
+
+
+       }
+
+
+
+
+       private void PlougWider()
+       {
+
+
+           GL.Enable(EnableCap.Texture2D);
+           GL.BindTexture(TextureTarget.Texture2D, texture[(int)FormGPS.textures.ZoomIn48]);        // Select Our Texture
+           GL.Color3(0.90f, 0.90f, 0.93f);
+           GL.Begin(PrimitiveType.Quads);
+
+           int hite = 510;
+           int center2 = oglMain.Width / -2 + 48;
+           {
+               GL.TexCoord2(0, 0); GL.Vertex2(center2, hite - 45); // 
+               GL.TexCoord2(1, 0); GL.Vertex2(center2 + 45, hite - 45); // 
+               GL.TexCoord2(1, 1); GL.Vertex2(center2 + 45, hite); // 
+               GL.TexCoord2(0, 1); GL.Vertex2(center2, hite); //
+           }
+           GL.End();
+       }
+       */
 
         #endregion
 

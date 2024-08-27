@@ -570,4 +570,7 @@
   <data name="gsWider" xml:space="preserve">
     <value>Breder</value>
   </data>
+  <data name="gsInvert" xml:space="preserve">
+    <value>Ploeg richting</value>
+  </data>
 </root>

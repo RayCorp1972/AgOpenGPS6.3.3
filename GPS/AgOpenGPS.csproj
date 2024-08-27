@@ -28,7 +28,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>20</ApplicationRevision>
+    <ApplicationRevision>21</ApplicationRevision>
     <ApplicationVersion>1.1.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -559,6 +559,11 @@
       <DependentUpon>gStr.lv.resx</DependentUpon>
     </Compile>
     <Compile Include="gStr.nl.Designer.cs" />
+    <Compile Include="gStr.nl1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>gStr.nl.resx</DependentUpon>
+    </Compile>
     <Compile Include="gStr.no.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1005,6 +1010,7 @@
     <None Include="Resources\plman.png" />
     <None Include="Resources\PlLeft.png" />
     <None Include="Resources\PlRight.png" />
+    <None Include="Resources\Stop.png" />
     <Content Include="Resources\TF012.WAV" />
     <None Include="Resources\SectionOn.wav" />
     <None Include="Resources\SectionOff.wav" />

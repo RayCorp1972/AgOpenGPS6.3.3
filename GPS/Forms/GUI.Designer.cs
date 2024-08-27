@@ -1355,9 +1355,9 @@ namespace AgOpenGPS
                             }
                         }
                     }
-
+                    #region Plough Auto Touch plus/min button
                     //Pwm plough Minus
-                    if (point.X > 150 && point.X < 170)
+                    if (point.X > 170 && point.X < 190)
                     {
                         if (point.Y > 60 && point.Y < 365)
                         {
@@ -1376,26 +1376,30 @@ namespace AgOpenGPS
                             PwmPloughManualSetPlus();
                         }
                     }
+                    #endregion
 
-                    //Plough manual wider
-                    if (point.X > 48 && point.X < 90)
+                    #region Plough Auto Touch plus/min button
+                    //Pwm plough Minus
+                    if (point.X > 170 && point.X < 190)
                     {
-                        if (point.Y > 60 && point.Y < 365)
+                        if (point.Y > 60 && point.Y < 510)
                         {
+                            PwmPloughManualNarrow();
 
-                           // PwmPloughManualSetPlus();
                         }
                     }
 
-                    //Plough manual wider
+                    //Pwm plough Plus
+
                     if (point.X > 48 && point.X < 90)
                     {
-                        if (point.Y > 60 && point.Y < 365)
+                        if (point.Y > 60 && point.Y < 510)
                         {
 
-                           // PwmPloughManualSetPlus();
+                            PwmPloughManualWider();
                         }
                     }
+                    #endregion 
 
 
 

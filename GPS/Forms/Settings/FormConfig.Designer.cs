@@ -148,10 +148,10 @@
             this.label27 = new System.Windows.Forms.Label();
             this.label53 = new System.Windows.Forms.Label();
             this.label44 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.nudTractorHitchLength = new AgOpenGPS.NudlessNumericUpDown();
             this.nudVehicleTrack = new AgOpenGPS.NudlessNumericUpDown();
             this.nudWheelbase = new AgOpenGPS.NudlessNumericUpDown();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabVGuidance = new System.Windows.Forms.TabPage();
             this.tabTConfig = new System.Windows.Forms.TabPage();
             this.gboxAttachment = new System.Windows.Forms.GroupBox();
@@ -588,10 +588,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudAntennaOffset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAntennaPivot)).BeginInit();
             this.tabVDimensions.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudTractorHitchLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudVehicleTrack)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudWheelbase)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabTConfig.SuspendLayout();
             this.gboxAttachment.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pboxConfigHarvester)).BeginInit();
@@ -2309,7 +2309,7 @@
             this.label96.BackColor = System.Drawing.Color.Transparent;
             this.label96.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label96.ForeColor = System.Drawing.Color.Black;
-            this.label96.Location = new System.Drawing.Point(382, 191);
+            this.label96.Location = new System.Drawing.Point(479, 181);
             this.label96.Name = "label96";
             this.label96.Size = new System.Drawing.Size(95, 16);
             this.label96.TabIndex = 502;
@@ -2333,7 +2333,7 @@
             this.label107.BackColor = System.Drawing.Color.Transparent;
             this.label107.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label107.ForeColor = System.Drawing.Color.Black;
-            this.label107.Location = new System.Drawing.Point(83, 20);
+            this.label107.Location = new System.Drawing.Point(83, 0);
             this.label107.Name = "label107";
             this.label107.Size = new System.Drawing.Size(176, 16);
             this.label107.TabIndex = 503;
@@ -2451,7 +2451,7 @@
             this.label100.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label100.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label100.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label100.Location = new System.Drawing.Point(718, 379);
+            this.label100.Location = new System.Drawing.Point(704, 379);
             this.label100.Name = "label100";
             this.label100.Size = new System.Drawing.Size(32, 19);
             this.label100.TabIndex = 483;
@@ -2464,7 +2464,7 @@
             this.label99.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label99.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label99.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label99.Location = new System.Drawing.Point(518, 249);
+            this.label99.Location = new System.Drawing.Point(606, 243);
             this.label99.Name = "label99";
             this.label99.Size = new System.Drawing.Size(32, 19);
             this.label99.TabIndex = 482;
@@ -2477,7 +2477,7 @@
             this.label98.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label98.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label98.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label98.Location = new System.Drawing.Point(247, 76);
+            this.label98.Location = new System.Drawing.Point(236, 52);
             this.label98.Name = "label98";
             this.label98.Size = new System.Drawing.Size(32, 19);
             this.label98.TabIndex = 481;
@@ -2499,7 +2499,7 @@
             this.nudAntennaHeight.BackColor = System.Drawing.Color.AliceBlue;
             this.nudAntennaHeight.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudAntennaHeight.InterceptArrowKeys = false;
-            this.nudAntennaHeight.Location = new System.Drawing.Point(368, 216);
+            this.nudAntennaHeight.Location = new System.Drawing.Point(456, 210);
             this.nudAntennaHeight.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -2541,7 +2541,7 @@
             this.nudAntennaPivot.BackColor = System.Drawing.Color.AliceBlue;
             this.nudAntennaPivot.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudAntennaPivot.InterceptArrowKeys = false;
-            this.nudAntennaPivot.Location = new System.Drawing.Point(97, 43);
+            this.nudAntennaPivot.Location = new System.Drawing.Point(86, 19);
             this.nudAntennaPivot.Maximum = new decimal(new int[] {
             999,
             0,
@@ -2574,10 +2574,10 @@
             this.tabVDimensions.Controls.Add(this.label27);
             this.tabVDimensions.Controls.Add(this.label53);
             this.tabVDimensions.Controls.Add(this.label44);
-            this.tabVDimensions.Controls.Add(this.pictureBox1);
             this.tabVDimensions.Controls.Add(this.nudTractorHitchLength);
             this.tabVDimensions.Controls.Add(this.nudVehicleTrack);
             this.tabVDimensions.Controls.Add(this.nudWheelbase);
+            this.tabVDimensions.Controls.Add(this.pictureBox1);
             this.tabVDimensions.Location = new System.Drawing.Point(4, 44);
             this.tabVDimensions.Name = "tabVDimensions";
             this.tabVDimensions.Size = new System.Drawing.Size(854, 584);
@@ -2591,7 +2591,7 @@
             this.label97.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label97.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label97.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label97.Location = new System.Drawing.Point(617, 216);
+            this.label97.Location = new System.Drawing.Point(675, 271);
             this.label97.Name = "label97";
             this.label97.Size = new System.Drawing.Size(32, 19);
             this.label97.TabIndex = 483;
@@ -2604,7 +2604,7 @@
             this.label95.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label95.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label95.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label95.Location = new System.Drawing.Point(236, 375);
+            this.label95.Location = new System.Drawing.Point(175, 431);
             this.label95.Name = "label95";
             this.label95.Size = new System.Drawing.Size(32, 19);
             this.label95.TabIndex = 481;
@@ -2628,7 +2628,7 @@
             // 
             this.label27.AutoSize = true;
             this.label27.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label27.Location = new System.Drawing.Point(74, 36);
+            this.label27.Location = new System.Drawing.Point(91, 36);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(78, 16);
             this.label27.TabIndex = 479;
@@ -2638,7 +2638,7 @@
             // 
             this.label53.AutoSize = true;
             this.label53.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label53.Location = new System.Drawing.Point(518, 164);
+            this.label53.Location = new System.Drawing.Point(579, 209);
             this.label53.Name = "label53";
             this.label53.Size = new System.Drawing.Size(40, 16);
             this.label53.TabIndex = 476;
@@ -2648,29 +2648,18 @@
             // 
             this.label44.AutoSize = true;
             this.label44.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label44.Location = new System.Drawing.Point(81, 325);
+            this.label44.Location = new System.Drawing.Point(64, 370);
             this.label44.Name = "label44";
             this.label44.Size = new System.Drawing.Size(71, 16);
             this.label44.TabIndex = 475;
             this.label44.Text = "Wheelbase";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::AgOpenGPS.Properties.Resources.RadiusWheelBase;
-            this.pictureBox1.InitialImage = null;
-            this.pictureBox1.Location = new System.Drawing.Point(4, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(521, 567);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 32;
-            this.pictureBox1.TabStop = false;
             // 
             // nudTractorHitchLength
             // 
             this.nudTractorHitchLength.BackColor = System.Drawing.Color.AliceBlue;
             this.nudTractorHitchLength.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudTractorHitchLength.InterceptArrowKeys = false;
-            this.nudTractorHitchLength.Location = new System.Drawing.Point(37, 56);
+            this.nudTractorHitchLength.Location = new System.Drawing.Point(48, 56);
             this.nudTractorHitchLength.Maximum = new decimal(new int[] {
             4000,
             0,
@@ -2694,7 +2683,7 @@
             this.nudVehicleTrack.BackColor = System.Drawing.Color.AliceBlue;
             this.nudVehicleTrack.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudVehicleTrack.InterceptArrowKeys = false;
-            this.nudVehicleTrack.Location = new System.Drawing.Point(469, 185);
+            this.nudVehicleTrack.Location = new System.Drawing.Point(531, 238);
             this.nudVehicleTrack.Maximum = new decimal(new int[] {
             2000,
             0,
@@ -2723,7 +2712,7 @@
             this.nudWheelbase.BackColor = System.Drawing.Color.AliceBlue;
             this.nudWheelbase.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudWheelbase.InterceptArrowKeys = false;
-            this.nudWheelbase.Location = new System.Drawing.Point(37, 352);
+            this.nudWheelbase.Location = new System.Drawing.Point(17, 399);
             this.nudWheelbase.Maximum = new decimal(new int[] {
             1999,
             0,
@@ -2746,6 +2735,17 @@
             0,
             0});
             this.nudWheelbase.Click += new System.EventHandler(this.nudWheelbase_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::AgOpenGPS.Properties.Resources.RadiusWheelBase;
+            this.pictureBox1.InitialImage = null;
+            this.pictureBox1.Location = new System.Drawing.Point(4, 127);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(521, 440);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 32;
+            this.pictureBox1.TabStop = false;
             // 
             // tabVGuidance
             // 
@@ -9976,10 +9976,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudAntennaPivot)).EndInit();
             this.tabVDimensions.ResumeLayout(false);
             this.tabVDimensions.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudTractorHitchLength)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudVehicleTrack)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudWheelbase)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabTConfig.ResumeLayout(false);
             this.gboxAttachment.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pboxConfigHarvester)).EndInit();
