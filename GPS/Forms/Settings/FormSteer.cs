@@ -1050,7 +1050,10 @@ namespace AgOpenGPS
             //hSBarFreeDrive.Value = mf.driveFreeSteerAngle;
         }
 
-     
+        private void btnSteerAngleDown_Click(object sender, EventArgs e)
+        {
+
+        }
 
         private void btnSteerAngleUp_MouseDown(object sender, MouseEventArgs e)
         {

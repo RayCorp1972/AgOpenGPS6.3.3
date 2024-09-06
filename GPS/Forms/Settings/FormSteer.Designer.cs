@@ -981,7 +981,7 @@
             this.lblAV_Set.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblAV_Set.AutoSize = true;
             this.lblAV_Set.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAV_Set.Location = new System.Drawing.Point(204, 18);
+            this.lblAV_Set.Location = new System.Drawing.Point(187, 18);
             this.lblAV_Set.Name = "lblAV_Set";
             this.lblAV_Set.Size = new System.Drawing.Size(51, 19);
             this.lblAV_Set.TabIndex = 529;
@@ -993,7 +993,7 @@
             this.lblAV_Act.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblAV_Act.AutoSize = true;
             this.lblAV_Act.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAV_Act.Location = new System.Drawing.Point(204, 42);
+            this.lblAV_Act.Location = new System.Drawing.Point(187, 42);
             this.lblAV_Act.Name = "lblAV_Act";
             this.lblAV_Act.Size = new System.Drawing.Size(54, 19);
             this.lblAV_Act.TabIndex = 528;
@@ -1016,7 +1016,7 @@
             this.label36.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label36.AutoSize = true;
             this.label36.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label36.Location = new System.Drawing.Point(160, 44);
+            this.label36.Location = new System.Drawing.Point(143, 44);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(51, 16);
             this.label36.TabIndex = 530;
@@ -1040,7 +1040,7 @@
             this.label38.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label38.AutoSize = true;
             this.label38.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label38.Location = new System.Drawing.Point(159, 20);
+            this.label38.Location = new System.Drawing.Point(142, 20);
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(52, 16);
             this.label38.TabIndex = 531;
@@ -1119,7 +1119,7 @@
             this.lblActualSteerAngleUpper.BackColor = System.Drawing.Color.Transparent;
             this.lblActualSteerAngleUpper.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblActualSteerAngleUpper.ForeColor = System.Drawing.Color.Black;
-            this.lblActualSteerAngleUpper.Location = new System.Drawing.Point(-131, 16);
+            this.lblActualSteerAngleUpper.Location = new System.Drawing.Point(-148, 16);
             this.lblActualSteerAngleUpper.Name = "lblActualSteerAngleUpper";
             this.lblActualSteerAngleUpper.Size = new System.Drawing.Size(39, 19);
             this.lblActualSteerAngleUpper.TabIndex = 324;
@@ -1576,6 +1576,7 @@
             this.btnSteerAngleDown.Size = new System.Drawing.Size(73, 56);
             this.btnSteerAngleDown.TabIndex = 314;
             this.btnSteerAngleDown.UseVisualStyleBackColor = true;
+            this.btnSteerAngleDown.Click += new System.EventHandler(this.btnSteerAngleDown_Click);
             this.btnSteerAngleDown.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnSteerAngleDown_MouseDown);
             // 
             // hsbarSensor
@@ -2028,7 +2029,7 @@
             this.cboxAutoSteerAuto1.TabIndex = 535;
             this.cboxAutoSteerAuto1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.cboxAutoSteerAuto1.UseVisualStyleBackColor = false;
-           // this.cboxAutoSteerAuto1.CheckedChanged += new System.EventHandler(this.cboxAutoSteerAuto1_CheckedChanged);
+            this.cboxAutoSteerAuto1.Click += new System.EventHandler(this.cboxAutoSteerAuto1_Click);
             // 
             // label156
             // 
@@ -2061,7 +2062,7 @@
             this.cboxSteerInReverse.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.cboxSteerInReverse.UseVisualStyleBackColor = false;
             this.cboxSteerInReverse.Click += new System.EventHandler(this.cboxSteerInReverse_Click);
-            this.cboxAutoSteerAuto1.Click += new System.EventHandler(this.cboxAutoSteerAuto1_Click);
+            // 
             // label41
             // 
             this.label41.AutoSize = true;

@@ -89,6 +89,7 @@ namespace AgOpenGPS
                 mf.unitsInCm;
 
             lblLookahead.Text = Properties.Settings.Default.setVehicle_toolLookAheadOn.ToString() + " sec";
+            
         }
 
         public string ConvertMeterToFeet(double meter)

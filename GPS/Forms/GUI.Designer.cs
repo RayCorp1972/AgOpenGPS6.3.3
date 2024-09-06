@@ -442,6 +442,7 @@ namespace AgOpenGPS
             isBlackWhiteOn = Settings.Default.setPlough_IsBlackWhiteOn;
             isRotationSensorOn = Settings.Default.setPlough_isRotationSensorOn;
             isInvertOn = Settings.Default.setPlough_isInvertOn;
+            
 
             //tools menu
             SmoothABtoolStripMenu.Visible = Properties.Settings.Default.setFeatures.isABSmoothOn;
@@ -1355,14 +1356,13 @@ namespace AgOpenGPS
                             }
                         }
                     }
-                    #region Plough Auto Touch plus/min button
+                    #region Plough AUTO plus/min button
                     //Pwm plough Minus
                     if (point.X > 170 && point.X < 190)
                     {
                         if (point.Y > 60 && point.Y < 365)
                         {
                             PwmPloughManualSetMin();
-
                         }
                     }
 
@@ -1378,29 +1378,7 @@ namespace AgOpenGPS
                     }
                     #endregion
 
-                    #region Plough Auto Touch plus/min button
-                    //Pwm plough Minus
-                    if (point.X > 170 && point.X < 190)
-                    {
-                        if (point.Y > 60 && point.Y < 510)
-                        {
-                            PwmPloughManualNarrow();
-
-                        }
-                    }
-
-                    //Pwm plough Plus
-
-                    if (point.X > 48 && point.X < 90)
-                    {
-                        if (point.Y > 60 && point.Y < 510)
-                        {
-
-                            PwmPloughManualWider();
-                        }
-                    }
-                    #endregion 
-
+                   
 
 
                     //tram override

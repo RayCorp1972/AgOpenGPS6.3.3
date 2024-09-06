@@ -203,7 +203,7 @@ namespace AgOpenGPS
             public int raiseTime = 5;
             public int lowerTime = 6;
             public int enableHyd = 7;
-            public int set0 = 8;
+            public int set0 = 8;  //reverse left/right
             public int user1 = 9;       //Target width (+200cm)                                            5  
             public int user2 = 10;      //Calabration command instrction                                   
             public int user3 = 11;      //Set value L
@@ -212,9 +212,9 @@ namespace AgOpenGPS
             public int user6 = 14;      //Pwm High
             public int user7 = 15;      //Pwm Low
             public int user8 = 16;      //Pwm / Black-White
-            public int user9 = 17;      //manual wider
-            public int user10 = 18;      //manual wider
-            public int user12 = 19;      //reverse left/right
+            public int user9 = 17;      //Auto + Button wider
+            public int user10 = 18;      //Auto - button smaller
+            public int user12 = 19;      //Manual wider/smaller
                                          
 
             // PGN  - 127.239 0x7FEF

@@ -609,4 +609,7 @@
   <data name="gsInvert" xml:space="preserve">
     <value>Ploughed Area</value>
   </data>
+  <data name="gsPwmInvert" xml:space="preserve">
+    <value>Inverted </value>
+  </data>
 </root>

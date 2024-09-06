@@ -1150,6 +1150,15 @@ namespace AgOpenGPS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Inverted .
+        /// </summary>
+        public static string gsPwmInvert {
+            get {
+                return ResourceManager.GetString("gsPwmInvert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Really Reset Everything.
         /// </summary>
         public static string gsReallyResetEverything {

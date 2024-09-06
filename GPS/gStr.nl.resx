@@ -571,6 +571,9 @@
     <value>Breder</value>
   </data>
   <data name="gsInvert" xml:space="preserve">
-    <value>Ploeg richting</value>
+    <value>Ploeg zijde</value>
+  </data>
+  <data name="gsPwmInvert" xml:space="preserve">
+    <value>Omgekeerd</value>
   </data>
 </root>

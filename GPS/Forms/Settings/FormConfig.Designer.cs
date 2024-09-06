@@ -1471,11 +1471,6 @@
             this.nudPwmSet.Size = new System.Drawing.Size(114, 52);
             this.nudPwmSet.TabIndex = 539;
             this.nudPwmSet.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nudPwmSet.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.nudPwmSet.Click += new System.EventHandler(this.nudPwmSet_Click);
             // 
             // btnSetWidth
@@ -1801,7 +1796,7 @@
             this.nudUser1.BackColor = System.Drawing.Color.AliceBlue;
             this.nudUser1.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudUser1.InterceptArrowKeys = false;
-            this.nudUser1.Location = new System.Drawing.Point(181, 225);
+            this.nudUser1.Location = new System.Drawing.Point(180, 225);
             this.nudUser1.Maximum = new decimal(new int[] {
             500,
             0,

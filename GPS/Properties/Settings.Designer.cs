@@ -3167,5 +3167,41 @@ namespace AgOpenGPS.Properties {
                 this["setArdMac_user12"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool setPlough_AblineFlip {
+            get {
+                return ((bool)(this["setPlough_AblineFlip"]));
+            }
+            set {
+                this["setPlough_AblineFlip"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool setArdMac_user13 {
+            get {
+                return ((bool)(this["setArdMac_user13"]));
+            }
+            set {
+                this["setArdMac_user13"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool setPlough_Richting {
+            get {
+                return ((bool)(this["setPlough_Richting"]));
+            }
+            set {
+                this["setPlough_Richting"] = value;
+            }
+        }
     }
 }

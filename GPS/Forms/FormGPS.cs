@@ -369,6 +369,8 @@ namespace AgOpenGPS
                     btnPloughControl.BackgroundImage = plMan;
                     PlAuto = false;
 
+                    
+
                 }
 
                 else if (IsSameImage(btnPloughControl.BackgroundImage, plMan))
@@ -376,6 +378,9 @@ namespace AgOpenGPS
 
                     btnPloughControl.BackgroundImage = plAuto1;
                     PlAuto = true;
+                    p_238.pgn[p_238.user12] = 0;
+                    SendPgnToLoop(p_238.pgn);
+
                 }
             }
         }
@@ -399,6 +404,8 @@ namespace AgOpenGPS
 
         private void FormGPS_Load(object sender, EventArgs e)
         {
+
+            
 
             var form = new FormAkkoord(this);
             {
@@ -867,44 +874,34 @@ namespace AgOpenGPS
         #region Plough Wider/Smaller Manual/Auto
         public void PwmPloughManualWider()
         {
-
-
-            ploughWidth = Properties.Settings.Default.setArdMac_user1;
-            byte incrementAmount = Properties.Settings.Default.setArdMac_user8; // You can adjust this value to change the increment amount
-            ploughWidth += incrementAmount;
-            Properties.Settings.Default.setArdMac_user1 = (byte)ploughWidth;
-            p_238.pgn[p_238.user1] = (byte)ploughWidth;
-            SendPgnToLoop(p_238.pgn);
-            Properties.Settings.Default.Save();
-            //Do not save just send pwm to cytron
+         
         }
 
         public void PwmPloughManualNarrow()
-        {
-
-
-            ploughWidth = Properties.Settings.Default.setArdMac_user1;
-            byte decrementAmount = Properties.Settings.Default.setArdMac_user8;
-            ploughWidth -= decrementAmount;
-            //Properties.Settings.Default.setArdMac_user1 = (byte)ploughWidth;
-            p_238.pgn[p_238.user1] = (byte)ploughWidth;
-            SendPgnToLoop(p_238.pgn);
-            //Properties.Settings.Default.Save();
-            //Do not save just send pwm to cytron
-
+        {         
+           
         }
 
         public void PwmPloughManualSetPlus()
         {
 
-
-            ploughWidth = Properties.Settings.Default.setArdMac_user1;
-            byte incrementAmount = Properties.Settings.Default.setArdMac_user8; // You can adjust this value to change the increment amount
-            ploughWidth += incrementAmount;
-            Properties.Settings.Default.setArdMac_user1 = (byte)ploughWidth;
-            p_238.pgn[p_238.user1] = (byte)ploughWidth;
-            SendPgnToLoop(p_238.pgn);
-            Properties.Settings.Default.Save();
+            if (PlAuto == true)
+            {
+                ploughWidth = Properties.Settings.Default.setArdMac_user1;
+                byte incrementAmount = Properties.Settings.Default.setArdMac_user8; // You can adjust this value to change the increment amount
+                ploughWidth += incrementAmount;
+                Properties.Settings.Default.setArdMac_user1 = (byte)ploughWidth;
+                p_238.pgn[p_238.user1] = (byte)ploughWidth;
+                SendPgnToLoop(p_238.pgn);
+                Properties.Settings.Default.Save();
+            }
+            else
+            {
+              
+                p_238.pgn[p_238.user12] = 1;
+                SendPgnToLoop(p_238.pgn);
+            
+            }
 
         }
 
@@ -912,14 +909,23 @@ namespace AgOpenGPS
         public void PwmPloughManualSetMin()
         {
 
-            ploughWidth = Properties.Settings.Default.setArdMac_user1;
-            byte decrementAmount = Properties.Settings.Default.setArdMac_user8;
-            ploughWidth -= decrementAmount;
-            Properties.Settings.Default.setArdMac_user1 = (byte)ploughWidth;
-            p_238.pgn[p_238.user1] = (byte)ploughWidth;
-            SendPgnToLoop(p_238.pgn);
-            Properties.Settings.Default.Save();
-
+            if (PlAuto == true)
+            {
+                ploughWidth = Properties.Settings.Default.setArdMac_user1;
+                byte decrementAmount = Properties.Settings.Default.setArdMac_user8;
+                ploughWidth -= decrementAmount;
+                Properties.Settings.Default.setArdMac_user1 = (byte)ploughWidth;
+                p_238.pgn[p_238.user12] = (byte)ploughWidth;
+                SendPgnToLoop(p_238.pgn);
+               Properties.Settings.Default.Save();
+            }
+            else
+            {
+              
+                p_238.pgn[p_238.user12] = 2;
+                SendPgnToLoop(p_238.pgn);
+               
+            }
 
 
 

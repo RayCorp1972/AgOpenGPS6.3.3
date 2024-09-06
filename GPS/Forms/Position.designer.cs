@@ -840,6 +840,14 @@ namespace AgOpenGPS
             //Tony add distance to line to Machine PGN
             short machineLineDistance = guidanceLineDistanceOff;
             if (!ABLine.isHeadingSameWay) machineLineDistance *= -1;
+            if (!ABLine.isHeadingSameWay)
+            {
+                Properties.Settings.Default.setPlough_AblineFlip = true;
+            }
+            else
+            {
+                Properties.Settings.Default.setPlough_AblineFlip = false;
+            }
             p_239.pgn[p_239.lineDistanceH] = unchecked((byte)(machineLineDistance >> 8));
             p_239.pgn[p_239.lineDistanceL] = unchecked((byte)(machineLineDistance));
 

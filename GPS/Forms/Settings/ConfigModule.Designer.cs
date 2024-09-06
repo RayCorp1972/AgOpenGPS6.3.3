@@ -33,7 +33,7 @@ namespace AgOpenGPS
             nudPwmMax.Value = Properties.Settings.Default.setArdMac_user6;
             nudPwmMin.Value = Properties.Settings.Default.setArdMac_user7;
             nudDeadzone.Value = Properties.Settings.Default.setArdMac_user5;
-            nudPwmSet.Value = Properties.Settings.Default.setArdMac_user11;
+            nudPwmSet.Value = Properties.Settings.Default.setArdMac_user8;
             //nudInvert.Value = Properties.Settings.Default.setArdMac_setting0;
 
             mf.p_238.pgn[mf.p_238.user2] = 0;
@@ -253,7 +253,7 @@ namespace AgOpenGPS
                 mf.p_238.pgn[mf.p_238.user7] = (byte)nudPwmMin.Value;
                 mf.p_238.pgn[mf.p_238.user8] = (byte)nudPwmSet.Value;
                 //mf.p_238.pgn[mf.p_238.set0] = (byte)nudInvert.Value;
-               //mf.p_238.pgn[mf.p_238.user12] = (byte)nudInvert.Value;
+               // mf.p_238.pgn[mf.p_238.user12] = (byte)nudInvert.Value;
 
 
             int calValue = (int)nudUser4.Value;
