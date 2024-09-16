@@ -9,6 +9,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using AgOpenGPS.Classes;
 using AgOpenGPS.Forms;
 using AgOpenGPS.Forms.Pickers;
 using AgOpenGPS.Properties;
@@ -18,6 +19,8 @@ namespace AgOpenGPS
 {
     public partial class FormGPS
     {
+
+        
         #region Right Menu
         public bool isABCyled = false;
         private void btnContour_Click(object sender, EventArgs e)
@@ -568,6 +571,10 @@ namespace AgOpenGPS
             {
                 if (triStrip[j].isDrawing) triStrip[j].TurnMappingOff();
             }
+            // save all files / check changed files and updat to server!! 
+            //Add function here
+
+
 
             //FileSaveHeadland();
             FileSaveBoundary();

@@ -9,12 +9,21 @@ using System.IO;
 using System.Globalization;
 using System.Xml;
 using System.Text;
+using System.Net;
+using System.Threading.Tasks;
+using System.Net.Http;
+using System.Text.Json;
+using System.Timers;
 
 namespace AgOpenGPS
 {
     
     public partial class FormGPS
     {
+        public string fileName = "test.txt";
+        public string localDirectory = @"C:\AgOpenGPS\Fields\";  // Local directory on tablet
+        public string serverUrl = "http://85.215.198.173/";             // XAMPP server URL
+        public string serverDirectory = "AOGTestFiles/AgOpenGPS/";
         //list of the list of patch data individual triangles for field sections
         public List<List<vec3>> patchSaveList = new List<List<vec3>>();
 
@@ -33,7 +42,7 @@ namespace AgOpenGPS
             { Directory.CreateDirectory(directoryName); }
 
             string myFileName = "TASKDATA.xml";
-
+            
             try
             {
                 XmlWriterSettings settings = new XmlWriterSettings();
@@ -3133,5 +3142,19 @@ namespace AgOpenGPS
             kml.Close();
 
         }
+
+
+        #region Server Sync
+       
+
+
+
+
+        #endregion
+
+
+
+
+
     }
 }

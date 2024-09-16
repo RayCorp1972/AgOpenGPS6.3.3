@@ -4,6 +4,7 @@
 
 
 using AgOpenGPS;
+using AgOpenGPS.Classes;
 using AgOpenGPS.Properties;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
@@ -136,6 +137,9 @@ namespace AgOpenGPS
         /// </summary>
         public CNMEA pn;
 
+      
+       
+             
         /// <summary>
         /// an array of sections
         /// </summary>
@@ -157,6 +161,8 @@ namespace AgOpenGPS
         /// </summary>
         public CTram tram;
 
+
+        
         /// <summary>
         /// Contour Mode Instance
         /// </summary>
@@ -380,7 +386,6 @@ namespace AgOpenGPS
                     PlAuto = true;
                     p_238.pgn[p_238.user12] = 0;
                     SendPgnToLoop(p_238.pgn);
-
                 }
             }
         }

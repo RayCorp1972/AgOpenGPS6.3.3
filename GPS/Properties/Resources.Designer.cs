@@ -1672,6 +1672,36 @@ namespace AgOpenGPS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap data_sync_icon_vector_37625019_removebg_preview {
+            get {
+                object obj = ResourceManager.GetObject("data-sync-icon-vector-37625019-removebg-preview", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap data_sync_icon_vector_37625019_removebg_preview_removebg_preview {
+            get {
+                object obj = ResourceManager.GetObject("data-sync-icon-vector-37625019-removebg-preview-removebg-preview", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap data_sync_icon_vector_37625019_removebg_preview1 {
+            get {
+                object obj = ResourceManager.GetObject("data-sync-icon-vector-37625019-removebg-preview1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Deutz {
             get {
                 object obj = ResourceManager.GetObject("Deutz", resourceCulture);

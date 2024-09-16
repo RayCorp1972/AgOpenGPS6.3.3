@@ -31,6 +31,8 @@ namespace AgOpenGPS
 
         private void FormJob_Load(object sender, EventArgs e)
         {
+
+            
             //check if directory and file exists, maybe was deleted etc
             if (String.IsNullOrEmpty(mf.currentFieldDirectory)) btnJobResume.Enabled = false;
             string directoryName = mf.fieldsDirectory + mf.currentFieldDirectory + "\\";
@@ -261,6 +263,12 @@ namespace AgOpenGPS
         private void btnDeleteAB_Click(object sender, EventArgs e)
         {
             mf.isCancelJobMenu = true;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //FormSyncData.(this);
+            
         }
     }
 }
