@@ -12,7 +12,7 @@ namespace AgOpenGPS.Forms.Field
 {
     public partial class FormSyncData : Form
     {
-        public FormSyncData()
+        public FormSyncData(FormGPS formjob)
         {
             InitializeComponent();
         }

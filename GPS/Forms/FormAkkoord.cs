@@ -6,9 +6,16 @@ namespace AgOpenGPS
 {
     public partial class FormAkkoord : Form
     {
+        private FormJob formJob;
+
         public FormAkkoord(FormGPS formGPS)
         {
             InitializeComponent();
+        }
+
+        public FormAkkoord(FormJob formJob)
+        {
+            this.formJob = formJob;
         }
 
         private void FormAkkoord_Load(object sender, EventArgs e)

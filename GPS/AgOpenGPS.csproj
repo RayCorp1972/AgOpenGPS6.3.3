@@ -209,10 +209,10 @@
     </Compile>
     <Compile Include="Classes\CTool.cs" />
     <Compile Include="Classes\FileSyncProgram.cs" />
-    <Compile Include="Forms\Field\FormSyncData.cs">
+    <Compile Include="Forms\FormSyncData.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Field\FormSyncData.Designer.cs">
+    <Compile Include="Forms\FormSyncData.Designer.cs">
       <DependentUpon>FormSyncData.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Field\FormEnterFlag.cs">
@@ -719,7 +719,7 @@
     <EmbeddedResource Include="Forms\Field\FormBndTool.resx">
       <DependentUpon>FormBndTool.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Field\FormSyncData.resx">
+    <EmbeddedResource Include="Forms\FormSyncData.resx">
       <DependentUpon>FormSyncData.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormAkkoord.resx">
