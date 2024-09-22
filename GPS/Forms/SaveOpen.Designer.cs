@@ -14,10 +14,12 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using System.Text.Json;
 using System.Timers;
+using System.Threading;
+using System.Text.RegularExpressions;
 
 namespace AgOpenGPS
 {
-    
+
     public partial class FormGPS
     {
         public string fileName = "test.txt";
@@ -26,7 +28,7 @@ namespace AgOpenGPS
         public string serverDirectory = "AOGTestFiles/AgOpenGPS/";
         //list of the list of patch data individual triangles for field sections
         public List<List<vec3>> patchSaveList = new List<List<vec3>>();
-
+        public string localFolderPath = "";
         //list of the list of patch data individual triangles for contour tracking
         public List<List<vec3>> contourSaveList = new List<List<vec3>>();
 
@@ -42,7 +44,7 @@ namespace AgOpenGPS
             { Directory.CreateDirectory(directoryName); }
 
             string myFileName = "TASKDATA.xml";
-            
+
             try
             {
                 XmlWriterSettings settings = new XmlWriterSettings();
@@ -235,7 +237,7 @@ namespace AgOpenGPS
             string directoryName = Path.GetDirectoryName(dirField);
             if ((directoryName.Length > 0) && (!Directory.Exists(directoryName)))
             { Directory.CreateDirectory(directoryName); }
-           
+
             string myFileName = "TASKDATA.xml";
 
             try
@@ -456,25 +458,25 @@ namespace AgOpenGPS
                 //Write the XML to file and close the kml
                 xml.Close();
 
-        }
+            }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
 
-    /*
-        //xml.WriteStartElement("TSK");//Task
-        //xml.WriteAttributeString("A", "TSK1");
-        //xml.WriteAttributeString("B", "Tractor Work");
-        //xml.WriteAttributeString("C", "CTR1");
-        //xml.WriteAttributeString("E", "PFD-1");
-        //xml.WriteAttributeString("G", "1");
-        //xml.WriteAttributeString("I", "1");
-        //xml.WriteAttributeString("J", "0");
-        //xml.WriteEndElement();//Task
-    */
+            /*
+                //xml.WriteStartElement("TSK");//Task
+                //xml.WriteAttributeString("A", "TSK1");
+                //xml.WriteAttributeString("B", "Tractor Work");
+                //xml.WriteAttributeString("C", "CTR1");
+                //xml.WriteAttributeString("E", "PFD-1");
+                //xml.WriteAttributeString("G", "1");
+                //xml.WriteAttributeString("I", "1");
+                //xml.WriteAttributeString("J", "0");
+                //xml.WriteEndElement();//Task
+            */
 
-}
+        }
 
         public void FileSaveHeadLines()
         {
@@ -507,7 +509,7 @@ namespace AgOpenGPS
 
                             //write out the mode
                             writer.WriteLine(hdl.tracksArr[i].mode.ToString(CultureInfo.InvariantCulture));
-                            
+
                             //write out the A_Point index
                             writer.WriteLine(hdl.tracksArr[i].a_point.ToString(CultureInfo.InvariantCulture));
 
@@ -962,7 +964,7 @@ namespace AgOpenGPS
                             line = reader.ReadLine();
                             int numPoints = int.Parse(line);
 
-                            if (numPoints > 1) 
+                            if (numPoints > 1)
                             {
                                 trk.gArr[trk.gArr.Count - 1].curvePts?.Clear();
 
@@ -978,7 +980,7 @@ namespace AgOpenGPS
 
                                 trk.gArr[trk.gArr.Count - 1].ptB.easting = trk.gArr[trk.gArr.Count - 1].curvePts[0].easting;
                                 trk.gArr[trk.gArr.Count - 1].ptB.northing = trk.gArr[trk.gArr.Count - 1].curvePts[0].northing;
-                                
+
                                 trk.gArr[trk.gArr.Count - 1].ptB.easting = trk.gArr[trk.gArr.Count - 1].curvePts[trk.gArr[trk.gArr.Count - 1].curvePts.Count - 1].easting;
                                 trk.gArr[trk.gArr.Count - 1].ptB.northing = trk.gArr[trk.gArr.Count - 1].curvePts[trk.gArr[trk.gArr.Count - 1].curvePts.Count - 1].northing;
                             }
@@ -1238,7 +1240,7 @@ namespace AgOpenGPS
 
             FileLoadTracks();
 
-            
+
             //section patches
             fileAndDirectory = fieldsDirectory + currentFieldDirectory + "\\Sections.txt";
             if (!File.Exists(fileAndDirectory))
@@ -1314,10 +1316,10 @@ namespace AgOpenGPS
                 //was old version prior to v4
                 if (isv3)
                 {
-                        //Append the current list to the field file
-                        using (StreamWriter writer = new StreamWriter((fieldsDirectory + currentFieldDirectory + "\\Sections.txt"), false))
-                        {
-                        }
+                    //Append the current list to the field file
+                    using (StreamWriter writer = new StreamWriter((fieldsDirectory + currentFieldDirectory + "\\Sections.txt"), false))
+                    {
+                    }
                 }
             }
 
@@ -1330,7 +1332,7 @@ namespace AgOpenGPS
                 form.Show(this);
                 //return;
             }
-            
+
             //Points in Patch followed by easting, heading, northing, altitude
             else
             {
@@ -1909,7 +1911,7 @@ namespace AgOpenGPS
                             {
                                 YesMessageBox("Missing one of the 3 rate images, " +
                                 " There should be MapRate1, MapRate2, MapRate3, " +
-                                " VR is turned off") ;
+                                " VR is turned off");
 
                                 worldGrid.isRateMap = false;
                             }
@@ -2036,8 +2038,8 @@ namespace AgOpenGPS
                         writer.WriteLine(count2.ToString(CultureInfo.InvariantCulture));
 
                         for (int i = 0; i < count2; i++)
-                            writer.WriteLine((Math.Round(triList[i].easting,3)).ToString(CultureInfo.InvariantCulture) +
-                                "," + (Math.Round(triList[i].northing,3)).ToString(CultureInfo.InvariantCulture) +
+                            writer.WriteLine((Math.Round(triList[i].easting, 3)).ToString(CultureInfo.InvariantCulture) +
+                                "," + (Math.Round(triList[i].northing, 3)).ToString(CultureInfo.InvariantCulture) +
                                  "," + (Math.Round(triList[i].heading, 3)).ToString(CultureInfo.InvariantCulture));
                     }
                 }
@@ -2163,7 +2165,7 @@ namespace AgOpenGPS
                         for (int i = 0; i < count2; i++)
                         {
                             writer.WriteLine(Math.Round((triList[i].easting), 3).ToString(CultureInfo.InvariantCulture) + "," +
-                                Math.Round(triList[i].northing, 3).ToString(CultureInfo.InvariantCulture)+ "," +
+                                Math.Round(triList[i].northing, 3).ToString(CultureInfo.InvariantCulture) + "," +
                                 Math.Round(triList[i].heading, 3).ToString(CultureInfo.InvariantCulture));
                         }
                     }
@@ -2197,9 +2199,9 @@ namespace AgOpenGPS
                     if (bnd.bndList[i].fenceLine.Count > 0)
                     {
                         for (int j = 0; j < bnd.bndList[i].fenceLine.Count; j++)
-                            writer.WriteLine(Math.Round(bnd.bndList[i].fenceLine[j].easting,3).ToString(CultureInfo.InvariantCulture) + "," +
+                            writer.WriteLine(Math.Round(bnd.bndList[i].fenceLine[j].easting, 3).ToString(CultureInfo.InvariantCulture) + "," +
                                                 Math.Round(bnd.bndList[i].fenceLine[j].northing, 3).ToString(CultureInfo.InvariantCulture) + "," +
-                                                    Math.Round(bnd.bndList[i].fenceLine[j].heading,5).ToString(CultureInfo.InvariantCulture));
+                                                    Math.Round(bnd.bndList[i].fenceLine[j].heading, 5).ToString(CultureInfo.InvariantCulture));
                     }
                 }
             }
@@ -2671,7 +2673,7 @@ namespace AgOpenGPS
 
             }
         }
-                                   
+
         //generate KML file from flag
         public void FileSaveSingleFlagKML(int flagNumber)
         {
@@ -2697,20 +2699,20 @@ namespace AgOpenGPS
 
                 writer.WriteLine(@"<Document>");
 
-                    writer.WriteLine(@"  <Placemark>                                  ");
-                    writer.WriteLine(@"<Style> <IconStyle>");
-                    if (flagPts[flagNumber - 1].color == 0)  //red - xbgr
-                        writer.WriteLine(@"<color>ff4400ff</color>");
-                    if (flagPts[flagNumber - 1].color == 1)  //grn - xbgr
-                        writer.WriteLine(@"<color>ff44ff00</color>");
-                    if (flagPts[flagNumber - 1].color == 2)  //yel - xbgr
-                        writer.WriteLine(@"<color>ff44ffff</color>");
-                    writer.WriteLine(@"</IconStyle> </Style>");
-                    writer.WriteLine(@" <name> " + flagNumber.ToString(CultureInfo.InvariantCulture) + @"</name>");
-                    writer.WriteLine(@"<Point><coordinates> " +
-                                    flagPts[flagNumber-1].longitude.ToString(CultureInfo.InvariantCulture) + "," + flagPts[flagNumber-1].latitude.ToString(CultureInfo.InvariantCulture) + ",0" +
-                                    @"</coordinates> </Point> ");
-                    writer.WriteLine(@"  </Placemark>                                 ");
+                writer.WriteLine(@"  <Placemark>                                  ");
+                writer.WriteLine(@"<Style> <IconStyle>");
+                if (flagPts[flagNumber - 1].color == 0)  //red - xbgr
+                    writer.WriteLine(@"<color>ff4400ff</color>");
+                if (flagPts[flagNumber - 1].color == 1)  //grn - xbgr
+                    writer.WriteLine(@"<color>ff44ff00</color>");
+                if (flagPts[flagNumber - 1].color == 2)  //yel - xbgr
+                    writer.WriteLine(@"<color>ff44ffff</color>");
+                writer.WriteLine(@"</IconStyle> </Style>");
+                writer.WriteLine(@" <name> " + flagNumber.ToString(CultureInfo.InvariantCulture) + @"</name>");
+                writer.WriteLine(@"<Point><coordinates> " +
+                                flagPts[flagNumber - 1].longitude.ToString(CultureInfo.InvariantCulture) + "," + flagPts[flagNumber - 1].latitude.ToString(CultureInfo.InvariantCulture) + ",0" +
+                                @"</coordinates> </Point> ");
+                writer.WriteLine(@"  </Placemark>                                 ");
                 writer.WriteLine(@"</Document>");
                 writer.WriteLine(@"</kml>                                         ");
 
@@ -2944,7 +2946,7 @@ namespace AgOpenGPS
             for (int i = 0; i < flagPts.Count; i++)
             {
                 kml.WriteStartElement("Placemark");
-                kml.WriteElementString("name", "Flag_"+ i.ToString());
+                kml.WriteElementString("name", "Flag_" + i.ToString());
 
                 kml.WriteStartElement("Style");
                 kml.WriteStartElement("IconStyle");
@@ -3002,7 +3004,7 @@ namespace AgOpenGPS
                             kml.WriteElementString("color", collor);
                             //kml.WriteElementString("width", "6");
                             kml.WriteEndElement(); // <LineStyle>
-                            
+
                             kml.WriteStartElement("PolyStyle");
                             kml.WriteElementString("color", collor);
                             kml.WriteEndElement(); // <PloyStyle>
@@ -3012,7 +3014,7 @@ namespace AgOpenGPS
                             kml.WriteElementString("tessellate", "1");
                             kml.WriteStartElement("outerBoundaryIs");
                             kml.WriteStartElement("LinearRing");
-                            
+
                             //coords
                             kml.WriteStartElement("coordinates");
                             secPts = "";
@@ -3094,7 +3096,7 @@ namespace AgOpenGPS
             kml.WriteStartElement("kml", "http://www.opengis.net/kml/2.2");
             kml.WriteStartElement("Document");
 
-            foreach(String dir in Directory.EnumerateDirectories(directoryName).OrderBy(d => new DirectoryInfo(d).Name).ToArray())
+            foreach (String dir in Directory.EnumerateDirectories(directoryName).OrderBy(d => new DirectoryInfo(d).Name).ToArray())
             //loop
             {
                 if (!File.Exists(dir + "\\" + "Field.kml")) continue;
@@ -3105,10 +3107,10 @@ namespace AgOpenGPS
 
                 var lines = File.ReadAllLines(dir + "\\" + "Field.kml");
                 LinkedList<string> linebuffer = new LinkedList<string>();
-                for( var i = 3; i < lines.Length-2; i++)  //We want to skip the first 3 and last 2 lines
+                for (var i = 3; i < lines.Length - 2; i++)  //We want to skip the first 3 and last 2 lines
                 {
                     linebuffer.AddLast(lines[i]);
-                    if(linebuffer.Count > 2)
+                    if (linebuffer.Count > 2)
                     {
                         kml.WriteRaw("   ");
                         kml.WriteRaw(Environment.NewLine);
@@ -3126,7 +3128,7 @@ namespace AgOpenGPS
                 kml.WriteRaw(Environment.NewLine);
 
                 kml.WriteEndElement(); // <Folder>
-                kml.WriteComment("End of " +directoryName);
+                kml.WriteComment("End of " + directoryName);
             }
 
             //end of document
@@ -3145,16 +3147,398 @@ namespace AgOpenGPS
 
 
         #region Server Sync
-       
-
-
-
-
-        #endregion
 
 
 
 
 
+
+
+
+
+        //private static string localFolderPath = @"C:\Users\Documents\AgOpenGPS";
+        //private static string ftpServerPath = "ftp://85.215.198.173/";
+        //private static string ftpUsername = Properties.Settings.Default.Sync_User;
+        //private static string ftpPassword = Properties.Settings.Default.Sync_Pass;
+
+
+
+        //public void SyncFolders(string ftpServerPath, string ftpUsername, string ftpPassword)
+        //{
+        //    // Get the current user's documents folder
+        //    string userDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        //    string agOpenGPSPath = Path.Combine(userDocumentsPath, "AgOpenGPS");
+
+        //    // Define the specific folders to sync
+        //    string[] foldersToSync = { "Fields", "Vehicles" };
+
+        //    // Check if the AgOpenGPS folder exists for the user
+        //    if (Directory.Exists(agOpenGPSPath))
+        //    {
+        //        foreach (string folder in foldersToSync)
+        //        {
+        //            string localFolderPath = Path.Combine(agOpenGPSPath, folder);
+
+        //            // Check if the specific folder exists
+        //            if (Directory.Exists(localFolderPath))
+        //            {
+        //                // Step 1: Check and create missing directories on FTP server
+        //                CreateMissingDirectories(localFolderPath, Path.Combine(ftpServerPath, folder), ftpUsername, ftpPassword);
+
+        //                // Step 2: Upload or download files based on modification date
+        //                SyncFiles(localFolderPath, Path.Combine(ftpServerPath, folder), ftpUsername, ftpPassword);
+        //            }
+        //            else
+        //            {
+        //                // Handle case when the specific folder does not exist
+        //                Console.WriteLine($"The folder '{localFolderPath}' does not exist for the current user.");
+        //            }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        // Handle case when the AgOpenGPS folder does not exist
+        //        Console.WriteLine($"The folder '{agOpenGPSPath}' does not exist for the current user.");
+        //    }
+        //}
+
+
+
+
+        private static string ftpServerPath = "ftp://85.215.198.173";
+        private static string ftpUsername = Properties.Settings.Default.Sync_User;
+        private static string ftpPassword = Properties.Settings.Default.Sync_Pass;
+
+        public void SyncFolders()
+        {
+            // Get the current user's documents folder
+            string userDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string agOpenGPSPath = Path.Combine(userDocumentsPath, "AgOpenGPS");
+
+            // Define the specific folders to sync
+            string[] foldersToSync = { "Fields", "Vehicles" };
+
+            // Check if the AgOpenGPS folder exists for the user
+            if (Directory.Exists(agOpenGPSPath))
+            {
+                foreach (string folder in foldersToSync)
+                {
+                    string localFolderPath = Path.Combine(agOpenGPSPath, folder);
+
+                    // Check if the specific folder exists locally
+                    if (Directory.Exists(localFolderPath))
+                    {
+                        // FTP path for the current folder (without trailing slash)
+                        string ftpFolderPath = $"{ftpServerPath}/{folder}";
+
+                        // Sync files and directories
+                        SyncDirectory(localFolderPath, ftpFolderPath);
+                    }
+                    else
+                    {
+                        // Handle case when the specific folder does not exist locally
+                        Console.WriteLine($"The local folder '{localFolderPath}' does not exist for the current user.");
+                    }
+                }
+            }
+            else
+            {
+                // Handle case when the AgOpenGPS folder does not exist
+                Console.WriteLine($"The folder '{agOpenGPSPath}' does not exist for the current user.");
+            }
+        }
+
+        // Recursively sync directories and files
+        private void SyncDirectory(string localPath, string ftpPath)
+        {
+            // Ensure the FTP directory exists
+            if (!DirectoryExistsOnFtp(ftpPath))
+            {
+                CreateFtpDirectory(ftpPath);
+            }
+
+            // Upload files in the current directory
+            string[] localFiles = Directory.GetFiles(localPath);
+            foreach (string localFile in localFiles)
+            {
+                string fileName = Path.GetFileName(localFile);
+                string ftpFilePath = $"{ftpPath}/{fileName}";
+
+                if (!FileExistsOnFtp(ftpFilePath) || IsLocalFileNewer(localFile, ftpFilePath))
+                {
+                    UploadFileToFtp(localFile, ftpFilePath);
+                    Console.WriteLine($"Uploaded: {localFile} to {ftpFilePath}");
+                }
+            }
+
+            // Recursively sync subdirectories
+            string[] localDirectories = Directory.GetDirectories(localPath);
+            foreach (string localDir in localDirectories)
+            {
+                string dirName = Path.GetFileName(localDir);
+                string ftpDirPath = $"{ftpPath}/{dirName}";
+
+                // Recursively sync the subdirectory
+                SyncDirectory(localDir, ftpDirPath);
+            }
+
+            // Download files from FTP to local directory
+            DownloadFilesFromFtp(localPath, ftpPath);
+        }
+
+        // Check if a directory exists on the FTP server
+        private bool DirectoryExistsOnFtp(string ftpPath)
+        {
+            try
+            {
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpPath);
+                request.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
+                request.Method = WebRequestMethods.Ftp.ListDirectory;
+
+                using (request.GetResponse())
+                {
+                    return true;
+                }
+            }
+            catch (WebException ex)
+            {
+                FtpWebResponse response = (FtpWebResponse)ex.Response;
+                if (response != null && response.StatusCode == FtpStatusCode.ActionNotTakenFileUnavailable)
+                {
+                    return false;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+        }
+
+        // Create a new directory on the FTP server
+        private void CreateFtpDirectory(string ftpPath)
+        {
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpPath);
+            request.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
+            request.Method = WebRequestMethods.Ftp.MakeDirectory;
+
+            try
+            {
+                using (request.GetResponse())
+                {
+                    Console.WriteLine($"Created directory: {ftpPath}");
+                }
+            }
+            catch (WebException ex)
+            {
+                FtpWebResponse response = (FtpWebResponse)ex.Response;
+                if (response.StatusCode != FtpStatusCode.ActionNotTakenFileUnavailable)
+                {
+                    throw;
+                }
+                // Directory already exists, ignore error
+            }
+        }
+
+        // Check if a file exists on the FTP server
+        private bool FileExistsOnFtp(string ftpPath)
+        {
+            try
+            {
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpPath);
+                request.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
+                request.Method = WebRequestMethods.Ftp.GetFileSize;
+
+                using (request.GetResponse())
+                {
+                    return true;
+                }
+            }
+            catch (WebException ex)
+            {
+                FtpWebResponse response = (FtpWebResponse)ex.Response;
+                if (response != null && response.StatusCode == FtpStatusCode.ActionNotTakenFileUnavailable)
+                {
+                    return false;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+        }
+
+        // Check if the local file is newer than the one on FTP
+        private bool IsLocalFileNewer(string localFilePath, string ftpFilePath)
+        {
+            DateTime ftpModified = GetFtpFileModifiedTime(ftpFilePath);
+            DateTime localModified = File.GetLastWriteTime(localFilePath);
+            return localModified > ftpModified;
+        }
+
+        // Get the modified time of a file on FTP
+        private DateTime GetFtpFileModifiedTime(string ftpFilePath)
+        {
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpFilePath);
+            request.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
+            request.Method = WebRequestMethods.Ftp.GetDateTimestamp;
+
+            using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+            {
+                return response.LastModified;
+            }
+        }
+
+        // Upload a file to the FTP server
+        private void UploadFileToFtp(string localFilePath, string ftpFilePath)
+        {
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpFilePath);
+            request.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
+            request.Method = WebRequestMethods.Ftp.UploadFile;
+
+            using (FileStream fileStream = new FileStream(localFilePath, FileMode.Open, FileAccess.Read))
+            using (Stream ftpStream = request.GetRequestStream())
+            {
+                fileStream.CopyTo(ftpStream);
+            }
+        }
+
+        // Download files from FTP to local directory
+        private void DownloadFilesFromFtp(string localPath, string ftpPath)
+        {
+            List<FtpListItem> ftpItems = ListDirectoryDetailsOnFtp(ftpPath);
+
+            foreach (var item in ftpItems)
+            {
+                string localItemPath = Path.Combine(localPath, item.Name);
+
+                if (item.IsDirectory)
+                {
+                    // Ensure the local directory exists
+                    if (!Directory.Exists(localItemPath))
+                    {
+                        Directory.CreateDirectory(localItemPath);
+                    }
+
+                    // Recursively download subdirectories
+                    DownloadFilesFromFtp(localItemPath, $"{ftpPath}/{item.Name}");
+                }
+                else
+                {
+                    // Download the file if it is newer on the FTP server
+                    if (!File.Exists(localItemPath) || IsFtpFileNewer($"{ftpPath}/{item.Name}", localItemPath))
+                    {
+                        DownloadFileFromFtp($"{ftpPath}/{item.Name}", localItemPath);
+                        Console.WriteLine($"Downloaded: {localItemPath}");
+                    }
+                }
+            }
+        }
+
+        // Check if the FTP file is newer than the local file
+        private bool IsFtpFileNewer(string ftpFilePath, string localFilePath)
+        {
+            DateTime ftpModified = GetFtpFileModifiedTime(ftpFilePath);
+            DateTime localModified = File.Exists(localFilePath) ? File.GetLastWriteTime(localFilePath) : DateTime.MinValue;
+            return ftpModified > localModified;
+        }
+
+        // Download a file from the FTP server to the local system
+        private void DownloadFileFromFtp(string ftpFilePath, string localFilePath)
+        {
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpFilePath);
+            request.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
+            request.Method = WebRequestMethods.Ftp.DownloadFile;
+
+            using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+            using (Stream ftpStream = response.GetResponseStream())
+            using (FileStream localFileStream = new FileStream(localFilePath, FileMode.Create))
+            {
+                ftpStream.CopyTo(localFileStream);
+            }
+        }
+
+        // List directory details on the FTP server
+        private List<FtpListItem> ListDirectoryDetailsOnFtp(string ftpPath)
+        {
+            var items = new List<FtpListItem>();
+
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpPath);
+            request.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
+            request.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
+
+            using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+            using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+            {
+                while (!reader.EndOfStream)
+                {
+                    string line = reader.ReadLine();
+
+                    FtpListItem item = ParseFtpListItem(line);
+                    if (item != null)
+                    {
+                        items.Add(item);
+                    }
+                }
+            }
+
+            return items;
+        }
+
+        // Parse a line from the FTP LIST command
+        private FtpListItem ParseFtpListItem(string line)
+        {
+            // Example line formats:
+            // Unix:  drwxr-xr-x   2 owner group       4096 Jan 01 00:00 foldername
+            // Windows:  01-01-21  12:00PM       <DIR>     foldername
+
+            // Try Unix format
+            Regex unixRegex = new Regex(@"^(?<permissions>[\-ld])([rwx\-]{9})\s+\d+\s+\w+\s+\w+\s+\d+\s+(?<month>\w{3})\s+(?<day>\d{1,2})\s+(?<timeyear>[\d\:]{4,5})\s+(?<name>.+)$");
+            Match match = unixRegex.Match(line);
+            if (match.Success)
+            {
+                bool isDirectory = match.Groups["permissions"].Value[0] == 'd' || match.Groups["permissions"].Value[0] == 'l';
+                string name = match.Groups["name"].Value;
+                return new FtpListItem { Name = name, IsDirectory = isDirectory };
+            }
+
+            // Try Windows format
+            Regex windowsRegex = new Regex(@"^(?<date>\d{2}-\d{2}-\d{2})\s+(?<time>\d{2}\:\d{2}(?:AM|PM))\s+(?<dir><DIR>|\d+)\s+(?<name>.+)$");
+            match = windowsRegex.Match(line);
+            if (match.Success)
+            {
+                bool isDirectory = match.Groups["dir"].Value == "<DIR>";
+                string name = match.Groups["name"].Value;
+                return new FtpListItem { Name = name, IsDirectory = isDirectory };
+            }
+
+            // Unknown format
+            return null;
+        }
+
+        // Helper class to represent items in an FTP directory listing
+        private class FtpListItem
+        {
+            public string Name { get; set; }
+            public bool IsDirectory { get; set; }
+        }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    #endregion
+
+
 }
+
+
+

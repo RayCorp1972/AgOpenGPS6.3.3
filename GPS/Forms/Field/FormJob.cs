@@ -1,4 +1,5 @@
-﻿using System;
+﻿//using AgOpenGPS.Forms.Field;
+using System;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -267,8 +268,10 @@ namespace AgOpenGPS
 
         private void button1_Click(object sender, EventArgs e)
         {
-           
-
+            using (FormSyncData form = new FormSyncData(this))
+            {
+                form.ShowDialog(this);
+            }
 
         }
     }

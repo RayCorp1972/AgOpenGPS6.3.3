@@ -3203,5 +3203,41 @@ namespace AgOpenGPS.Properties {
                 this["setPlough_Richting"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Sync_Pass {
+            get {
+                return ((string)(this["Sync_Pass"]));
+            }
+            set {
+                this["Sync_Pass"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Sync_User {
+            get {
+                return ((string)(this["Sync_User"]));
+            }
+            set {
+                this["Sync_User"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Sync_chkBox {
+            get {
+                return ((bool)(this["Sync_chkBox"]));
+            }
+            set {
+                this["Sync_chkBox"] = value;
+            }
+        }
     }
 }
