@@ -3146,68 +3146,21 @@ namespace AgOpenGPS
         }
 
 
-        #region Server Sync
-
-
-
-
-
-
-
-
-
-        //private static string localFolderPath = @"C:\Users\Documents\AgOpenGPS";
-        //private static string ftpServerPath = "ftp://85.215.198.173/";
-        //private static string ftpUsername = Properties.Settings.Default.Sync_User;
-        //private static string ftpPassword = Properties.Settings.Default.Sync_Pass;
-
-
-
-        //public void SyncFolders(string ftpServerPath, string ftpUsername, string ftpPassword)
-        //{
-        //    // Get the current user's documents folder
-        //    string userDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-        //    string agOpenGPSPath = Path.Combine(userDocumentsPath, "AgOpenGPS");
-
-        //    // Define the specific folders to sync
-        //    string[] foldersToSync = { "Fields", "Vehicles" };
-
-        //    // Check if the AgOpenGPS folder exists for the user
-        //    if (Directory.Exists(agOpenGPSPath))
-        //    {
-        //        foreach (string folder in foldersToSync)
-        //        {
-        //            string localFolderPath = Path.Combine(agOpenGPSPath, folder);
-
-        //            // Check if the specific folder exists
-        //            if (Directory.Exists(localFolderPath))
-        //            {
-        //                // Step 1: Check and create missing directories on FTP server
-        //                CreateMissingDirectories(localFolderPath, Path.Combine(ftpServerPath, folder), ftpUsername, ftpPassword);
-
-        //                // Step 2: Upload or download files based on modification date
-        //                SyncFiles(localFolderPath, Path.Combine(ftpServerPath, folder), ftpUsername, ftpPassword);
-        //            }
-        //            else
-        //            {
-        //                // Handle case when the specific folder does not exist
-        //                Console.WriteLine($"The folder '{localFolderPath}' does not exist for the current user.");
-        //            }
-        //        }
-        //    }
-        //    else
-        //    {
-        //        // Handle case when the AgOpenGPS folder does not exist
-        //        Console.WriteLine($"The folder '{agOpenGPSPath}' does not exist for the current user.");
-        //    }
-        //}
-
-
 
 
         private static string ftpServerPath = "ftp://85.215.198.173";
         private static string ftpUsername = Properties.Settings.Default.Sync_User;
         private static string ftpPassword = Properties.Settings.Default.Sync_Pass;
+
+    
+        // Dictionary to store file paths and their last sync time
+        private Dictionary<string, DateTime> fileSyncCache = new Dictionary<string, DateTime>();
+
+        public void StartSyncInBackground()
+        {
+            // Run the SyncFolders method asynchronously in the background
+            Task.Run(() => SyncFolders());
+        }
 
         public void SyncFolders()
         {
@@ -3231,8 +3184,8 @@ namespace AgOpenGPS
                         // FTP path for the current folder (without trailing slash)
                         string ftpFolderPath = $"{ftpServerPath}/{folder}";
 
-                        // Sync files and directories
-                        SyncDirectory(localFolderPath, ftpFolderPath);
+                        // Sync only modified files in this folder
+                        SyncOnlyModifiedFiles(localFolderPath, ftpFolderPath);
                     }
                     else
                     {
@@ -3248,8 +3201,8 @@ namespace AgOpenGPS
             }
         }
 
-        // Recursively sync directories and files
-        private void SyncDirectory(string localPath, string ftpPath)
+        // Sync only modified files from local to FTP
+        private void SyncOnlyModifiedFiles(string localPath, string ftpPath)
         {
             // Ensure the FTP directory exists
             if (!DirectoryExistsOnFtp(ftpPath))
@@ -3257,33 +3210,37 @@ namespace AgOpenGPS
                 CreateFtpDirectory(ftpPath);
             }
 
-            // Upload files in the current directory
+            // Upload only changed files (no recursion, no directory listing on FTP)
             string[] localFiles = Directory.GetFiles(localPath);
             foreach (string localFile in localFiles)
             {
                 string fileName = Path.GetFileName(localFile);
                 string ftpFilePath = $"{ftpPath}/{fileName}";
 
-                if (!FileExistsOnFtp(ftpFilePath) || IsLocalFileNewer(localFile, ftpFilePath))
+                // Check if the local file has changed and upload if necessary
+                if (HasLocalFileChanged(localFile))
                 {
                     UploadFileToFtp(localFile, ftpFilePath);
                     Console.WriteLine($"Uploaded: {localFile} to {ftpFilePath}");
+
+                    // Update the sync cache after uploading
+                    UpdateSyncCache(localFile);
+                }
+                else
+                {
+                    Console.WriteLine($"File '{localFile}' has not changed, skipping.");
                 }
             }
 
-            // Recursively sync subdirectories
+            // Recursively handle subdirectories (if needed)
             string[] localDirectories = Directory.GetDirectories(localPath);
             foreach (string localDir in localDirectories)
             {
                 string dirName = Path.GetFileName(localDir);
                 string ftpDirPath = $"{ftpPath}/{dirName}";
 
-                // Recursively sync the subdirectory
-                SyncDirectory(localDir, ftpDirPath);
+                SyncOnlyModifiedFiles(localDir, ftpDirPath);
             }
-
-            // Download files from FTP to local directory
-            DownloadFilesFromFtp(localPath, ftpPath);
         }
 
         // Check if a directory exists on the FTP server
@@ -3339,55 +3296,6 @@ namespace AgOpenGPS
             }
         }
 
-        // Check if a file exists on the FTP server
-        private bool FileExistsOnFtp(string ftpPath)
-        {
-            try
-            {
-                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpPath);
-                request.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
-                request.Method = WebRequestMethods.Ftp.GetFileSize;
-
-                using (request.GetResponse())
-                {
-                    return true;
-                }
-            }
-            catch (WebException ex)
-            {
-                FtpWebResponse response = (FtpWebResponse)ex.Response;
-                if (response != null && response.StatusCode == FtpStatusCode.ActionNotTakenFileUnavailable)
-                {
-                    return false;
-                }
-                else
-                {
-                    throw;
-                }
-            }
-        }
-
-        // Check if the local file is newer than the one on FTP
-        private bool IsLocalFileNewer(string localFilePath, string ftpFilePath)
-        {
-            DateTime ftpModified = GetFtpFileModifiedTime(ftpFilePath);
-            DateTime localModified = File.GetLastWriteTime(localFilePath);
-            return localModified > ftpModified;
-        }
-
-        // Get the modified time of a file on FTP
-        private DateTime GetFtpFileModifiedTime(string ftpFilePath)
-        {
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpFilePath);
-            request.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
-            request.Method = WebRequestMethods.Ftp.GetDateTimestamp;
-
-            using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
-            {
-                return response.LastModified;
-            }
-        }
-
         // Upload a file to the FTP server
         private void UploadFileToFtp(string localFilePath, string ftpFilePath)
         {
@@ -3402,143 +3310,30 @@ namespace AgOpenGPS
             }
         }
 
-        // Download files from FTP to local directory
-        private void DownloadFilesFromFtp(string localPath, string ftpPath)
+        // Method to check if a file has changed locally
+        private bool HasLocalFileChanged(string filePath)
         {
-            List<FtpListItem> ftpItems = ListDirectoryDetailsOnFtp(ftpPath);
+            DateTime lastWriteTime = File.GetLastWriteTime(filePath);
 
-            foreach (var item in ftpItems)
+            if (fileSyncCache.ContainsKey(filePath))
             {
-                string localItemPath = Path.Combine(localPath, item.Name);
-
-                if (item.IsDirectory)
-                {
-                    // Ensure the local directory exists
-                    if (!Directory.Exists(localItemPath))
-                    {
-                        Directory.CreateDirectory(localItemPath);
-                    }
-
-                    // Recursively download subdirectories
-                    DownloadFilesFromFtp(localItemPath, $"{ftpPath}/{item.Name}");
-                }
-                else
-                {
-                    // Download the file if it is newer on the FTP server
-                    if (!File.Exists(localItemPath) || IsFtpFileNewer($"{ftpPath}/{item.Name}", localItemPath))
-                    {
-                        DownloadFileFromFtp($"{ftpPath}/{item.Name}", localItemPath);
-                        Console.WriteLine($"Downloaded: {localItemPath}");
-                    }
-                }
-            }
-        }
-
-        // Check if the FTP file is newer than the local file
-        private bool IsFtpFileNewer(string ftpFilePath, string localFilePath)
-        {
-            DateTime ftpModified = GetFtpFileModifiedTime(ftpFilePath);
-            DateTime localModified = File.Exists(localFilePath) ? File.GetLastWriteTime(localFilePath) : DateTime.MinValue;
-            return ftpModified > localModified;
-        }
-
-        // Download a file from the FTP server to the local system
-        private void DownloadFileFromFtp(string ftpFilePath, string localFilePath)
-        {
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpFilePath);
-            request.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
-            request.Method = WebRequestMethods.Ftp.DownloadFile;
-
-            using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
-            using (Stream ftpStream = response.GetResponseStream())
-            using (FileStream localFileStream = new FileStream(localFilePath, FileMode.Create))
-            {
-                ftpStream.CopyTo(localFileStream);
-            }
-        }
-
-        // List directory details on the FTP server
-        private List<FtpListItem> ListDirectoryDetailsOnFtp(string ftpPath)
-        {
-            var items = new List<FtpListItem>();
-
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpPath);
-            request.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
-            request.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
-
-            using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
-            using (StreamReader reader = new StreamReader(response.GetResponseStream()))
-            {
-                while (!reader.EndOfStream)
-                {
-                    string line = reader.ReadLine();
-
-                    FtpListItem item = ParseFtpListItem(line);
-                    if (item != null)
-                    {
-                        items.Add(item);
-                    }
-                }
+                // If the file's last modified time is newer than the cached sync time, it's changed
+                return lastWriteTime > fileSyncCache[filePath];
             }
 
-            return items;
+            // If the file is not in the cache, it hasn't been synced yet
+            return true;
         }
 
-        // Parse a line from the FTP LIST command
-        private FtpListItem ParseFtpListItem(string line)
+        // Method to update the sync cache after successful upload
+        private void UpdateSyncCache(string filePath)
         {
-            // Example line formats:
-            // Unix:  drwxr-xr-x   2 owner group       4096 Jan 01 00:00 foldername
-            // Windows:  01-01-21  12:00PM       <DIR>     foldername
-
-            // Try Unix format
-            Regex unixRegex = new Regex(@"^(?<permissions>[\-ld])([rwx\-]{9})\s+\d+\s+\w+\s+\w+\s+\d+\s+(?<month>\w{3})\s+(?<day>\d{1,2})\s+(?<timeyear>[\d\:]{4,5})\s+(?<name>.+)$");
-            Match match = unixRegex.Match(line);
-            if (match.Success)
-            {
-                bool isDirectory = match.Groups["permissions"].Value[0] == 'd' || match.Groups["permissions"].Value[0] == 'l';
-                string name = match.Groups["name"].Value;
-                return new FtpListItem { Name = name, IsDirectory = isDirectory };
-            }
-
-            // Try Windows format
-            Regex windowsRegex = new Regex(@"^(?<date>\d{2}-\d{2}-\d{2})\s+(?<time>\d{2}\:\d{2}(?:AM|PM))\s+(?<dir><DIR>|\d+)\s+(?<name>.+)$");
-            match = windowsRegex.Match(line);
-            if (match.Success)
-            {
-                bool isDirectory = match.Groups["dir"].Value == "<DIR>";
-                string name = match.Groups["name"].Value;
-                return new FtpListItem { Name = name, IsDirectory = isDirectory };
-            }
-
-            // Unknown format
-            return null;
+            fileSyncCache[filePath] = File.GetLastWriteTime(filePath);
+            // Save the updated cache to a file or database
         }
 
-        // Helper class to represent items in an FTP directory listing
-        private class FtpListItem
-        {
-            public string Name { get; set; }
-            public bool IsDirectory { get; set; }
-        }
+
+
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-    #endregion
-
-
 }
-
-
 

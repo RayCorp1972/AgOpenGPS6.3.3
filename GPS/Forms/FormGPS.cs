@@ -490,6 +490,16 @@ namespace AgOpenGPS
                     Settings.Default.Save();
                 }
             }
+           
+            
+            // start sync data
+
+            if (Properties.Settings.Default.Sync_chkBox == true)
+            {
+                //SyncFolders();
+                StartSyncInBackground();
+            }
+
 
             if (isBrightnessOn)
             {

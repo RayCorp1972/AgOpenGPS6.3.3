@@ -49,6 +49,11 @@ namespace AgOpenGPS
                     Close();
                 }
             }
+            else
+            {
+                Properties.Settings.Default.Sync_chkBox = false;
+                Close();
+            }
         }
 
         private void btnSyncCancel_Click(object sender, EventArgs e)

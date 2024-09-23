@@ -587,9 +587,10 @@ namespace AgOpenGPS
             ExportFieldAs_ISOXMLv4();
             if (Properties.Settings.Default.Sync_chkBox == true)
             {
-                SyncFolders();
+                //SyncFolders();
+                StartSyncInBackground();
             }
-           
+
             Settings.Default.setF_CurrentDir = currentFieldDirectory;
             Settings.Default.Save();
 
