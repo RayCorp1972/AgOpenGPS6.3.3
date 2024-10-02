@@ -2617,11 +2617,11 @@ namespace AgOpenGPS
             else if (ploughMode == 9) font.DrawText(center + 10, 270, Both, 1);
             else if (ploughMode == 10) font.DrawText(center + 10, 270, "Breder (M)", 1);
             else if (ploughMode == 11) font.DrawText(center + 10, 270, "Smaller (M)", 1);
-
+            else if (ploughMode == 12) font.DrawText(center + 10, 270, "Stop (M)", 1);
             font.DrawText(center + 25, 310, "" + Wider + "  " + Narrow, 0.8);
-                PlougPwmMinus();
-                PlougPwmPlus();
-                Omkeer();
+            PlougPwmMinus();
+            PlougPwmPlus();
+            Omkeer();
 
         }
 
@@ -2651,14 +2651,14 @@ namespace AgOpenGPS
             {
 
                 GL.Color3(0.9652f, 0.9752f, 0.1f); //Yellow
-                font.DrawText(center + 10, 440, pwmInvert + ": " + "Yes", 0.8);
+                font.DrawText(center + 10, 440, pwmInvert + ": " + "Nee", 0.8);
             }
             else if (Properties.Settings.Default.setArdMac_user13 == false)
             {
 
 
                 GL.Color3(0.9652f, 0.9752f, 0.1f); //Yellow
-                font.DrawText(center + 10, 440, pwmInvert + ": " + "No", 0.8);
+                font.DrawText(center + 10, 440, pwmInvert + ": " + "Ja", 0.8);
             }
 
         }

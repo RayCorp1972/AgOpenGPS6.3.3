@@ -1,6 +1,9 @@
 ﻿//Please, if you use this, share the improvements
+// Added plough control
+
 
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -468,7 +471,7 @@ namespace AgOpenGPS
             {
                
                 //Properties.Settings.Default.setPlough_Richting = false;
-                nudInvert.Value = 0; // van a naar b - trekker rechts wijkt af van lijn ploeg smaller
+                nudInvert.Value = 1; // van a naar b - trekker rechts wijkt af van lijn ploeg smaller
                 bool Omgekeerd = false;
                 Properties.Settings.Default.setArdMac_user13 = Omgekeerd;               
                 SaveSettingsMachine();
@@ -481,7 +484,7 @@ namespace AgOpenGPS
                
                 //Links
                 //Properties.Settings.Default.setPlough_Richting = true;
-                nudInvert.Value = 1;//van b naar a - trekker rechts wijkt af van lijn ploeg breder
+                nudInvert.Value = 0;//van b naar a - trekker rechts wijkt af van lijn ploeg breder
                 bool Omgekeerd = true; 
                 Properties.Settings.Default.setArdMac_user13 = Omgekeerd;               
                 SaveSettingsMachine();
@@ -490,6 +493,22 @@ namespace AgOpenGPS
             }
         }
         #endregion
+
+        private void btnRemote_Click(object sender, EventArgs e)
+        {
+
+            OpenExeFile(sender, e);
+           
+        }
+
+        public void OpenExeFile(object sender, EventArgs e)
+        {
+            // Path to the .exe file (assuming it's in the same directory as the program)
+            string exePath = Application.StartupPath + @"\Anydesk.exe";
+
+            // Start the .exe file
+            Process.Start(exePath);
+        }
     }
 
 }

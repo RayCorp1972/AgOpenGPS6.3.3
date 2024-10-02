@@ -29,20 +29,20 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnDataSync = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblResumeField = new System.Windows.Forms.Label();
-            this.btnDataSync = new System.Windows.Forms.Button();
             this.btnFromKML = new System.Windows.Forms.Button();
             this.btnFromISOXML = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.btnJobOpen = new System.Windows.Forms.Button();
             this.btnJobClose = new System.Windows.Forms.Button();
             this.btnInField = new System.Windows.Forms.Button();
             this.btnJobResume = new System.Windows.Forms.Button();
             this.btnFromExisting = new System.Windows.Forms.Button();
             this.btnJobNew = new System.Windows.Forms.Button();
+            this.lblResumeField = new System.Windows.Forms.Label();
             this.btnDeleteAB = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -81,6 +81,30 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(605, 423);
             this.tableLayoutPanel1.TabIndex = 106;
             // 
+            // btnDataSync
+            // 
+            this.btnDataSync.BackColor = System.Drawing.Color.Transparent;
+            this.btnDataSync.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnDataSync.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnDataSync.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnDataSync.FlatAppearance.BorderSize = 0;
+            this.btnDataSync.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDataSync.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDataSync.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnDataSync.Image = global::AgOpenGPS.Properties.Resources.data_sync_icon_vector_37625019_removebg_preview_removebg_preview;
+            this.btnDataSync.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDataSync.Location = new System.Drawing.Point(5, 340);
+            this.btnDataSync.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.btnDataSync.Name = "btnDataSync";
+            this.btnDataSync.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnDataSync.Size = new System.Drawing.Size(281, 79);
+            this.btnDataSync.TabIndex = 112;
+            this.btnDataSync.Text = "Sync Data";
+            this.btnDataSync.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnDataSync.UseVisualStyleBackColor = false;
+            this.btnDataSync.Visible = false;
+            this.btnDataSync.Click += new System.EventHandler(this.button1_Click);
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -110,53 +134,6 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(17, 84);
             this.label2.TabIndex = 109;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(294, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(17, 84);
-            this.label1.TabIndex = 108;
-            // 
-            // lblResumeField
-            // 
-            this.lblResumeField.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblResumeField.BackColor = System.Drawing.Color.Transparent;
-            this.lblResumeField.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblResumeField.ForeColor = System.Drawing.Color.Black;
-            this.lblResumeField.Location = new System.Drawing.Point(9, 463);
-            this.lblResumeField.Name = "lblResumeField";
-            this.lblResumeField.Size = new System.Drawing.Size(468, 28);
-            this.lblResumeField.TabIndex = 106;
-            this.lblResumeField.Text = "Previous Field";
-            this.lblResumeField.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // btnDataSync
-            // 
-            this.btnDataSync.BackColor = System.Drawing.Color.Transparent;
-            this.btnDataSync.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnDataSync.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnDataSync.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnDataSync.FlatAppearance.BorderSize = 0;
-            this.btnDataSync.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDataSync.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDataSync.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnDataSync.Image = global::AgOpenGPS.Properties.Resources.data_sync_icon_vector_37625019_removebg_preview_removebg_preview;
-            this.btnDataSync.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDataSync.Location = new System.Drawing.Point(5, 340);
-            this.btnDataSync.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.btnDataSync.Name = "btnDataSync";
-            this.btnDataSync.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnDataSync.Size = new System.Drawing.Size(281, 79);
-            this.btnDataSync.TabIndex = 112;
-            this.btnDataSync.Text = "Sync Data";
-            this.btnDataSync.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnDataSync.UseVisualStyleBackColor = false;
-            this.btnDataSync.Click += new System.EventHandler(this.button1_Click);
             // 
             // btnFromKML
             // 
@@ -203,6 +180,16 @@
             this.btnFromISOXML.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnFromISOXML.UseVisualStyleBackColor = false;
             this.btnFromISOXML.Click += new System.EventHandler(this.btnFromISOXML_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Location = new System.Drawing.Point(294, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(17, 84);
+            this.label1.TabIndex = 108;
             // 
             // btnJobOpen
             // 
@@ -342,6 +329,20 @@
             this.btnJobNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnJobNew.UseVisualStyleBackColor = false;
             this.btnJobNew.Click += new System.EventHandler(this.btnJobNew_Click);
+            // 
+            // lblResumeField
+            // 
+            this.lblResumeField.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblResumeField.BackColor = System.Drawing.Color.Transparent;
+            this.lblResumeField.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResumeField.ForeColor = System.Drawing.Color.Black;
+            this.lblResumeField.Location = new System.Drawing.Point(9, 463);
+            this.lblResumeField.Name = "lblResumeField";
+            this.lblResumeField.Size = new System.Drawing.Size(468, 28);
+            this.lblResumeField.TabIndex = 106;
+            this.lblResumeField.Text = "Previous Field";
+            this.lblResumeField.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // btnDeleteAB
             // 

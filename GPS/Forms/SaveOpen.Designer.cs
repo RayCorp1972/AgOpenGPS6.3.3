@@ -3146,194 +3146,1008 @@ namespace AgOpenGPS
         }
 
 
+    }
+}
 
 
-        private static string ftpServerPath = "ftp://85.215.198.173";
-        private static string ftpUsername = Properties.Settings.Default.Sync_User;
-        private static string ftpPassword = Properties.Settings.Default.Sync_Pass;
+/*
 
-    
-        // Dictionary to store file paths and their last sync time
-        private Dictionary<string, DateTime> fileSyncCache = new Dictionary<string, DateTime>();
+        private string ftpUsername = Properties.Settings.Default.Sync_User;
+        private string ftpPassword = Properties.Settings.Default.Sync_Pass;
+        private string markerFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "AgOpenGPS", "sync_marker.txt");
 
-        public void StartSyncInBackground()
+        public async void SyncFoldersInBackground()
         {
-            // Run the SyncFolders method asynchronously in the background
-            Task.Run(() => SyncFolders());
+            await Task.Run(() => SyncFolders());
         }
+
+       
 
         public void SyncFolders()
         {
-            // Get the current user's documents folder
-            string userDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            string agOpenGPSPath = Path.Combine(userDocumentsPath, "AgOpenGPS");
 
-            // Define the specific folders to sync
-            string[] foldersToSync = { "Fields", "Vehicles" };
 
-            // Check if the AgOpenGPS folder exists for the user
-            if (Directory.Exists(agOpenGPSPath))
+            string localPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "AgOpenGPS");
+            string ftpPath = "ftp://85.215.198.173";
+
+            // Check if it's the first run
+            bool isFirstRun = CheckIfFirstRun();
+
+            if (isFirstRun)
             {
-                foreach (string folder in foldersToSync)
-                {
-                    string localFolderPath = Path.Combine(agOpenGPSPath, folder);
+                // If it's the first run, sync all files and folders
+                SyncFromFtpToLocal(ftpPath, localPath, true); // Force download all files
+                SyncFromLocalToFtp(localPath, ftpPath, true); // Force upload all files
 
-                    // Check if the specific folder exists locally
-                    if (Directory.Exists(localFolderPath))
-                    {
-                        // FTP path for the current folder (without trailing slash)
-                        string ftpFolderPath = $"{ftpServerPath}/{folder}";
-
-                        // Sync only modified files in this folder
-                        SyncOnlyModifiedFiles(localFolderPath, ftpFolderPath);
-                    }
-                    else
-                    {
-                        // Handle case when the specific folder does not exist locally
-                        Console.WriteLine($"The local folder '{localFolderPath}' does not exist for the current user.");
-                    }
-                }
+                CreateMarkerFile(); // Create marker file after the first sync
             }
             else
             {
-                // Handle case when the AgOpenGPS folder does not exist
-                Console.WriteLine($"The folder '{agOpenGPSPath}' does not exist for the current user.");
+                // Subsequent runs only sync modified files and directories
+                SyncFromFtpToLocal(ftpPath, localPath); // Normal sync
+                SyncFromLocalToFtp(localPath, ftpPath); // Normal sync
             }
+
+            // Display sync complete notification
+            ShowSyncCompleteMessage();
         }
 
-        // Sync only modified files from local to FTP
-        private void SyncOnlyModifiedFiles(string localPath, string ftpPath)
+        private bool CheckIfFirstRun()
         {
-            // Ensure the FTP directory exists
-            if (!DirectoryExistsOnFtp(ftpPath))
+            return !File.Exists(markerFilePath);
+        }
+
+        private void CreateMarkerFile()
+        {
+            // Create the marker file to indicate that the initial sync has been completed
+            using (File.Create(markerFilePath)) { }
+        }
+
+        public void SyncFromFtpToLocal(string ftpDir, string localDir, bool forceDownload = false)
+        {
+            // Ensure local directory exists
+            if (!Directory.Exists(localDir))
             {
-                CreateFtpDirectory(ftpPath);
+                Directory.CreateDirectory(localDir);
             }
 
-            // Upload only changed files (no recursion, no directory listing on FTP)
-            string[] localFiles = Directory.GetFiles(localPath);
-            foreach (string localFile in localFiles)
+            // Get list of files and directories on FTP
+            var ftpItems = GetFtpFilesAndDirectories(ftpDir);
+
+            // Sync files and folders from FTP to local
+            foreach (var ftpItem in ftpItems)
             {
-                string fileName = Path.GetFileName(localFile);
-                string ftpFilePath = $"{ftpPath}/{fileName}";
+                string localPath = Path.Combine(localDir, ftpItem.Name);
 
-                // Check if the local file has changed and upload if necessary
-                if (HasLocalFileChanged(localFile))
+                if (ftpItem.IsDirectory)
                 {
-                    UploadFileToFtp(localFile, ftpFilePath);
-                    Console.WriteLine($"Uploaded: {localFile} to {ftpFilePath}");
-
-                    // Update the sync cache after uploading
-                    UpdateSyncCache(localFile);
+                    // Recursively sync directories
+                    SyncFromFtpToLocal(ftpItem.FullPath, localPath, forceDownload);
                 }
                 else
                 {
-                    Console.WriteLine($"File '{localFile}' has not changed, skipping.");
+                    // Download file if it does not exist locally or is older than the FTP version
+                    if (forceDownload || !File.Exists(localPath) || IsFtpFileNewer(ftpItem, localPath))
+                    {
+                        DownloadFileFromFtp(ftpItem.FullPath, localPath);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"File already exists and is up to date: {localPath}");
+                    }
                 }
-            }
-
-            // Recursively handle subdirectories (if needed)
-            string[] localDirectories = Directory.GetDirectories(localPath);
-            foreach (string localDir in localDirectories)
-            {
-                string dirName = Path.GetFileName(localDir);
-                string ftpDirPath = $"{ftpPath}/{dirName}";
-
-                SyncOnlyModifiedFiles(localDir, ftpDirPath);
             }
         }
 
-        // Check if a directory exists on the FTP server
-        private bool DirectoryExistsOnFtp(string ftpPath)
+        public void SyncFromLocalToFtp(string localDir, string ftpDir, bool forceUpload = false)
         {
-            try
-            {
-                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpPath);
-                request.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
-                request.Method = WebRequestMethods.Ftp.ListDirectory;
+            // Ensure that the FTP directory exists
+            CreateFtpDirectoryIfNotExists(ftpDir);
 
-                using (request.GetResponse())
-                {
-                    return true;
-                }
-            }
-            catch (WebException ex)
+            // Get list of files and directories locally
+            var localItems = Directory.GetFileSystemEntries(localDir);
+
+            foreach (var localItem in localItems)
             {
-                FtpWebResponse response = (FtpWebResponse)ex.Response;
-                if (response != null && response.StatusCode == FtpStatusCode.ActionNotTakenFileUnavailable)
+                string ftpPath = ftpDir + "/" + Path.GetFileName(localItem);
+
+                if (Directory.Exists(localItem))
                 {
-                    return false;
+                    // Recursively sync directory
+                    SyncFromLocalToFtp(localItem, ftpPath, forceUpload);
                 }
                 else
                 {
-                    throw;
+                    // Upload file if it is not present on FTP or is newer than the FTP version
+                    if (forceUpload || !FtpFileExists(ftpPath) || IsLocalFileNewer(localItem, ftpPath))
+                    {
+                        UploadFileToFtp(localItem, ftpPath);
+                    }
                 }
             }
         }
 
-        // Create a new directory on the FTP server
-        private void CreateFtpDirectory(string ftpPath)
+        public void CreateFtpDirectoryIfNotExists(string ftpPath)
+        {
+            string[] folders = ftpPath.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+            string currentPath = "ftp://85.215.198.173"; // Your FTP base path
+
+            foreach (var folder in folders)
+            {
+                currentPath = $"{currentPath}/{folder}";
+                if (!FtpDirectoryExists(currentPath))
+                {
+                    CreateFtpDirectory(currentPath);
+                }
+            }
+        }
+
+        public bool IsFtpFileNewer(FtpItem ftpItem, string localPath)
+        {
+            DateTime localLastModified = File.GetLastWriteTime(localPath);
+            DateTime ftpLastModified = GetFtpFileLastModified(ftpItem.FullPath); // Fetch actual FTP last modified time
+            return ftpLastModified > localLastModified;
+        }
+
+        public bool IsLocalFileNewer(string localPath, string ftpPath)
+        {
+            DateTime localLastModified = File.GetLastWriteTime(localPath);
+            DateTime ftpLastModified = GetFtpFileLastModified(ftpPath); // Fetch actual FTP last modified time
+            return localLastModified > ftpLastModified;
+        }
+
+        public void CreateFtpDirectory(string ftpPath)
         {
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpPath);
-            request.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
             request.Method = WebRequestMethods.Ftp.MakeDirectory;
+            request.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
+            using (var response = (FtpWebResponse)request.GetResponse()) { }
+        }
 
+        public void DownloadFileFromFtp(string ftpFilePath, string localFilePath)
+        {
             try
             {
-                using (request.GetResponse())
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpFilePath);
+                request.Method = WebRequestMethods.Ftp.DownloadFile;
+                request.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
+
+                using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+                using (Stream responseStream = response.GetResponseStream())
+                using (FileStream fileStream = new FileStream(localFilePath, FileMode.Create))
                 {
-                    Console.WriteLine($"Created directory: {ftpPath}");
+                    responseStream.CopyTo(fileStream);
                 }
             }
             catch (WebException ex)
             {
-                FtpWebResponse response = (FtpWebResponse)ex.Response;
-                if (response.StatusCode != FtpStatusCode.ActionNotTakenFileUnavailable)
+                FtpWebResponse ftpResponse = (FtpWebResponse)ex.Response;
+                if (ftpResponse.StatusCode == FtpStatusCode.ActionNotTakenFileUnavailable)
                 {
-                    throw;
+                    Console.WriteLine("File not found on FTP server: " + ftpFilePath);
                 }
-                // Directory already exists, ignore error
+                else
+                {
+                    Console.WriteLine("FTP Error: " + ex.Message);
+                }
             }
         }
 
-        // Upload a file to the FTP server
-        private void UploadFileToFtp(string localFilePath, string ftpFilePath)
+        public void UploadFileToFtp(string localFilePath, string ftpFilePath)
         {
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpFilePath);
-            request.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
             request.Method = WebRequestMethods.Ftp.UploadFile;
+            request.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
 
-            using (FileStream fileStream = new FileStream(localFilePath, FileMode.Open, FileAccess.Read))
-            using (Stream ftpStream = request.GetRequestStream())
+            byte[] fileContents = File.ReadAllBytes(localFilePath);
+            request.ContentLength = fileContents.Length;
+
+            using (Stream requestStream = request.GetRequestStream())
             {
-                fileStream.CopyTo(ftpStream);
+                requestStream.Write(fileContents, 0, fileContents.Length);
             }
         }
 
-        // Method to check if a file has changed locally
-        private bool HasLocalFileChanged(string filePath)
+        public bool FtpDirectoryExists(string ftpDir)
         {
-            DateTime lastWriteTime = File.GetLastWriteTime(filePath);
-
-            if (fileSyncCache.ContainsKey(filePath))
+            try
             {
-                // If the file's last modified time is newer than the cached sync time, it's changed
-                return lastWriteTime > fileSyncCache[filePath];
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpDir);
+                request.Method = WebRequestMethods.Ftp.ListDirectory;
+                request.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
+
+                using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+                {
+                    return true; // Directory exists
+                }
             }
-
-            // If the file is not in the cache, it hasn't been synced yet
-            return true;
+            catch (WebException ex)
+            {
+                if (ex.Response is FtpWebResponse ftpResponse && ftpResponse.StatusCode == FtpStatusCode.ActionNotTakenFileUnavailable)
+                {
+                    return false; // Directory does not exist
+                }
+                throw;
+            }
         }
 
-        // Method to update the sync cache after successful upload
-        private void UpdateSyncCache(string filePath)
+        public bool FtpFileExists(string ftpFilePath)
         {
-            fileSyncCache[filePath] = File.GetLastWriteTime(filePath);
-            // Save the updated cache to a file or database
+            try
+            {
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpFilePath);
+                request.Method = WebRequestMethods.Ftp.GetDateTimestamp;
+                request.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
+
+                using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+                {
+                    return true; // File exists
+                }
+            }
+            catch (WebException ex)
+            {
+                if (ex.Response is FtpWebResponse ftpResponse && ftpResponse.StatusCode == FtpStatusCode.ActionNotTakenFileUnavailable)
+                {
+                    return false; // File does not exist
+                }
+                throw;
+            }
         }
 
+        public DateTime GetFtpFileLastModified(string ftpFilePath)
+        {
+            try
+            {
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpFilePath);
+                request.Method = WebRequestMethods.Ftp.GetDateTimestamp;
+                request.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
 
+                using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+                {
+                    return response.LastModified;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error getting FTP file last modified time: " + ex.Message);
+                return DateTime.MinValue;
+            }
+        }
 
+        private void ShowSyncCompleteMessage()
+        {
+            MessageBox.Show("Sync complete!");
+        }
+
+        private List<FtpItem> GetFtpFilesAndDirectories(string ftpDir)
+        {
+            List<FtpItem> items = new List<FtpItem>();
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpDir);
+            request.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
+            request.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
+
+            using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+            using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    FtpItem item = ParseFtpItem(line, ftpDir);
+                    items.Add(item);
+                }
+            }
+            return items;
+        }
+
+        private FtpItem ParseFtpItem(string line, string ftpDir)
+        {
+            // This method should parse the response from ListDirectoryDetails
+            // and create an FtpItem object based on the information. Adjust
+            // parsing logic according to the FTP server's response format.
+
+            // Example implementation (modify according to your needs):
+            string[] parts = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            string itemName = parts.Last();
+            bool isDirectory = line.StartsWith("d"); // Check if it's a directory
+
+            return new FtpItem
+            {
+                Name = itemName,
+                FullPath = Path.Combine(ftpDir, itemName),
+                IsDirectory = isDirectory
+            };
+        }
+    
+
+    public class FtpItem
+    {
+        public string Name { get; set; }
+        public string FullPath { get; set; }
+        public bool IsDirectory { get; set; }
     }
 }
+
+}
+ 
+
+
+
+
+
+
+
+
+    //private string ftpUsername = Properties.Settings.Default.Sync_User;
+    //private string ftpPassword = Properties.Settings.Default.Sync_Pass;
+    //private string markerFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "AgOpenGPS", "sync_marker.txt");
+
+    //public async void SyncFoldersInBackground()
+    //{
+    //    await Task.Run(() => SyncFolders());
+    //    //lblCurrentField.Text = "Data veriferen";
+    //}
+
+    //public void SyncFolders()
+    //{
+    //    string localPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "AgOpenGPS");
+    //    string ftpPath = "ftp://85.215.198.173";
+
+    //    // Check if it's the first run
+    //    bool isFirstRun = CheckIfFirstRun();
+
+    //    if (isFirstRun)
+    //    {
+    //        // If it's the first run, sync all files
+    //        SyncFromFtpToLocal(ftpPath, localPath, true); // Force download all files
+    //        SyncFromLocalToFtp(localPath, ftpPath, true); // Force upload all files
+
+    //        CreateMarkerFile(); // Create marker file after the first sync
+    //    }
+    //    else
+    //    {
+    //        // Subsequent runs only sync modified files
+    //        SyncFromFtpToLocal(ftpPath, localPath); // Normal sync
+    //        SyncFromLocalToFtp(localPath, ftpPath); // Normal sync
+    //    }
+
+    //    // Display sync complete notification
+    //    ShowSyncCompleteMessage();
+    //}
+
+    //private bool CheckIfFirstRun()
+    //{
+    //    return !File.Exists(markerFilePath);
+    //}
+
+    //private void CreateMarkerFile()
+    //{
+    //    // Create the marker file to indicate that the initial sync has been completed
+    //    using (File.Create(markerFilePath)) { }
+    //}
+
+    //public void SyncFromFtpToLocal(string ftpDir, string localDir, bool forceDownload = false)
+    //{
+    //    // Ensure local directory exists
+    //    if (!Directory.Exists(localDir))
+    //    {
+    //        Directory.CreateDirectory(localDir);
+    //    }
+
+    //    // Get list of files and directories on FTP
+    //    var ftpItems = GetFtpFilesAndDirectories(ftpDir);
+
+    //    // Sync files and folders from FTP to local
+    //    foreach (var ftpItem in ftpItems)
+    //    {
+    //        string localPath = Path.Combine(localDir, ftpItem.Name);
+
+    //        if (ftpItem.IsDirectory)
+    //        {
+    //            // Recursively sync directories
+    //            SyncFromFtpToLocal(ftpItem.FullPath, localPath, forceDownload);
+    //        }
+    //        else
+    //        {
+    //            // Download file if it does not exist locally or is older than the FTP version
+    //            if (forceDownload || !File.Exists(localPath) || IsFtpFileNewer(ftpItem, localPath))
+    //            {
+    //                DownloadFileFromFtp(ftpItem.FullPath, localPath);
+    //            }
+    //            else
+    //            {
+    //                Console.WriteLine($"File already exists and is up to date: {localPath}");
+    //            }
+    //        }
+    //    }
+    //}
+
+    //public void SyncFromLocalToFtp(string localDir, string ftpDir, bool forceUpload = false)
+    //{
+    //    // Get list of files and directories locally
+    //    var localItems = Directory.GetFileSystemEntries(localDir);
+
+    //    foreach (var localItem in localItems)
+    //    {
+    //        string ftpPath = ftpDir + "/" + Path.GetFileName(localItem);
+
+    //        if (Directory.Exists(localItem))
+    //        {
+    //            // Create directory on FTP if not present
+    //            if (!FtpDirectoryExists(ftpPath))
+    //            {
+    //                CreateFtpDirectory(ftpPath);
+    //            }
+    //            // Recursively sync directory
+    //            SyncFromLocalToFtp(localItem, ftpPath, forceUpload);
+    //        }
+    //        else
+    //        {
+    //            // Upload file if it is not present on FTP or is newer than the FTP version
+    //            if (forceUpload || !FtpFileExists(ftpPath) || IsLocalFileNewer(localItem, ftpPath))
+    //            {
+    //                UploadFileToFtp(localItem, ftpPath);
+    //            }
+    //        }
+    //    }
+    //}
+
+    //public bool IsFtpFileNewer(FtpItem ftpItem, string localPath)
+    //{
+    //    DateTime localLastModified = File.GetLastWriteTime(localPath);
+    //    DateTime ftpLastModified = GetFtpFileLastModified(ftpItem.FullPath); // Fetch actual FTP last modified time
+    //    return ftpLastModified > localLastModified;
+    //}
+
+    //public bool IsLocalFileNewer(string localPath, string ftpPath)
+    //{
+    //    DateTime localLastModified = File.GetLastWriteTime(localPath);
+    //    DateTime ftpLastModified = GetFtpFileLastModified(ftpPath); // Fetch actual FTP last modified time
+    //    return localLastModified > ftpLastModified;
+    //}
+
+    //public void CreateFtpDirectory(string ftpPath)
+    //{
+    //    FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpPath);
+    //    request.Method = WebRequestMethods.Ftp.MakeDirectory;
+    //    request.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
+    //    using (var response = (FtpWebResponse)request.GetResponse()) { }
+    //}
+
+    //public void DownloadFileFromFtp(string ftpFilePath, string localFilePath)
+    //{
+    //    try
+    //    {
+    //        FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpFilePath);
+    //        request.Method = WebRequestMethods.Ftp.DownloadFile;
+    //        request.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
+
+    //        using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+    //        using (Stream responseStream = response.GetResponseStream())
+    //        using (FileStream fileStream = new FileStream(localFilePath, FileMode.Create))
+    //        {
+    //            responseStream.CopyTo(fileStream);
+    //        }
+    //    }
+    //    catch (WebException ex)
+    //    {
+    //        FtpWebResponse ftpResponse = (FtpWebResponse)ex.Response;
+    //        if (ftpResponse.StatusCode == FtpStatusCode.ActionNotTakenFileUnavailable)
+    //        {
+    //            Console.WriteLine("File not found on FTP server: " + ftpFilePath);
+    //        }
+    //        else
+    //        {
+    //            Console.WriteLine("FTP Error: " + ex.Message);
+    //        }
+    //    }
+    //}
+
+    //public void UploadFileToFtp(string localFilePath, string ftpFilePath)
+    //{
+    //    FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpFilePath);
+    //    request.Method = WebRequestMethods.Ftp.UploadFile;
+    //    request.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
+
+    //    byte[] fileContents = File.ReadAllBytes(localFilePath);
+    //    request.ContentLength = fileContents.Length;
+
+    //    using (Stream requestStream = request.GetRequestStream())
+    //    {
+    //        requestStream.Write(fileContents, 0, fileContents.Length);
+    //    }
+    //}
+
+    //public bool FtpDirectoryExists(string ftpDir)
+    //{
+    //    try
+    //    {
+    //        FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpDir);
+    //        request.Method = WebRequestMethods.Ftp.ListDirectory;
+    //        request.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
+
+    //        using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+    //        {
+    //            return true;
+    //        }
+    //    }
+    //    catch (WebException ex)
+    //    {
+    //        if (ex.Response is FtpWebResponse ftpResponse && ftpResponse.StatusCode == FtpStatusCode.ActionNotTakenFileUnavailable)
+    //        {
+    //            return false; // Directory does not exist
+    //        }
+    //        throw;
+    //    }
+    //}
+
+    //public bool FtpFileExists(string ftpFilePath)
+    //{
+    //    try
+    //    {
+    //        FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpFilePath);
+    //        request.Method = WebRequestMethods.Ftp.GetDateTimestamp;
+    //        request.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
+
+    //        using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+    //        {
+    //            return true; // File exists
+    //        }
+    //    }
+    //    catch (WebException ex)
+    //    {
+    //        if (ex.Response is FtpWebResponse ftpResponse && ftpResponse.StatusCode == FtpStatusCode.ActionNotTakenFileUnavailable)
+    //        {
+    //            return false; // File does not exist
+    //        }
+    //        throw;
+    //    }
+    //}
+
+    //public DateTime GetFtpFileLastModified(string ftpFilePath)
+    //{
+    //    try
+    //    {
+    //        FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpFilePath);
+    //        request.Method = WebRequestMethods.Ftp.GetDateTimestamp;
+    //        request.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
+
+    //        using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+    //        {
+    //            return response.LastModified;
+    //        }
+    //    }
+    //    catch (WebException ex)
+    //    {
+    //        FtpWebResponse response = (FtpWebResponse)ex.Response;
+    //        if (response != null && response.StatusCode == FtpStatusCode.ActionNotTakenFileUnavailable)
+    //        {
+    //            Console.WriteLine("File not found: " + ftpFilePath);
+    //        }
+    //        else
+    //        {
+    //            Console.WriteLine("Error retrieving file: " + ex.Message);
+    //        }
+    //        return DateTime.MinValue; // Or any fallback you prefer
+    //    }
+    //}
+
+    //public List<FtpItem> GetFtpFilesAndDirectories(string ftpDir)
+    //{
+    //    List<FtpItem> items = new List<FtpItem>();
+
+    //    FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpDir);
+    //    request.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
+    //    request.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
+
+    //    using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+    //    using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+    //    {
+    //        while (!reader.EndOfStream)
+    //        {
+    //            var line = reader.ReadLine();
+    //            var ftpItem = ParseFtpItem(line, ftpDir);
+    //            if (ftpItem != null)
+    //            {
+    //                items.Add(ftpItem);
+    //            }
+    //        }
+    //    }
+
+    //    return items;
+    //}
+
+    //public FtpItem ParseFtpItem(string line, string ftpDir)
+    //{
+    //    string[] tokens = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+    //    if (tokens.Length < 9)
+    //    {
+    //        return null; // Not a valid line
+    //    }
+
+    //    // Assume the last token is the file/directory name
+    //    string name = tokens[tokens.Length - 1];
+    //    bool isDirectory = line[0] == 'd'; // Check if the item is a directory
+    //    string fullPath = $"{ftpDir}/{name}";
+
+    //    return new FtpItem(name, fullPath, isDirectory);
+    //}
+
+    //private void ShowSyncCompleteMessage()
+    //{
+    //    MessageBox.Show("Sync complete!", "Sync Status", MessageBoxButtons.OK, MessageBoxIcon.Information);
+    //}
+
+    //public class FtpItem
+    //{
+    //    public string Name { get; }
+    //    public string FullPath { get; }
+    //    public bool IsDirectory { get; }
+
+    //    public FtpItem(string name, string fullPath, bool isDirectory)
+    //    {
+    //        Name = name;
+    //        FullPath = fullPath;
+    //        IsDirectory = isDirectory;
+    //    }
+    //}
+
+
+
+
+
+
+    //    public async void SyncFoldersInBackground()
+    //    {
+    //        await Task.Run(() => SyncFolders());
+    //        //lblCurrentField.Text = "Data veriferen";
+    //    }
+
+
+    //    private string ftpUsername = Properties.Settings.Default.Sync_User;
+    //    private string ftpPassword = Properties.Settings.Default.Sync_Pass;
+
+    //    public void SyncFolders()
+    //    {
+
+
+    //        string localPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\AgOpenGPS";
+    //        string ftpPath = "ftp://85.215.198.173";
+
+    //        // Check if it's the first run (you can use a flag or setting to determine this)
+    //        bool isFirstRun = CheckIfFirstRun(); // Implement this to check if it is the first run
+
+    //        // If it's the first run, sync all files
+    //        if (isFirstRun)
+    //        {
+
+    //            SyncFromFtpToLocal(ftpPath, localPath, true); // Force download all files
+    //            SyncFromLocalToFtp(localPath, ftpPath, true); // Force upload all files
+    //        }
+    //        else
+    //        {
+    //            // Subsequent runs only sync modified files
+    //            SyncFromFtpToLocal(ftpPath, localPath); // Normal sync
+    //            SyncFromLocalToFtp(localPath, ftpPath); // Normal sync
+    //        }
+
+    //        // Display sync complete notification
+    //        ShowSyncCompleteMessage();
+    //    }
+
+    //    private string GetLastModifiedItem(string localDir)
+    //    {
+    //        var dirInfo = new DirectoryInfo(localDir);
+    //        var lastModifiedFile = dirInfo.GetFiles("*", SearchOption.AllDirectories)
+    //            .OrderByDescending(f => f.LastWriteTime)
+    //            .FirstOrDefault();
+
+    //        var lastModifiedDir = dirInfo.GetDirectories("*", SearchOption.AllDirectories)
+    //            .OrderByDescending(d => d.LastWriteTime)
+    //            .FirstOrDefault();
+
+    //        // Compare last modified file and directory
+    //        if (lastModifiedFile != null && lastModifiedDir != null)
+    //        {
+    //            return lastModifiedFile.LastWriteTime > lastModifiedDir.LastWriteTime
+    //                ? lastModifiedFile.FullName
+    //                : lastModifiedDir.FullName;
+    //        }
+
+    //        return lastModifiedFile?.FullName ?? lastModifiedDir?.FullName;
+    //    }
+
+    //    public void SyncFromFtpToLocal(string ftpDir, string localDir, bool forceDownload = false)
+    //    {
+    //        // Ensure local directory exists
+    //        if (!Directory.Exists(localDir))
+    //        {
+    //            Directory.CreateDirectory(localDir);
+    //        }
+
+    //        // Get list of files and directories on FTP
+    //        var ftpItems = GetFtpFilesAndDirectories(ftpDir);
+
+    //        // Sync files and folders from FTP to local
+    //        foreach (var ftpItem in ftpItems)
+    //        {
+    //            string localPath = Path.Combine(localDir, ftpItem.Name);
+
+    //            if (ftpItem.IsDirectory)
+    //            {
+    //                // Recursively sync directories
+    //                SyncFromFtpToLocal(ftpItem.FullPath, localPath, forceDownload);
+    //            }
+    //            else
+    //            {
+    //                // Download file if it does not exist locally or is older than the FTP version
+    //                if (forceDownload || !File.Exists(localPath) || IsFtpFileNewer(ftpItem, localPath))
+    //                {
+    //                    DownloadFileFromFtp(ftpItem.FullPath, localPath);
+    //                }
+    //                else
+    //                {
+    //                    Console.WriteLine($"File already exists and is up to date: {localPath}");
+    //                }
+    //            }
+    //        }
+    //    }
+
+    //    public void SyncFromLocalToFtp(string localDir, string ftpDir, bool forceUpload = false)
+    //    {
+    //        string lastModifiedItem = GetLastModifiedItem(localDir);
+
+    //        if (lastModifiedItem != null)
+    //        {
+    //            string ftpPath = ftpDir + "/" + Path.GetFileName(lastModifiedItem);
+
+    //            if (Directory.Exists(lastModifiedItem))
+    //            {
+    //                // Create directory on FTP if not present
+    //                if (!FtpDirectoryExists(ftpPath))
+    //                {
+    //                    CreateFtpDirectory(ftpPath);
+    //                }
+    //                // Recursively sync directory
+    //                SyncFromLocalToFtp(lastModifiedItem, ftpPath);
+    //            }
+    //            else
+    //            {
+    //                // Upload file if it is not present on FTP or is newer than the FTP version
+    //                if (!FtpFileExists(ftpPath) || IsLocalFileNewer(lastModifiedItem, ftpPath))
+    //                {
+    //                    UploadFileToFtp(lastModifiedItem, ftpPath);
+    //                }
+    //            }
+    //        }
+
+    //    }
+
+    //    private string markerFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "AgOpenGPS", "sync_marker.txt");
+
+    //    private bool CheckIfFirstRun()
+    //    {
+    //        // Check for the existence of the marker file
+    //        return !File.Exists(markerFilePath);
+    //    }
+
+    //    private void CreateMarkerFile()
+    //    {
+    //        // Create the marker file to indicate that the initial sync has been completed
+    //        using (File.Create(markerFilePath))
+    //        {
+    //            // File.Create returns a FileStream that needs to be disposed
+    //            // This line ensures the file is created and closed immediately
+    //        }
+    //    }
+
+
+    //    public bool IsFtpFileNewer(FtpItem ftpItem, string localPath)
+    //    {
+    //        DateTime localLastModified = File.GetLastWriteTime(localPath);
+    //        DateTime ftpLastModified = GetFtpFileLastModified(ftpItem.FullPath); // Fetch actual FTP last modified time
+    //        return ftpLastModified > localLastModified;
+    //    }
+
+    //    public bool IsLocalFileNewer(string localPath, string ftpPath)
+    //    {
+    //        DateTime localLastModified = File.GetLastWriteTime(localPath);
+    //        DateTime ftpLastModified = GetFtpFileLastModified(ftpPath); // Fetch actual FTP last modified time
+    //        return localLastModified > ftpLastModified;
+    //    }
+
+    //    public void CreateFtpDirectory(string ftpPath)
+    //    {
+    //        FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpPath);
+    //        request.Method = WebRequestMethods.Ftp.MakeDirectory;
+    //        request.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
+    //        using (var response = (FtpWebResponse)request.GetResponse()) { }
+    //    }
+
+    //    public void DownloadFileFromFtp(string ftpFilePath, string localFilePath)
+    //    {
+    //        try
+    //        {
+    //            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpFilePath);
+    //            request.Method = WebRequestMethods.Ftp.DownloadFile;
+    //            request.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
+
+    //            using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+    //            using (Stream responseStream = response.GetResponseStream())
+    //            using (FileStream fileStream = new FileStream(localFilePath, FileMode.Create))
+    //            {
+    //                responseStream.CopyTo(fileStream);
+    //            }
+    //        }
+    //        catch (WebException ex)
+    //        {
+    //            FtpWebResponse ftpResponse = (FtpWebResponse)ex.Response;
+    //            if (ftpResponse.StatusCode == FtpStatusCode.ActionNotTakenFileUnavailable)
+    //            {
+    //                // Handle file not found error (550)
+    //                Console.WriteLine("File not found on FTP server: " + ftpFilePath);
+    //            }
+    //            else
+    //            {
+    //                // Log other errors
+    //                Console.WriteLine("FTP Error: " + ex.Message);
+    //            }
+    //        }
+    //    }
+
+    //    public void UploadFileToFtp(string localFilePath, string ftpFilePath)
+    //    {
+    //        FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpFilePath);
+    //        request.Method = WebRequestMethods.Ftp.UploadFile;
+    //        request.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
+
+    //        byte[] fileContents = File.ReadAllBytes(localFilePath);
+    //        request.ContentLength = fileContents.Length;
+
+    //        using (Stream requestStream = request.GetRequestStream())
+    //        {
+    //            requestStream.Write(fileContents, 0, fileContents.Length);
+    //        }
+    //    }
+
+    //    public bool FtpDirectoryExists(string ftpDir)
+    //    {
+    //        try
+    //        {
+    //            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpDir);
+    //            request.Method = WebRequestMethods.Ftp.ListDirectory;
+    //            request.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
+
+    //            using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+    //            {
+    //                return true;
+    //            }
+    //        }
+    //        catch (WebException ex)
+    //        {
+    //            if (ex.Response is FtpWebResponse ftpResponse && ftpResponse.StatusCode == FtpStatusCode.ActionNotTakenFileUnavailable)
+    //            {
+    //                return false; // Directory does not exist
+    //            }
+    //            throw;
+    //        }
+    //    }
+
+    //    public bool FtpFileExists(string ftpFilePath)
+    //    {
+    //        try
+    //        {
+    //            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpFilePath);
+    //            request.Method = WebRequestMethods.Ftp.GetDateTimestamp;
+    //            request.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
+
+    //            using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+    //            {
+    //                return true; // File exists
+    //            }
+    //        }
+    //        catch (WebException ex)
+    //        {
+    //            if (ex.Response is FtpWebResponse ftpResponse && ftpResponse.StatusCode == FtpStatusCode.ActionNotTakenFileUnavailable)
+    //            {
+    //                return false; // File does not exist
+    //            }
+    //            throw;
+    //        }
+    //    }
+
+    //    public DateTime GetFtpFileLastModified(string ftpFilePath)
+    //    {
+    //        try
+    //        {
+    //            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpFilePath);
+    //            request.Method = WebRequestMethods.Ftp.GetDateTimestamp;
+    //            request.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
+
+    //            using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+    //            {
+    //                return response.LastModified;
+    //            }
+    //        }
+    //        catch (WebException ex)
+    //        {
+    //            FtpWebResponse response = (FtpWebResponse)ex.Response;
+    //            if (response != null && response.StatusCode == FtpStatusCode.ActionNotTakenFileUnavailable)
+    //            {
+    //                Console.WriteLine("File not found: " + ftpFilePath);
+    //            }
+    //            else
+    //            {
+    //                Console.WriteLine("Error retrieving file: " + ex.Message);
+    //            }
+    //            return DateTime.MinValue; // Or any fallback you prefer
+    //        }
+    //    }
+
+    //    public List<FtpItem> GetFtpFilesAndDirectories(string ftpDir)
+    //    {
+    //        List<FtpItem> items = new List<FtpItem>();
+
+    //        FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpDir);
+    //        request.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
+    //        request.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
+
+    //        using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+    //        using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+    //        {
+    //            while (!reader.EndOfStream)
+    //            {
+    //                string line = reader.ReadLine();
+    //                FtpItem item = ParseFtpItem(line, ftpDir);
+    //                items.Add(item);
+    //            }
+    //        }
+
+    //        return items;
+    //    }
+
+    //    public FtpItem ParseFtpItem(string line, string ftpDir)
+    //    {
+    //        string[] tokens = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+    //        string name = tokens[tokens.Length - 1]; // File/folder name is the last token
+    //        bool isDirectory = line[0] == 'd'; // Check if it's a directory based on the first character
+
+    //        // Fetch the last modified time only if it's a file
+    //        DateTime lastModified = !isDirectory ? GetFtpFileLastModified(ftpDir + "/" + name) : DateTime.MinValue;
+
+    //        return new FtpItem
+    //        {
+    //            Name = name,
+    //            IsDirectory = isDirectory,
+    //            FullPath = ftpDir + "/" + name,
+    //            LastModified = lastModified // Store the fetched last modified date
+    //        };
+    //    }
+
+
+
+    //    // Class to hold FTP item details
+    //    public class FtpItem
+    //    {
+    //        public string Name { get; set; }
+    //        public bool IsDirectory { get; set; }
+    //        public string FullPath { get; set; }
+    //        public DateTime LastModified { get; set; }
+    //    }
+
+
+    //    public void ShowSyncCompleteMessage()
+    //    {
+    //        MessageBox.Show("Sync Compleet");
+    //    }
+
+    //}
+
+
+*/
+
+
+
+
+
+
 
