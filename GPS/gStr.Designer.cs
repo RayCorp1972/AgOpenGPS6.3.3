@@ -574,6 +574,15 @@ namespace AgOpenGPS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter measured difference.
+        /// </summary>
+        public static string gsEntermeasureddifference {
+            get {
+                return ResourceManager.GetString("gsEntermeasureddifference", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter Sim Coords.
         /// </summary>
         public static string gsEnterSimCoords {
@@ -777,6 +786,15 @@ namespace AgOpenGPS {
         public static string gsInvert {
             get {
                 return ResourceManager.GetString("gsInvert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invert Wide/Narrow.
+        /// </summary>
+        public static string gsInvertWideNarrow {
+            get {
+                return ResourceManager.GetString("gsInvertWideNarrow", resourceCulture);
             }
         }
         
@@ -1038,6 +1056,15 @@ namespace AgOpenGPS {
         public static string gsOffsetFix {
             get {
                 return ResourceManager.GetString("gsOffsetFix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On/Off.
+        /// </summary>
+        public static string gsOnOff {
+            get {
+                return ResourceManager.GetString("gsOnOff", resourceCulture);
             }
         }
         
@@ -1389,6 +1416,15 @@ namespace AgOpenGPS {
         public static string gsSteerWizard {
             get {
                 return ResourceManager.GetString("gsSteerWizard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Step Width.
+        /// </summary>
+        public static string gsStepWidth {
+            get {
+                return ResourceManager.GetString("gsStepWidth", resourceCulture);
             }
         }
         

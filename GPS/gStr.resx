@@ -612,4 +612,16 @@
   <data name="gsPwmInvert" xml:space="preserve">
     <value>Inverted </value>
   </data>
+  <data name="gsEntermeasureddifference" xml:space="preserve">
+    <value>Enter measured difference</value>
+  </data>
+  <data name="gsInvertWideNarrow" xml:space="preserve">
+    <value>Invert Wide/Narrow</value>
+  </data>
+  <data name="gsOnOff" xml:space="preserve">
+    <value>On/Off</value>
+  </data>
+  <data name="gsStepWidth" xml:space="preserve">
+    <value>Step Width</value>
+  </data>
 </root>

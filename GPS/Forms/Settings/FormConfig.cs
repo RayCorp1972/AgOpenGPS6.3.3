@@ -101,21 +101,39 @@ namespace AgOpenGPS
         private void FormConfig_Load(object sender, EventArgs e)
         {
 
-            
-        //since we reset, save current state
-        mf.SaveFormGPSWindowSettings();
+            String PloughControl  = (gStr.gsPloughControl);
+            String DesiredPloughWidth = (gStr.gsDesiredPloughWidth);
+            String Deadzone = (gStr.gsDeadzoneinmm);
+            String OnOff = (gStr.gsOnOff);
+            String Step = (gStr.gsStepWidth);
+            String Invert = (gStr.gsInvertWideNarrow);
+            String Distance = (gStr.gsEntermeasureddifference);
+
+            groupBox6.Text = PloughControl;
+            label110.Text = DesiredPloughWidth;
+            label108.Text = Deadzone;
+            label109.Text = OnOff;
+            lblStepsManual.Text = Step;
+            label179.Text = Invert;
+            label113.Text = Distance;
+
+
+
+
+            //since we reset, save current state
+            mf.SaveFormGPSWindowSettings();
 
             nudUser1.Value = Properties.Settings.Default.setArdMac_user1;
             nudPwmSet.Value = Properties.Settings.Default.setArdMac_user8;
-
+            
             //Plough Control
             chbPloeg.Checked = mf.isPlougOn;
-            chbPwm.Checked = mf.isPwmOn;
-            chbBlackWhite.Checked = mf.isBlackWhiteOn;
+            //chbPwm.Checked = mf.isPwmOn;
+            //chbBlackWhite.Checked = mf.isBlackWhiteOn;
             chbRotationSensor.Checked = mf.isRotationSensorOn;
             chbInvert.Checked = mf.isInvertOn;
+            nudDeadzone.Value = Properties.Settings.Default.setArdMac_user5;
 
-           
 
 
             //metric or imp on spinners min/maxes
@@ -165,23 +183,23 @@ namespace AgOpenGPS
                 mf.btnPloughControl.Visible = false;
             }
 
-            if (chbPwm.Checked)
-            {
-                Properties.Settings.Default.setPlough_isPwmOn = true;
-            }
-            else
-            {
-                Properties.Settings.Default.setPlough_isPwmOn = false;
-            }
+            //if (chbPwm.Checked)
+            //{
+            //    Properties.Settings.Default.setPlough_isPwmOn = true;
+            //}
+            //else
+            //{
+            //    Properties.Settings.Default.setPlough_isPwmOn = false;
+            //}
 
-            if (chbBlackWhite.Checked)
-            {
-                Properties.Settings.Default.setPlough_IsBlackWhiteOn = true;
-            }
-            else
-            {
-                Properties.Settings.Default.setPlough_IsBlackWhiteOn = false;
-            }
+            //if (chbBlackWhite.Checked)
+            //{
+            //    Properties.Settings.Default.setPlough_IsBlackWhiteOn = true;
+            //}
+            //else
+            //{
+            //    Properties.Settings.Default.setPlough_IsBlackWhiteOn = false;
+            //}
 
             if (chbRotationSensor.Checked)
             {

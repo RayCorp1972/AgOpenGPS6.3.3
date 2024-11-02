@@ -576,4 +576,16 @@
   <data name="gsPwmInvert" xml:space="preserve">
     <value>Omgekeerd</value>
   </data>
+  <data name="gsEntermeasureddifference" xml:space="preserve">
+    <value>Invoer gemeten afstand</value>
+  </data>
+  <data name="gsInvertWideNarrow" xml:space="preserve">
+    <value>Omkeren Breder/Smaller</value>
+  </data>
+  <data name="gsOnOff" xml:space="preserve">
+    <value>Aan / Uit</value>
+  </data>
+  <data name="gsStepWidth" xml:space="preserve">
+    <value>Stap Grote</value>
+  </data>
 </root>

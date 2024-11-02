@@ -765,7 +765,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="setArdMac_user5" Type="System.Byte" Scope="User">
-      <Value Profile="(Default)">5</Value>
+      <Value Profile="(Default)">20</Value>
     </Setting>
     <Setting Name="setArdMac_user6" Type="System.Byte" Scope="User">
       <Value Profile="(Default)">6</Value>
