@@ -840,6 +840,8 @@ namespace AgOpenGPS
             //Tony add distance to line to Machine PGN
             short machineLineDistance = guidanceLineDistanceOff;
             if (!ABLine.isHeadingSameWay) machineLineDistance *= -1;
+
+            // change plough direction
             if (!ABLine.isHeadingSameWay && Properties.Settings.Default.setPlough_AblineFlipManual == false)
             {
                 Properties.Settings.Default.setPlough_AblineFlip = true;
