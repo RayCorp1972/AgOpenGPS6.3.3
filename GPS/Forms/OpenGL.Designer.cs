@@ -2638,11 +2638,13 @@ namespace AgOpenGPS
                 GL.Color3(0.9652f, 0.9752f, 0.1f); //Yellow
                 font.DrawText(center + 10, 410, invert + ": " + "L", 0.8);
             }
-            else if (Properties.Settings.Default.setPlough_AblineFlip == true)
+            else 
             {
                 GL.Color3(0.9652f, 0.9752f, 0.1f); //Yellow
                 font.DrawText(center + 10, 410, invert + ": " + "R", 0.8);
             }
+            
+
 
 
 

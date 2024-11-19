@@ -10,20 +10,20 @@ using System.Windows.Forms;
 namespace AgOpenGPS
 {
 
-    
+
     public partial class FormConfig : Form
     {
         //class variables
         private readonly FormGPS mf = null;
 
         private bool isClosing = false;
-        
+
         //constructor
         public FormConfig(Form callingForm)
         {
-            
 
-        //get copy of the calling main form
+
+            //get copy of the calling main form
             mf = callingForm as FormGPS;
             InitializeComponent();
 
@@ -101,7 +101,7 @@ namespace AgOpenGPS
         private void FormConfig_Load(object sender, EventArgs e)
         {
 
-            String PloughControl  = (gStr.gsPloughControl);
+            String PloughControl = (gStr.gsPloughControl);
             String DesiredPloughWidth = (gStr.gsDesiredPloughWidth);
             String Deadzone = (gStr.gsDeadzoneinmm);
             String OnOff = (gStr.gsOnOff);
@@ -125,7 +125,7 @@ namespace AgOpenGPS
 
             nudUser1.Value = Properties.Settings.Default.setArdMac_user1;
             nudPwmSet.Value = Properties.Settings.Default.setArdMac_user8;
-            
+
             //Plough Control
             chbPloeg.Checked = mf.isPlougOn;
             //chbPwm.Checked = mf.isPwmOn;
@@ -133,11 +133,11 @@ namespace AgOpenGPS
             chbRotationSensor.Checked = mf.isRotationSensorOn;
             chbInvert.Checked = mf.isInvertOn;
             nudDeadzone.Value = Properties.Settings.Default.setArdMac_user5;
-
-
+            cbManualPloughDir.Checked = Properties.Settings.Default.setPlough_AblineFlipManual;
+            cbManualPloughDir.BackgroundImage = Properties.Resources.PlRight;
 
             //metric or imp on spinners min/maxes
-            if (!mf.isMetric)  FixMinMaxSpinners();            
+            if (!mf.isMetric) FixMinMaxSpinners();
 
             //the pick a saved vehicle box
             UpdateVehicleListView();
@@ -148,7 +148,7 @@ namespace AgOpenGPS
 
             tab1.SelectedTab = tabSummary;
             tboxVehicleNameSave.Focus();
-            
+
             label29.Text = gStr.gsSaveAs;
             UpdateSummary();
             //label3.Text = gStr.gsCurrent;
@@ -220,11 +220,19 @@ namespace AgOpenGPS
             else
             {
                 Properties.Settings.Default.setPlough_isInvertOn = false;
-                
+
 
             }
 
-           
+            if (cbManualPloughDir.Checked == true)
+            {
+                Properties.Settings.Default.setPlough_AblineFlipManual = true;
+
+            }
+            else
+            {
+                Properties.Settings.Default.setPlough_AblineFlipManual = false;
+            }
 
 
             //reload all the settings from default and user.config
@@ -425,14 +433,14 @@ namespace AgOpenGPS
 
         private void btnSetWidth_Click(object sender, EventArgs e)
         {
-           
-                SaveSettingsMachine();
 
-                Properties.Settings.Default.Save();
+            SaveSettingsMachine();
 
-                mf.TimedMessageBox(1000, gStr.gsMachinePort, gStr.gsSentToMachineModule);
+            Properties.Settings.Default.Save();
 
-           
+            mf.TimedMessageBox(1000, gStr.gsMachinePort, gStr.gsSentToMachineModule);
+
+
         }
 
         private void btn_calMin_Click(object sender, EventArgs e)
@@ -479,35 +487,51 @@ namespace AgOpenGPS
         //        Properties.Settings.Default.Save();
         //    }
         //}
-        
+
 
         private void chbInvert_CheckedChanged(object sender, EventArgs e)
         {
-           
+
 
             if (chbInvert.Checked) //Rechts
             {
-               
+
                 //Properties.Settings.Default.setPlough_Richting = false;
                 nudInvert.Value = 1; // van a naar b - trekker rechts wijkt af van lijn ploeg smaller
                 bool Omgekeerd = false;
-                Properties.Settings.Default.setArdMac_user13 = Omgekeerd;               
+                Properties.Settings.Default.setArdMac_user13 = Omgekeerd;
                 SaveSettingsMachine();
                 Properties.Settings.Default.Save();
-               
+
 
             }
             else
             {
-               
+
                 //Links
                 //Properties.Settings.Default.setPlough_Richting = true;
                 nudInvert.Value = 0;//van b naar a - trekker rechts wijkt af van lijn ploeg breder
-                bool Omgekeerd = true; 
-                Properties.Settings.Default.setArdMac_user13 = Omgekeerd;               
+                bool Omgekeerd = true;
+                Properties.Settings.Default.setArdMac_user13 = Omgekeerd;
                 SaveSettingsMachine();
                 Properties.Settings.Default.Save();
-                
+
+            }
+        }
+
+        // nog nakijken
+        private void cbManualPloughDir_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbManualPloughDir.Checked == true)
+            {
+                cbManualPloughDir.BackgroundImage = Properties.Resources.PlLeft;
+                Properties.Settings.Default.setPlough_AblineFlipManual = false;
+
+            }
+            else
+            {
+                cbManualPloughDir.BackgroundImage = Properties.Resources.PlRight;
+                Properties.Settings.Default.setPlough_AblineFlipManual = true;
             }
         }
         #endregion
@@ -526,6 +550,11 @@ namespace AgOpenGPS
 
             // Start the .exe file
             Process.Start(exePath);
+        }
+
+        private void chbPloeg_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 

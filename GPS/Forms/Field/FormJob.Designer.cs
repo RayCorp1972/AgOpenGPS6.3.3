@@ -102,7 +102,6 @@
             this.btnDataSync.Text = "Sync Data";
             this.btnDataSync.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnDataSync.UseVisualStyleBackColor = false;
-            this.btnDataSync.Visible = false;
             this.btnDataSync.Click += new System.EventHandler(this.button1_Click);
             // 
             // label4

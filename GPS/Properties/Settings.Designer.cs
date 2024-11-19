@@ -3239,5 +3239,17 @@ namespace AgOpenGPS.Properties {
                 this["Sync_chkBox"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool setPlough_AblineFlipManual {
+            get {
+                return ((bool)(this["setPlough_AblineFlipManual"]));
+            }
+            set {
+                this["setPlough_AblineFlipManual"] = value;
+            }
+        }
     }
 }

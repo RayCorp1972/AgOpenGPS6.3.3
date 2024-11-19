@@ -211,8 +211,8 @@ namespace AgOpenGPS
 
         private void SaveSettingsMachine()
         {
-            
-                int set = 1;
+
+            int set = 1;
                 int reset = 2046;
                 int sett = 0;
 

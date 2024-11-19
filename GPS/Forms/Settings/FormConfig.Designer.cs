@@ -64,6 +64,8 @@
             this.tab1 = new System.Windows.Forms.TabControl();
             this.aPlough = new System.Windows.Forms.TabPage();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.label160 = new System.Windows.Forms.Label();
+            this.cbManualPloughDir = new System.Windows.Forms.CheckBox();
             this.label179 = new System.Windows.Forms.Label();
             this.chbInvert = new System.Windows.Forms.CheckBox();
             this.btnSetPwm = new System.Windows.Forms.Button();
@@ -1363,6 +1365,8 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.label160);
+            this.groupBox6.Controls.Add(this.cbManualPloughDir);
             this.groupBox6.Controls.Add(this.label179);
             this.groupBox6.Controls.Add(this.chbInvert);
             this.groupBox6.Controls.Add(this.btnSetPwm);
@@ -1395,12 +1399,42 @@
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Plough Control";
             // 
+            // label160
+            // 
+            this.label160.AutoSize = true;
+            this.label160.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label160.ForeColor = System.Drawing.Color.Black;
+            this.label160.Location = new System.Drawing.Point(321, 23);
+            this.label160.Name = "label160";
+            this.label160.Size = new System.Drawing.Size(208, 19);
+            this.label160.TabIndex = 547;
+            this.label160.Text = "Manual Plough Direction";
+            // 
+            // cbManualPloughDir
+            // 
+            this.cbManualPloughDir.Appearance = System.Windows.Forms.Appearance.Button;
+            this.cbManualPloughDir.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.cbManualPloughDir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.cbManualPloughDir.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.cbManualPloughDir.FlatAppearance.CheckedBackColor = System.Drawing.Color.MediumAquamarine;
+            this.cbManualPloughDir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cbManualPloughDir.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbManualPloughDir.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.cbManualPloughDir.Location = new System.Drawing.Point(366, 45);
+            this.cbManualPloughDir.Name = "cbManualPloughDir";
+            this.cbManualPloughDir.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.cbManualPloughDir.Size = new System.Drawing.Size(114, 87);
+            this.cbManualPloughDir.TabIndex = 546;
+            this.cbManualPloughDir.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cbManualPloughDir.UseVisualStyleBackColor = false;
+            this.cbManualPloughDir.CheckedChanged += new System.EventHandler(this.cbManualPloughDir_CheckedChanged);
+            // 
             // label179
             // 
             this.label179.AutoSize = true;
             this.label179.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label179.ForeColor = System.Drawing.Color.Black;
-            this.label179.Location = new System.Drawing.Point(487, 23);
+            this.label179.Location = new System.Drawing.Point(544, 23);
             this.label179.Name = "label179";
             this.label179.Size = new System.Drawing.Size(174, 19);
             this.label179.TabIndex = 545;
@@ -1417,7 +1451,7 @@
             this.chbInvert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chbInvert.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chbInvert.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.chbInvert.Location = new System.Drawing.Point(517, 45);
+            this.chbInvert.Location = new System.Drawing.Point(548, 45);
             this.chbInvert.Name = "chbInvert";
             this.chbInvert.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chbInvert.Size = new System.Drawing.Size(114, 87);
@@ -1428,7 +1462,7 @@
             // 
             // btnSetPwm
             // 
-            this.btnSetPwm.Location = new System.Drawing.Point(517, 282);
+            this.btnSetPwm.Location = new System.Drawing.Point(548, 282);
             this.btnSetPwm.Margin = new System.Windows.Forms.Padding(2);
             this.btnSetPwm.Name = "btnSetPwm";
             this.btnSetPwm.Size = new System.Drawing.Size(113, 36);
@@ -1442,7 +1476,7 @@
             this.lblStepsManual.AutoSize = true;
             this.lblStepsManual.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblStepsManual.ForeColor = System.Drawing.Color.Black;
-            this.lblStepsManual.Location = new System.Drawing.Point(527, 203);
+            this.lblStepsManual.Location = new System.Drawing.Point(556, 199);
             this.lblStepsManual.Name = "lblStepsManual";
             this.lblStepsManual.Size = new System.Drawing.Size(99, 19);
             this.lblStepsManual.TabIndex = 540;
@@ -1454,7 +1488,7 @@
             this.nudPwmSet.BackColor = System.Drawing.Color.AliceBlue;
             this.nudPwmSet.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudPwmSet.InterceptArrowKeys = false;
-            this.nudPwmSet.Location = new System.Drawing.Point(517, 225);
+            this.nudPwmSet.Location = new System.Drawing.Point(548, 225);
             this.nudPwmSet.Maximum = new decimal(new int[] {
             255,
             0,
@@ -1729,13 +1763,14 @@
             this.chbPloeg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chbPloeg.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chbPloeg.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.chbPloeg.Location = new System.Drawing.Point(181, 45);
+            this.chbPloeg.Location = new System.Drawing.Point(180, 45);
             this.chbPloeg.Name = "chbPloeg";
             this.chbPloeg.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.chbPloeg.Size = new System.Drawing.Size(108, 79);
+            this.chbPloeg.Size = new System.Drawing.Size(114, 87);
             this.chbPloeg.TabIndex = 518;
             this.chbPloeg.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.chbPloeg.UseVisualStyleBackColor = false;
+            this.chbPloeg.CheckedChanged += new System.EventHandler(this.chbPloeg_CheckedChanged);
             // 
             // label187
             // 
@@ -10585,5 +10620,7 @@
         private System.Windows.Forms.Label label156;
         private System.Windows.Forms.Button btnRemote;
         private System.Windows.Forms.Label label159;
+        private System.Windows.Forms.CheckBox cbManualPloughDir;
+        private System.Windows.Forms.Label label160;
     }
 }
