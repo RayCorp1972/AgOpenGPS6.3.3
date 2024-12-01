@@ -88,7 +88,7 @@ namespace AgOpenGPS
                     GL.LoadIdentity();
 
                     //position the camera
-                    camera.SetWorldCam(pivotAxlePos.easting, pivotAxlePos.northing, camHeading);
+                    camera.SetWorldCam(pivotAxlePos.easting, pivotAxlePos.northing, camHeading);// test
 
                     //the bounding box of the camera for cullling.
                     CalcFrustum();
@@ -394,7 +394,26 @@ namespace AgOpenGPS
                     // Plough Text in MainGL
                     if (isJobStarted)
                     {
-                        if (isPlougOn) Plougcontrol();
+                        if (isPlougOn)
+                        {
+                            Plougcontrol();
+                            //btnPloughControl.Visible = true;
+                            btnFlag.Visible = false;
+                            btnHeadlandOnOff.Visible = false;
+                            cboxIsSectionControlled.Visible = false;
+                            btnHydLift.Visible = false;
+                            btnTramDisplayMode.Visible = false;
+                            btnResetToolHeading.Visible = false;
+                            btnChangeMappingColor.Visible = false;
+                            btnInvertDir.Visible = true;
+                            btnPloughDir.Visible = true; 
+                         }
+                        else
+                        {
+                            btnInvertDir.Visible = false;
+                            btnPloughDir.Visible = false;
+                        }
+
 
                         if (isSpeedoOn) DrawSpeedo();
                     }
@@ -2308,16 +2327,16 @@ namespace AgOpenGPS
             GL.Color3(0.9852f, 0.982f, 0.983f);
             font.DrawText(oglMain.Width / 2 - lenth, 10, strHeading, 1);
 
-            //GPS Step
-            if (distanceCurrentStepFixDisplay < 0.03 * 100)
-                GL.Color3(0.98f, 0.82f, 0.653f);
-            font.DrawText(center, 10, distanceCurrentStepFixDisplay.ToString("N1") + "cm", 1);
+            //GPS Step// turned off
+            //if (distanceCurrentStepFixDisplay < 0.03 * 100)
+            //    GL.Color3(0.98f, 0.82f, 0.653f);
+            //font.DrawText(center, 10, distanceCurrentStepFixDisplay.ToString("N1") + "cm", 1);
 
-            if (isMaxAngularVelocity)
-            {
-                GL.Color3(0.98f, 0.4f, 0.4f);
-                font.DrawText(center - 10, oglMain.Height - 260, "*", 2);
-            }
+            //if (isMaxAngularVelocity)
+            //{
+            //    GL.Color3(0.98f, 0.4f, 0.4f);
+            //    font.DrawText(center - 10, oglMain.Height - 260, "*", 2);
+            //}
 
             //if (ahrs.imuHeading != 99999)
             //{

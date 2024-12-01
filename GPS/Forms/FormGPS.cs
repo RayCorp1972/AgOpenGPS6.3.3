@@ -21,12 +21,21 @@ using System.Net.Sockets;
 using System.Reflection;
 using System.Resources;
 using System.Windows.Forms;
+using System.Threading.Tasks;
+
 
 namespace AgOpenGPS
 {
+    
     //the main form object
     public partial class FormGPS : Form
     {
+
+       
+
+
+
+
         //To bring forward AgIO if running
         [System.Runtime.InteropServices.DllImport("User32.dll")]
         private static extern bool SetForegroundWindow(IntPtr handle);
@@ -36,6 +45,9 @@ namespace AgOpenGPS
 
         #region // Class Props and instances
 
+        public bool Aansturen;
+        // Count button ploughdirinvert
+        public bool aan;
         //maximum sections available
         public const int MAXSECTIONS = 64;
 
@@ -272,7 +284,8 @@ namespace AgOpenGPS
         {
             //winform initialization
             InitializeComponent();
-
+            //get copy of the calling main form
+           
             CheckSettingsNotNull();
 
             //time keeper
@@ -410,7 +423,18 @@ namespace AgOpenGPS
         private void FormGPS_Load(object sender, EventArgs e)
         {
 
-            
+
+
+            btnInvertDir.BackgroundImage = Properties.Resources.Invert;
+            if (Properties.Settings.Default.setArdMac_user13 == false)
+            {
+                btnInvertDir.Text = "Aan";
+            }
+            else
+            {
+                btnInvertDir.Text = "Uit";
+            }
+            btnPloughDir.BackgroundImage = Properties.Resources.PlRight;
 
             var form = new FormAkkoord(this);
             {
@@ -421,11 +445,15 @@ namespace AgOpenGPS
             {
                 PlAuto = true;
                 btnPloughControl.Visible = true;
+                btnInvertDir.BackgroundImage = Properties.Resources.Invert;
+               
             }
             else
             {
+               
                 btnPloughControl.Visible = false;
                 PlAuto = false;
+               
             }
             this.MouseWheel += ZoomByMouseWheel;
 
@@ -755,6 +783,66 @@ namespace AgOpenGPS
             }
         }
 
+        public void btnInvertDir_Click(object sender, EventArgs e)
+        {
+
+            int set = 1;
+            int reset = 2046;
+            int sett = 0;
+
+            if (isInvertOn) sett |= set;
+            else sett &= reset;
+
+            set <<= 1;
+            reset <<= 1;
+            reset += 1;
+            if (isInvertOn)
+            {
+                isInvertOn = false;
+                btnInvertDir.Text = "Uit";
+                Properties.Settings.Default.setArdMac_user13 = true;
+                sett &= reset;
+                p_238.pgn[p_238.set0] = (byte)sett;
+            }
+            else
+            {
+                isInvertOn = true;
+                btnInvertDir.Text = "Aan";
+                Properties.Settings.Default.setArdMac_user13 = false;
+                if (isInvertOn) sett |= set;
+                p_238.pgn[p_238.set0] = (byte)sett;
+            }
+
+            
+        }
+
+
+        private void btnPloughDir_Click(object sender, EventArgs e)
+        {
+            
+                // Load images from resources
+                Image plLeft = Resources.PlLeft;
+                Image plRight = Resources.PlRight;
+
+
+                if (IsSameImage(btnPloughDir.BackgroundImage, plLeft))
+                {
+                        btnPloughDir.BackgroundImage = plRight;
+                        Properties.Settings.Default.setPlough_AblineFlipManual = false;
+
+
+
+            }
+
+                else if (IsSameImage(btnPloughDir.BackgroundImage, plRight))
+                {
+
+                    btnPloughDir.BackgroundImage = plLeft;
+                    Properties.Settings.Default.setPlough_AblineFlipManual = true;
+            }
+            
+        }
+
         // Return True if a certain percent of a rectangle is shown across the total screen area of all monitors, otherwise return False.
         public bool IsOnScreen(System.Drawing.Point RecLocation, System.Drawing.Size RecSize, double MinPercentOnScreen = 0.8)
         {
@@ -822,7 +910,8 @@ namespace AgOpenGPS
             ToolWheels, Tire, TramDot,
             RateMap1, RateMap2, RateMap3, 
             YouTurnU, YouTurnH,
-            Stop
+            Stop,
+            z_PlLef
         }
 
         public void LoadGLTextures()
@@ -897,6 +986,22 @@ namespace AgOpenGPS
            
         }
 
+        // Call asynchronously testen nog
+        
+        public async Task SetPgnWithDelayAsync()
+        {
+            p_238.pgn[p_238.user12] = 1;
+            SendPgnToLoop(p_238.pgn);
+           
+
+            // Delay for 1 second (1000 ms)
+            await Task.Delay(500);
+
+            p_238.pgn[p_238.user12] = 0;
+            SendPgnToLoop(p_238.pgn);
+            MessageBox.Show("Uit");
+        }
+
         public void PwmPloughManualSetPlus()
         {
 
@@ -912,10 +1017,9 @@ namespace AgOpenGPS
             }
             else
             {
-              
                 p_238.pgn[p_238.user12] = 1;
                 SendPgnToLoop(p_238.pgn);
-            
+                
             }
 
         }
@@ -932,19 +1036,20 @@ namespace AgOpenGPS
                 Properties.Settings.Default.setArdMac_user1 = (byte)ploughWidth;
                 p_238.pgn[p_238.user12] = (byte)ploughWidth;
                 SendPgnToLoop(p_238.pgn);
-               Properties.Settings.Default.Save();
+                Properties.Settings.Default.Save();
             }
             else
             {
-              
+
                 p_238.pgn[p_238.user12] = 2;
                 SendPgnToLoop(p_238.pgn);
-               
+
             }
-
-
-
         }
+
+       
+
+        
         #endregion 
         public void KeyboardToText(TextBox sender, Form owner)
         {

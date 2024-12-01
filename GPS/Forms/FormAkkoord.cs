@@ -1,16 +1,21 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace AgOpenGPS
 {
     public partial class FormAkkoord : Form
     {
+       
+
         private FormJob formJob;
 
         public FormAkkoord(FormGPS formGPS)
         {
             InitializeComponent();
+            
+
         }
 
         public FormAkkoord(FormJob formJob)

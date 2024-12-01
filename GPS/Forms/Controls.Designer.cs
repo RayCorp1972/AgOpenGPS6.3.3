@@ -585,12 +585,7 @@ namespace AgOpenGPS
             ExportFieldAs_KML();
             ExportFieldAs_ISOXMLv3();
             ExportFieldAs_ISOXMLv4();
-            if (Properties.Settings.Default.Sync_chkBox == true)
-            {
-                //SyncFoldersInBackground();
-
-
-            }
+           
 
             Settings.Default.setF_CurrentDir = currentFieldDirectory;
             Settings.Default.Save();

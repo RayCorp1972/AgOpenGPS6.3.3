@@ -67,7 +67,6 @@
             this.label160 = new System.Windows.Forms.Label();
             this.cbManualPloughDir = new System.Windows.Forms.CheckBox();
             this.label179 = new System.Windows.Forms.Label();
-            this.chbInvert = new System.Windows.Forms.CheckBox();
             this.btnSetPwm = new System.Windows.Forms.Button();
             this.lblStepsManual = new System.Windows.Forms.Label();
             this.nudPwmSet = new AgOpenGPS.NudlessNumericUpDown();
@@ -90,6 +89,7 @@
             this.nudUser1 = new AgOpenGPS.NudlessNumericUpDown();
             this.chbPloeg = new System.Windows.Forms.CheckBox();
             this.label187 = new System.Windows.Forms.Label();
+            this.chbInvert = new System.Windows.Forms.CheckBox();
             this.chbRotationSensor = new System.Windows.Forms.CheckBox();
             this.tabSummary = new System.Windows.Forms.TabPage();
             this.label173 = new System.Windows.Forms.Label();
@@ -704,7 +704,7 @@
             this.panelLeftSideMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelLeftSideMenu.Location = new System.Drawing.Point(4, 4);
             this.panelLeftSideMenu.Name = "panelLeftSideMenu";
-            this.panelLeftSideMenu.Size = new System.Drawing.Size(120, 728);
+            this.panelLeftSideMenu.Size = new System.Drawing.Size(120, 736);
             this.panelLeftSideMenu.TabIndex = 110;
             // 
             // btnFeatureHides
@@ -1355,7 +1355,7 @@
             this.aPlough.Controls.Add(this.chbRotationSensor);
             this.aPlough.Location = new System.Drawing.Point(4, 44);
             this.aPlough.Name = "aPlough";
-            this.aPlough.Padding = new System.Windows.Forms.Padding(3);
+            this.aPlough.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.aPlough.Size = new System.Drawing.Size(854, 584);
             this.aPlough.TabIndex = 28;
             this.aPlough.Text = "aPlough";
@@ -1368,7 +1368,6 @@
             this.groupBox6.Controls.Add(this.label160);
             this.groupBox6.Controls.Add(this.cbManualPloughDir);
             this.groupBox6.Controls.Add(this.label179);
-            this.groupBox6.Controls.Add(this.chbInvert);
             this.groupBox6.Controls.Add(this.btnSetPwm);
             this.groupBox6.Controls.Add(this.lblStepsManual);
             this.groupBox6.Controls.Add(this.nudPwmSet);
@@ -1391,6 +1390,7 @@
             this.groupBox6.Controls.Add(this.nudUser1);
             this.groupBox6.Controls.Add(this.chbPloeg);
             this.groupBox6.Controls.Add(this.label187);
+            this.groupBox6.Controls.Add(this.chbInvert);
             this.groupBox6.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox6.Location = new System.Drawing.Point(34, 27);
             this.groupBox6.Name = "groupBox6";
@@ -1404,11 +1404,12 @@
             this.label160.AutoSize = true;
             this.label160.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label160.ForeColor = System.Drawing.Color.Black;
-            this.label160.Location = new System.Drawing.Point(321, 23);
+            this.label160.Location = new System.Drawing.Point(359, 159);
             this.label160.Name = "label160";
             this.label160.Size = new System.Drawing.Size(208, 19);
             this.label160.TabIndex = 547;
             this.label160.Text = "Manual Plough Direction";
+            this.label160.Visible = false;
             // 
             // cbManualPloughDir
             // 
@@ -1420,13 +1421,14 @@
             this.cbManualPloughDir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbManualPloughDir.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbManualPloughDir.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cbManualPloughDir.Location = new System.Drawing.Point(366, 45);
+            this.cbManualPloughDir.Location = new System.Drawing.Point(389, 199);
             this.cbManualPloughDir.Name = "cbManualPloughDir";
             this.cbManualPloughDir.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.cbManualPloughDir.Size = new System.Drawing.Size(114, 87);
             this.cbManualPloughDir.TabIndex = 546;
             this.cbManualPloughDir.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.cbManualPloughDir.UseVisualStyleBackColor = false;
+            this.cbManualPloughDir.Visible = false;
             this.cbManualPloughDir.CheckedChanged += new System.EventHandler(this.cbManualPloughDir_CheckedChanged);
             // 
             // label179
@@ -1434,36 +1436,17 @@
             this.label179.AutoSize = true;
             this.label179.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label179.ForeColor = System.Drawing.Color.Black;
-            this.label179.Location = new System.Drawing.Point(544, 23);
+            this.label179.Location = new System.Drawing.Point(-3, 149);
             this.label179.Name = "label179";
             this.label179.Size = new System.Drawing.Size(174, 19);
             this.label179.TabIndex = 545;
             this.label179.Text = "Invert Wide/Narrow";
-            // 
-            // chbInvert
-            // 
-            this.chbInvert.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chbInvert.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.chbInvert.BackgroundImage = global::AgOpenGPS.Properties.Resources.Invert;
-            this.chbInvert.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.chbInvert.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.chbInvert.FlatAppearance.CheckedBackColor = System.Drawing.Color.MediumAquamarine;
-            this.chbInvert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chbInvert.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chbInvert.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.chbInvert.Location = new System.Drawing.Point(548, 45);
-            this.chbInvert.Name = "chbInvert";
-            this.chbInvert.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.chbInvert.Size = new System.Drawing.Size(114, 87);
-            this.chbInvert.TabIndex = 544;
-            this.chbInvert.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chbInvert.UseVisualStyleBackColor = false;
-            this.chbInvert.CheckedChanged += new System.EventHandler(this.chbInvert_CheckedChanged);
+            this.label179.Visible = false;
             // 
             // btnSetPwm
             // 
             this.btnSetPwm.Location = new System.Drawing.Point(548, 282);
-            this.btnSetPwm.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSetPwm.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSetPwm.Name = "btnSetPwm";
             this.btnSetPwm.Size = new System.Drawing.Size(113, 36);
             this.btnSetPwm.TabIndex = 543;
@@ -1504,7 +1487,7 @@
             // btnSetWidth
             // 
             this.btnSetWidth.Location = new System.Drawing.Point(181, 282);
-            this.btnSetWidth.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSetWidth.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSetWidth.Name = "btnSetWidth";
             this.btnSetWidth.Size = new System.Drawing.Size(113, 36);
             this.btnSetWidth.TabIndex = 538;
@@ -1515,7 +1498,7 @@
             // btnSetPwmMin
             // 
             this.btnSetPwmMin.Location = new System.Drawing.Point(625, 483);
-            this.btnSetPwmMin.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSetPwmMin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSetPwmMin.Name = "btnSetPwmMin";
             this.btnSetPwmMin.Size = new System.Drawing.Size(113, 36);
             this.btnSetPwmMin.TabIndex = 534;
@@ -1525,7 +1508,7 @@
             // btnSetPwmMax
             // 
             this.btnSetPwmMax.Location = new System.Drawing.Point(460, 483);
-            this.btnSetPwmMax.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSetPwmMax.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSetPwmMax.Name = "btnSetPwmMax";
             this.btnSetPwmMax.Size = new System.Drawing.Size(113, 36);
             this.btnSetPwmMax.TabIndex = 533;
@@ -1630,7 +1613,7 @@
             // btnSetDeadzone
             // 
             this.btnSetDeadzone.Location = new System.Drawing.Point(298, 483);
-            this.btnSetDeadzone.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSetDeadzone.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSetDeadzone.Name = "btnSetDeadzone";
             this.btnSetDeadzone.Size = new System.Drawing.Size(113, 36);
             this.btnSetDeadzone.TabIndex = 522;
@@ -1654,7 +1637,7 @@
             this.label109.AutoSize = true;
             this.label109.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label109.ForeColor = System.Drawing.Color.Black;
-            this.label109.Location = new System.Drawing.Point(203, 23);
+            this.label109.Location = new System.Drawing.Point(385, 22);
             this.label109.Name = "label109";
             this.label109.Size = new System.Drawing.Size(74, 19);
             this.label109.TabIndex = 519;
@@ -1663,7 +1646,7 @@
             // btn_calMax
             // 
             this.btn_calMax.Location = new System.Drawing.Point(162, 483);
-            this.btn_calMax.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_calMax.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_calMax.Name = "btn_calMax";
             this.btn_calMax.Size = new System.Drawing.Size(97, 36);
             this.btn_calMax.TabIndex = 514;
@@ -1698,7 +1681,7 @@
             // btn_calMin
             // 
             this.btn_calMin.Location = new System.Drawing.Point(29, 483);
-            this.btn_calMin.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_calMin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_calMin.Name = "btn_calMin";
             this.btn_calMin.Size = new System.Drawing.Size(98, 36);
             this.btn_calMin.TabIndex = 515;
@@ -1763,7 +1746,7 @@
             this.chbPloeg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chbPloeg.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chbPloeg.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.chbPloeg.Location = new System.Drawing.Point(180, 45);
+            this.chbPloeg.Location = new System.Drawing.Point(363, 44);
             this.chbPloeg.Name = "chbPloeg";
             this.chbPloeg.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chbPloeg.Size = new System.Drawing.Size(114, 87);
@@ -1782,6 +1765,27 @@
             this.label187.Size = new System.Drawing.Size(0, 19);
             this.label187.TabIndex = 537;
             this.label187.Visible = false;
+            // 
+            // chbInvert
+            // 
+            this.chbInvert.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chbInvert.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.chbInvert.BackgroundImage = global::AgOpenGPS.Properties.Resources.Invert;
+            this.chbInvert.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.chbInvert.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.chbInvert.FlatAppearance.CheckedBackColor = System.Drawing.Color.MediumAquamarine;
+            this.chbInvert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chbInvert.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chbInvert.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.chbInvert.Location = new System.Drawing.Point(13, 187);
+            this.chbInvert.Name = "chbInvert";
+            this.chbInvert.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chbInvert.Size = new System.Drawing.Size(114, 87);
+            this.chbInvert.TabIndex = 544;
+            this.chbInvert.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chbInvert.UseVisualStyleBackColor = false;
+            this.chbInvert.Visible = false;
+            this.chbInvert.CheckedChanged += new System.EventHandler(this.chbInvert_CheckedChanged);
             // 
             // chbRotationSensor
             // 
@@ -1835,7 +1839,7 @@
             this.tabSummary.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.tabSummary.Location = new System.Drawing.Point(4, 44);
             this.tabSummary.Name = "tabSummary";
-            this.tabSummary.Padding = new System.Windows.Forms.Padding(3);
+            this.tabSummary.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.tabSummary.Size = new System.Drawing.Size(854, 584);
             this.tabSummary.TabIndex = 0;
             this.tabSummary.Text = "tSum";
@@ -3231,7 +3235,7 @@
             this.tabToolPivot.Controls.Add(this.nudTrailingToolToPivotLength);
             this.tabToolPivot.Location = new System.Drawing.Point(4, 44);
             this.tabToolPivot.Name = "tabToolPivot";
-            this.tabToolPivot.Padding = new System.Windows.Forms.Padding(3);
+            this.tabToolPivot.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.tabToolPivot.Size = new System.Drawing.Size(854, 584);
             this.tabToolPivot.TabIndex = 27;
             this.tabToolPivot.Text = "tPivot";
@@ -5349,7 +5353,7 @@
             65536});
             this.nudDualReverseDistance.Name = "nudDualReverseDistance";
             this.nudDualReverseDistance.ReadOnly = true;
-            this.nudDualReverseDistance.Size = new System.Drawing.Size(144, 52);
+            this.nudDualReverseDistance.Size = new System.Drawing.Size(179, 52);
             this.nudDualReverseDistance.TabIndex = 472;
             this.nudDualReverseDistance.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nudDualReverseDistance.Value = new decimal(new int[] {
@@ -5385,7 +5389,7 @@
             -2147483648});
             this.nudDualHeadingOffset.Name = "nudDualHeadingOffset";
             this.nudDualHeadingOffset.ReadOnly = true;
-            this.nudDualHeadingOffset.Size = new System.Drawing.Size(144, 52);
+            this.nudDualHeadingOffset.Size = new System.Drawing.Size(215, 52);
             this.nudDualHeadingOffset.TabIndex = 470;
             this.nudDualHeadingOffset.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nudDualHeadingOffset.Value = new decimal(new int[] {
@@ -6260,7 +6264,7 @@
             this.tabRelay.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.tabRelay.Location = new System.Drawing.Point(4, 44);
             this.tabRelay.Name = "tabRelay";
-            this.tabRelay.Padding = new System.Windows.Forms.Padding(3);
+            this.tabRelay.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.tabRelay.Size = new System.Drawing.Size(854, 584);
             this.tabRelay.TabIndex = 24;
             this.tabRelay.Text = "aRelay";
@@ -8645,7 +8649,7 @@
             this.tabDisplay.Controls.Add(this.chkDisplayExtraGuides);
             this.tabDisplay.Location = new System.Drawing.Point(4, 44);
             this.tabDisplay.Name = "tabDisplay";
-            this.tabDisplay.Padding = new System.Windows.Forms.Padding(3);
+            this.tabDisplay.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.tabDisplay.Size = new System.Drawing.Size(854, 584);
             this.tabDisplay.TabIndex = 25;
             this.tabDisplay.Text = "fDisp";
@@ -9864,7 +9868,7 @@
             this.panelBottom.Controls.Add(this.label22);
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelBottom.ForeColor = System.Drawing.Color.Lime;
-            this.panelBottom.Location = new System.Drawing.Point(124, 666);
+            this.panelBottom.Location = new System.Drawing.Point(124, 674);
             this.panelBottom.Name = "panelBottom";
             this.panelBottom.Size = new System.Drawing.Size(862, 66);
             this.panelBottom.TabIndex = 112;
@@ -9923,7 +9927,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(990, 736);
+            this.ClientSize = new System.Drawing.Size(990, 744);
             this.ControlBox = false;
             this.Controls.Add(this.tab1);
             this.Controls.Add(this.panelBottom);
@@ -9931,11 +9935,11 @@
             this.Font = new System.Drawing.Font("Tahoma", 9.75F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.HelpButton = true;
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormConfig";
-            this.Padding = new System.Windows.Forms.Padding(4);
+            this.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Configuration";
@@ -10589,7 +10593,6 @@
         private System.Windows.Forms.TabPage aPlough;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Label label179;
-        private System.Windows.Forms.CheckBox chbInvert;
         public System.Windows.Forms.Button btnSetPwm;
         private System.Windows.Forms.Label lblStepsManual;
         public NudlessNumericUpDown nudPwmSet;
@@ -10622,5 +10625,6 @@
         private System.Windows.Forms.Label label159;
         private System.Windows.Forms.CheckBox cbManualPloughDir;
         private System.Windows.Forms.Label label160;
+        public System.Windows.Forms.CheckBox chbInvert;
     }
 }

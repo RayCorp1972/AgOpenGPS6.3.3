@@ -707,7 +707,7 @@
       <DependentUpon>FormGPS.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\vec3.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
+    <Compile Include="Properties\Resources1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
@@ -980,8 +980,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <SubType>Designer</SubType>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>Resources1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="AgOpenGPS_TemporaryKey.pfx" />
     <None Include="app.config">
@@ -1022,9 +1021,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AnyDesk.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="AOG.ico" />
     <Content Include="aChangeLog.txt" />
     <None Include="btnImages\AntennaLeftOffset.png" />
@@ -1053,6 +1049,7 @@
     <None Include="Resources\data-sync-icon-vector-37625019-removebg-preview.png" />
     <None Include="Resources\data-sync-icon-vector-37625019-removebg-preview1.png" />
     <None Include="Resources\data-sync-icon-vector-37625019-removebg-preview-removebg-preview.png" />
+    <None Include="btnImages\Images\t.png" />
     <Content Include="Resources\TF012.WAV" />
     <None Include="Resources\SectionOn.wav" />
     <None Include="Resources\SectionOff.wav" />

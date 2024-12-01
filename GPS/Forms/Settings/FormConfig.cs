@@ -12,7 +12,8 @@ namespace AgOpenGPS
 
 
     public partial class FormConfig : Form
-    {
+    { 
+        public bool IsInvertChecked;
         //class variables
         private readonly FormGPS mf = null;
 
@@ -22,7 +23,7 @@ namespace AgOpenGPS
         public FormConfig(Form callingForm)
         {
 
-
+              
             //get copy of the calling main form
             mf = callingForm as FormGPS;
             InitializeComponent();
@@ -489,49 +490,48 @@ namespace AgOpenGPS
         //}
 
 
-        private void chbInvert_CheckedChanged(object sender, EventArgs e)
+        public void chbInvert_CheckedChanged(object sender, EventArgs e)
         {
 
+            
 
-            if (chbInvert.Checked) //Rechts
-            {
-
-                //Properties.Settings.Default.setPlough_Richting = false;
-                nudInvert.Value = 1; // van a naar b - trekker rechts wijkt af van lijn ploeg smaller
-                bool Omgekeerd = false;
-                Properties.Settings.Default.setArdMac_user13 = Omgekeerd;
+            if (mf.isInvertOn) //Rechts
+            {              
+                nudInvert.Value = 1; // van a naar b - trekker rechts wijkt af van lijn ploeg smaller              
+                Properties.Settings.Default.setArdMac_user13 = false;
                 SaveSettingsMachine();
                 Properties.Settings.Default.Save();
-
+                
 
             }
-            else
-            {
-
-                //Links
-                //Properties.Settings.Default.setPlough_Richting = true;
-                nudInvert.Value = 0;//van b naar a - trekker rechts wijkt af van lijn ploeg breder
-                bool Omgekeerd = true;
-                Properties.Settings.Default.setArdMac_user13 = Omgekeerd;
+            else //Links
+            {           
+                
+                nudInvert.Value = 0;  //van b naar a - trekker rechts wijkt af van lijn ploeg breder              
+                Properties.Settings.Default.setArdMac_user13 = true;
                 SaveSettingsMachine();
                 Properties.Settings.Default.Save();
-
+                                
             }
         }
 
-        // nog nakijken
+        
+
+        // Werkt
         private void cbManualPloughDir_CheckedChanged(object sender, EventArgs e)
         {
             if (cbManualPloughDir.Checked == true)
             {
-                cbManualPloughDir.BackgroundImage = Properties.Resources.PlLeft;
+                cbManualPloughDir.BackgroundImage = Properties.Resources.PlRight;
                 Properties.Settings.Default.setPlough_AblineFlipManual = false;
+                mf.btnPloughDir.BackgroundImage = Properties.Resources.PlRight;
 
             }
             else
             {
-                cbManualPloughDir.BackgroundImage = Properties.Resources.PlRight;
+                cbManualPloughDir.BackgroundImage = Properties.Resources.PlLeft;                    ;
                 Properties.Settings.Default.setPlough_AblineFlipManual = true;
+                mf.btnPloughDir.BackgroundImage = Properties.Resources.PlLeft;
             }
         }
         #endregion
@@ -554,7 +554,7 @@ namespace AgOpenGPS
 
         private void chbPloeg_CheckedChanged(object sender, EventArgs e)
         {
-
+           
         }
     }
 

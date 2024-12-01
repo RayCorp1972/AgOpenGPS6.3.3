@@ -1362,7 +1362,8 @@ namespace AgOpenGPS
                     {
                         if (point.Y > 60 && point.Y < 365)
                         {
-                            PwmPloughManualSetMin();
+                            //PwmPloughManualSetMin();
+                            SetPgnWithDelayAsync();
                         }
                     }
 
@@ -1372,13 +1373,12 @@ namespace AgOpenGPS
                     {
                         if (point.Y > 60 && point.Y < 365)
                         {
-
                             PwmPloughManualSetPlus();
                         }
                     }
                     #endregion
 
-                   
+
 
 
                     //tram override
@@ -1447,7 +1447,9 @@ namespace AgOpenGPS
                 mouseY = oglMain.Height - point.Y;
                 leftMouseDownOnOpenGL = true;
             }
+
         }
+        
         private void SpeedLimitExceeded()
         {
             if (isMetric)
@@ -1461,6 +1463,7 @@ namespace AgOpenGPS
                     + (vehicle.functionSpeedLimit* 0.621371).ToString("N1") + " " + gStr.gsMPH);
            }
         }
+       
 
         public void SwapDirection()
         {
