@@ -704,7 +704,7 @@
             this.panelLeftSideMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelLeftSideMenu.Location = new System.Drawing.Point(4, 4);
             this.panelLeftSideMenu.Name = "panelLeftSideMenu";
-            this.panelLeftSideMenu.Size = new System.Drawing.Size(120, 736);
+            this.panelLeftSideMenu.Size = new System.Drawing.Size(120, 693);
             this.panelLeftSideMenu.TabIndex = 110;
             // 
             // btnFeatureHides
@@ -1355,7 +1355,7 @@
             this.aPlough.Controls.Add(this.chbRotationSensor);
             this.aPlough.Location = new System.Drawing.Point(4, 44);
             this.aPlough.Name = "aPlough";
-            this.aPlough.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.aPlough.Padding = new System.Windows.Forms.Padding(3);
             this.aPlough.Size = new System.Drawing.Size(854, 584);
             this.aPlough.TabIndex = 28;
             this.aPlough.Text = "aPlough";
@@ -1446,7 +1446,7 @@
             // btnSetPwm
             // 
             this.btnSetPwm.Location = new System.Drawing.Point(548, 282);
-            this.btnSetPwm.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSetPwm.Margin = new System.Windows.Forms.Padding(2);
             this.btnSetPwm.Name = "btnSetPwm";
             this.btnSetPwm.Size = new System.Drawing.Size(113, 36);
             this.btnSetPwm.TabIndex = 543;
@@ -1487,7 +1487,7 @@
             // btnSetWidth
             // 
             this.btnSetWidth.Location = new System.Drawing.Point(181, 282);
-            this.btnSetWidth.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSetWidth.Margin = new System.Windows.Forms.Padding(2);
             this.btnSetWidth.Name = "btnSetWidth";
             this.btnSetWidth.Size = new System.Drawing.Size(113, 36);
             this.btnSetWidth.TabIndex = 538;
@@ -1498,7 +1498,7 @@
             // btnSetPwmMin
             // 
             this.btnSetPwmMin.Location = new System.Drawing.Point(625, 483);
-            this.btnSetPwmMin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSetPwmMin.Margin = new System.Windows.Forms.Padding(2);
             this.btnSetPwmMin.Name = "btnSetPwmMin";
             this.btnSetPwmMin.Size = new System.Drawing.Size(113, 36);
             this.btnSetPwmMin.TabIndex = 534;
@@ -1508,7 +1508,7 @@
             // btnSetPwmMax
             // 
             this.btnSetPwmMax.Location = new System.Drawing.Point(460, 483);
-            this.btnSetPwmMax.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSetPwmMax.Margin = new System.Windows.Forms.Padding(2);
             this.btnSetPwmMax.Name = "btnSetPwmMax";
             this.btnSetPwmMax.Size = new System.Drawing.Size(113, 36);
             this.btnSetPwmMax.TabIndex = 533;
@@ -1613,7 +1613,7 @@
             // btnSetDeadzone
             // 
             this.btnSetDeadzone.Location = new System.Drawing.Point(298, 483);
-            this.btnSetDeadzone.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSetDeadzone.Margin = new System.Windows.Forms.Padding(2);
             this.btnSetDeadzone.Name = "btnSetDeadzone";
             this.btnSetDeadzone.Size = new System.Drawing.Size(113, 36);
             this.btnSetDeadzone.TabIndex = 522;
@@ -1646,7 +1646,7 @@
             // btn_calMax
             // 
             this.btn_calMax.Location = new System.Drawing.Point(162, 483);
-            this.btn_calMax.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_calMax.Margin = new System.Windows.Forms.Padding(2);
             this.btn_calMax.Name = "btn_calMax";
             this.btn_calMax.Size = new System.Drawing.Size(97, 36);
             this.btn_calMax.TabIndex = 514;
@@ -1681,7 +1681,7 @@
             // btn_calMin
             // 
             this.btn_calMin.Location = new System.Drawing.Point(29, 483);
-            this.btn_calMin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_calMin.Margin = new System.Windows.Forms.Padding(2);
             this.btn_calMin.Name = "btn_calMin";
             this.btn_calMin.Size = new System.Drawing.Size(98, 36);
             this.btn_calMin.TabIndex = 515;
@@ -1839,7 +1839,7 @@
             this.tabSummary.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.tabSummary.Location = new System.Drawing.Point(4, 44);
             this.tabSummary.Name = "tabSummary";
-            this.tabSummary.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabSummary.Padding = new System.Windows.Forms.Padding(3);
             this.tabSummary.Size = new System.Drawing.Size(854, 584);
             this.tabSummary.TabIndex = 0;
             this.tabSummary.Text = "tSum";
@@ -3235,7 +3235,7 @@
             this.tabToolPivot.Controls.Add(this.nudTrailingToolToPivotLength);
             this.tabToolPivot.Location = new System.Drawing.Point(4, 44);
             this.tabToolPivot.Name = "tabToolPivot";
-            this.tabToolPivot.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabToolPivot.Padding = new System.Windows.Forms.Padding(3);
             this.tabToolPivot.Size = new System.Drawing.Size(854, 584);
             this.tabToolPivot.TabIndex = 27;
             this.tabToolPivot.Text = "tPivot";
@@ -6264,7 +6264,7 @@
             this.tabRelay.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.tabRelay.Location = new System.Drawing.Point(4, 44);
             this.tabRelay.Name = "tabRelay";
-            this.tabRelay.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabRelay.Padding = new System.Windows.Forms.Padding(3);
             this.tabRelay.Size = new System.Drawing.Size(854, 584);
             this.tabRelay.TabIndex = 24;
             this.tabRelay.Text = "aRelay";
@@ -8649,7 +8649,7 @@
             this.tabDisplay.Controls.Add(this.chkDisplayExtraGuides);
             this.tabDisplay.Location = new System.Drawing.Point(4, 44);
             this.tabDisplay.Name = "tabDisplay";
-            this.tabDisplay.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabDisplay.Padding = new System.Windows.Forms.Padding(3);
             this.tabDisplay.Size = new System.Drawing.Size(854, 584);
             this.tabDisplay.TabIndex = 25;
             this.tabDisplay.Text = "fDisp";
@@ -9868,7 +9868,7 @@
             this.panelBottom.Controls.Add(this.label22);
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelBottom.ForeColor = System.Drawing.Color.Lime;
-            this.panelBottom.Location = new System.Drawing.Point(124, 674);
+            this.panelBottom.Location = new System.Drawing.Point(124, 631);
             this.panelBottom.Name = "panelBottom";
             this.panelBottom.Size = new System.Drawing.Size(862, 66);
             this.panelBottom.TabIndex = 112;
@@ -9927,7 +9927,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(990, 744);
+            this.ClientSize = new System.Drawing.Size(990, 701);
             this.ControlBox = false;
             this.Controls.Add(this.tab1);
             this.Controls.Add(this.panelBottom);
@@ -9935,11 +9935,11 @@
             this.Font = new System.Drawing.Font("Tahoma", 9.75F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.HelpButton = true;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormConfig";
-            this.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Padding = new System.Windows.Forms.Padding(4);
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Configuration";

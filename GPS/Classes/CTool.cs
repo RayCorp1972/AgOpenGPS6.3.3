@@ -40,7 +40,7 @@ namespace AgOpenGPS
 
         public bool areAllSectionBtnsOn = true;
 
-        public bool isLeftSideInHeadland = true, isRightSideInHeadland = true, isSectionsNotZones;
+        public bool isLeftSideInHeadland = true, isRightSideInHeadland = true, isSectionsNotZones, isIsoBusOn;
 
         //read pixel values
         public int rpXPosition;
@@ -90,6 +90,9 @@ namespace AgOpenGPS
                 numOfSections = Properties.Settings.Default.setVehicle_numSections;
             else
                 numOfSections = Properties.Settings.Default.setTool_numSectionsMulti;
+
+            if (isIsoBusOn)
+                numOfSections = Properties.Settings.Default.setVehicle_numSections;
 
             minCoverage = Properties.Settings.Default.setVehicle_minCoverage;
             isMultiColoredSections = Properties.Settings.Default.setColor_isMultiColorSections;

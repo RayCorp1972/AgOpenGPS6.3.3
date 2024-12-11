@@ -968,7 +968,7 @@ namespace AgOpenGPS
 
                 p_254.pgn[p_254.steerAngleHi] = unchecked((byte)(guidanceLineSteerAngle >> 8));
                 p_254.pgn[p_254.steerAngleLo] = unchecked((byte)(guidanceLineSteerAngle));
-
+                p_240.pgn[p_240.Section1] = 0;
                 if (isChangingDirection && ahrs.imuHeading == 99999)
                     p_254.pgn[p_254.status] = 0;
 
