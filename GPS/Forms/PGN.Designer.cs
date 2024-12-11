@@ -532,11 +532,11 @@ namespace AgOpenGPS
         public class CPGN_E6
         {
             /// <summary>
-            /// PGN - 240 - EG
+            /// PGN - 240 - E6
             /// </summary>
             public byte[] pgn = new byte[]
             {
-            0x80, 0x81, 0x7F, 0xE6, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0xCC
+            0x80, 0x81, 0x7F, 0xE6, 36, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  0xCC
             };
             public int numberOfSections = 5; // Number of sections
             public int actualSectionStates = 6;
