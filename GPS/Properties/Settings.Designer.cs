@@ -3182,10 +3182,10 @@ namespace AgOpenGPS.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool setArdMac_user13 {
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public byte setArdMac_user13 {
             get {
-                return ((bool)(this["setArdMac_user13"]));
+                return ((byte)(this["setArdMac_user13"]));
             }
             set {
                 this["setArdMac_user13"] = value;
@@ -3249,6 +3249,18 @@ namespace AgOpenGPS.Properties {
             }
             set {
                 this["setPlough_AblineFlipManual"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool setArdMac_user14 {
+            get {
+                return ((bool)(this["setArdMac_user14"]));
+            }
+            set {
+                this["setArdMac_user14"] = value;
             }
         }
     }

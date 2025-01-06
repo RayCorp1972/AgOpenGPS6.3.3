@@ -199,7 +199,7 @@ namespace AgOpenGPS
             /// PGN - 238 - EE 
             /// raiseTime=5  lowerTime=6   enableHyd= 7 set0 = 8
             /// </summary>
-            public byte[] pgn = new byte[] { 0x80, 0x81, 0x7f, 0xEE, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0xCC };
+            public byte[] pgn = new byte[] { 0x80, 0x81, 0x7f, 0xEE, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0xCC };
             public int raiseTime = 5;
             public int lowerTime = 6;
             public int enableHyd = 7;
@@ -215,6 +215,7 @@ namespace AgOpenGPS
             public int user9 = 17;      //Auto + Button wider
             public int user10 = 18;      //Auto - button smaller
             public int user12 = 19;      //Manual wider/smaller
+            public int user13 = 20;      //ploughdirection 
 
 
             // PGN  - 127.239 0x7FEF
@@ -238,6 +239,7 @@ namespace AgOpenGPS
                 pgn[user9] = Properties.Settings.Default.setArdMac_user9;
                 pgn[user10] = Properties.Settings.Default.setArdMac_user10;
                 pgn[user12] = Properties.Settings.Default.setArdMac_user12;
+                pgn[user13] = Properties.Settings.Default.setArdMac_user13;
 
             }
 

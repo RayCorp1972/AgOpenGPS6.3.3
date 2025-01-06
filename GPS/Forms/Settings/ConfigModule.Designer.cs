@@ -32,7 +32,7 @@ namespace AgOpenGPS
             nudUser4.Value = 0;
             nudPwmMax.Value = Properties.Settings.Default.setArdMac_user6;
             nudPwmMin.Value = Properties.Settings.Default.setArdMac_user7;
-            nudDeadzone.Value = Properties.Settings.Default.setArdMac_user5;
+           // nudDeadzone.Value = Properties.Settings.Default.setArdMac_user5;
             nudPwmSet.Value = Properties.Settings.Default.setArdMac_user8;
             //nudInvert.Value = Properties.Settings.Default.setArdMac_setting0;
 
@@ -212,18 +212,17 @@ namespace AgOpenGPS
         public void SaveSettingsMachine()
         {
 
-                int set = 1;
-                int reset = 2046;
-                int sett = 0;
+            int set = 1;
+            int reset = 2046;
+            int sett = 0;
 
-                if (chbInvert.Checked) sett |= set;
-                else sett &= reset;
+            if (chbInvert.Checked) sett |= set;
+            else sett &= reset;
 
-                set <<= 1;
-                reset <<= 1;
-                reset += 1;
-                //if (cboxIsHydOn.Checked) sett |= set;
-                //else sett &= reset;
+            set <<= 1;
+            reset <<= 1;
+            reset += 1;
+
 
                 Properties.Settings.Default.setArdMac_setting0 = (byte)sett;
                 Properties.Settings.Default.setArdMac_hydRaiseTime = (byte)nudRaiseTime.Value;
@@ -238,7 +237,7 @@ namespace AgOpenGPS
                 Properties.Settings.Default.setArdMac_user6 = (byte)nudPwmMax.Value; // Pwm max
                 Properties.Settings.Default.setArdMac_user7 = (byte)nudPwmMin.Value; // Pwm Min
                 Properties.Settings.Default.setArdMac_user8 = (byte)nudPwmSet.Value; // PwmSet
-                //Properties.Settings.Default.setArdMac_setting0 = (byte)nudInvert.Value;
+            
 
                 Properties.Settings.Default.setVehicle_hydraulicLiftLookAhead = (double)nudHydLiftLookAhead.Value;
                 mf.vehicle.hydLiftLookAheadTime = Properties.Settings.Default.setVehicle_hydraulicLiftLookAhead;
@@ -252,8 +251,8 @@ namespace AgOpenGPS
                 mf.p_238.pgn[mf.p_238.user6] = (byte)nudPwmMax.Value;
                 mf.p_238.pgn[mf.p_238.user7] = (byte)nudPwmMin.Value;
                 mf.p_238.pgn[mf.p_238.user8] = (byte)nudPwmSet.Value;
-                //mf.p_238.pgn[mf.p_238.set0] = (byte)nudInvert.Value;
-               // mf.p_238.pgn[mf.p_238.user12] = (byte)nudInvert.Value;
+            //mf.p_238.pgn[mf.p_238.set0] = (byte)nudInvert.Value;
+                mf.p_238.pgn[mf.p_238.user13] = Properties.Settings.Default.setArdMac_user8;
 
 
             int calValue = (int)nudUser4.Value;

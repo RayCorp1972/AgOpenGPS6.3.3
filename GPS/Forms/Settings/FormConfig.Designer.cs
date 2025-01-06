@@ -1777,14 +1777,13 @@
             this.chbInvert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chbInvert.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chbInvert.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.chbInvert.Location = new System.Drawing.Point(13, 187);
+            this.chbInvert.Location = new System.Drawing.Point(559, 44);
             this.chbInvert.Name = "chbInvert";
             this.chbInvert.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chbInvert.Size = new System.Drawing.Size(114, 87);
             this.chbInvert.TabIndex = 544;
             this.chbInvert.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.chbInvert.UseVisualStyleBackColor = false;
-            this.chbInvert.Visible = false;
             this.chbInvert.CheckedChanged += new System.EventHandler(this.chbInvert_CheckedChanged);
             // 
             // chbRotationSensor

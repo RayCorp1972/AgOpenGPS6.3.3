@@ -1358,12 +1358,12 @@ namespace AgOpenGPS
                     }
                     #region Plough AUTO plus/min button
                     //Pwm plough Minus
-                    if (point.X > 170 && point.X < 190)
+                    if (point.X > 150 && point.X < 250)
                     {
-                        if (point.Y > 60 && point.Y < 365)
+                        if (point.Y > 300 && point.Y < 400)
                         {
-                            //PwmPloughManualSetMin();
-                            SetPgnWithDelayAsync();
+                            PwmPloughManualSetMin();
+                            //SetPgnWithDelayAsync();
                         }
                     }
 

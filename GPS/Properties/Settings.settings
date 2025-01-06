@@ -791,8 +791,8 @@
     <Setting Name="setPlough_AblineFlip" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="setArdMac_user13" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+    <Setting Name="setArdMac_user13" Type="System.Byte" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="setPlough_Richting" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -807,6 +807,9 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="setPlough_AblineFlipManual" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="setArdMac_user14" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>

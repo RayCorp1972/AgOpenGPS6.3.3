@@ -201,6 +201,11 @@ namespace AgOpenGPS
         public CVehicle vehicle;
 
         /// <summary>
+        /// Ploughcontrol
+        /// </summary>
+        public CPloughControl pC;
+
+        /// <summary>
         /// Just the tool attachment that includes the sections
         /// </summary>
         public CTool tool;
@@ -298,6 +303,9 @@ namespace AgOpenGPS
             vehicle = new CVehicle(this);
 
             tool = new CTool(this);
+
+            pC = new CPloughControl(this);
+
 
             //create a new section and set left and right positions
             //created whether used or not, saves restarting program
@@ -419,14 +427,15 @@ namespace AgOpenGPS
             }
         }
 
+        
 
         private void FormGPS_Load(object sender, EventArgs e)
         {
-
+            
 
 
             btnInvertDir.BackgroundImage = Properties.Resources.Invert;
-            if (Properties.Settings.Default.setArdMac_user13 == false)
+            if (Properties.Settings.Default.setArdMac_user14 == true) 
             {
                 btnInvertDir.Text = "Aan";
             }
@@ -783,37 +792,48 @@ namespace AgOpenGPS
             }
         }
 
+        public bool isInvertOn1 = false;
+       
+
         public void btnInvertDir_Click(object sender, EventArgs e)
         {
+            isInvertOn = true;
+            
 
-            int set = 1;
-            int reset = 2046;
-            int sett = 0;
+            nudlessNumericUpDown1.Value = 0;
+            // Wissel de status van isInvertOn
+            isInvertOn1 = !isInvertOn1;
 
-            if (isInvertOn) sett |= set;
-            else sett &= reset;
 
-            set <<= 1;
-            reset <<= 1;
-            reset += 1;
-            if (isInvertOn)
+            if (isInvertOn1)
             {
-                isInvertOn = false;
+                
                 btnInvertDir.Text = "Uit";
-                Properties.Settings.Default.setArdMac_user13 = true;
-                sett &= reset;
-                p_238.pgn[p_238.set0] = (byte)sett;
+                nudlessNumericUpDown1.Value = 1;
+                Properties.Settings.Default.setArdMac_user14 = true;
+                Properties.Settings.Default.setArdMac_user13 = (byte)nudlessNumericUpDown1.Value;
+                p_238.pgn[p_238.user13] = Properties.Settings.Default.setArdMac_user13;
+                SendPgnToLoop(p_238.pgn);
+               
+
             }
             else
             {
-                isInvertOn = true;
                 btnInvertDir.Text = "Aan";
-                Properties.Settings.Default.setArdMac_user13 = false;
-                if (isInvertOn) sett |= set;
-                p_238.pgn[p_238.set0] = (byte)sett;
+                nudlessNumericUpDown1.Value = 0;
+                Properties.Settings.Default.setArdMac_user14 = false;
+                Properties.Settings.Default.setArdMac_user13 = (byte)nudlessNumericUpDown1.Value;
+                p_238.pgn[p_238.user13] = Properties.Settings.Default.setArdMac_user13;
+                SendPgnToLoop(p_238.pgn);
+               
             }
-
             
+
+
+
+
+
+
         }
 
 
@@ -999,7 +1019,7 @@ namespace AgOpenGPS
 
             p_238.pgn[p_238.user12] = 0;
             SendPgnToLoop(p_238.pgn);
-            MessageBox.Show("Uit");
+            
         }
 
         public void PwmPloughManualSetPlus()

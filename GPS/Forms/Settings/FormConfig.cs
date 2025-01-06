@@ -123,7 +123,7 @@ namespace AgOpenGPS
 
             //since we reset, save current state
             mf.SaveFormGPSWindowSettings();
-
+            
             nudUser1.Value = Properties.Settings.Default.setArdMac_user1;
             nudPwmSet.Value = Properties.Settings.Default.setArdMac_user8;
 
@@ -132,7 +132,7 @@ namespace AgOpenGPS
             //chbPwm.Checked = mf.isPwmOn;
             //chbBlackWhite.Checked = mf.isBlackWhiteOn;
             chbRotationSensor.Checked = mf.isRotationSensorOn;
-            chbInvert.Checked = mf.isInvertOn;
+            //chbInvert.Checked = mf.isInvertOn;
             nudDeadzone.Value = Properties.Settings.Default.setArdMac_user5;
             cbManualPloughDir.Checked = Properties.Settings.Default.setPlough_AblineFlipManual;
             cbManualPloughDir.BackgroundImage = Properties.Resources.PlRight;
@@ -211,19 +211,7 @@ namespace AgOpenGPS
                 Properties.Settings.Default.setPlough_isRotationSensorOn = false;
             }
 
-            if (chbInvert.Checked)
-            {
-                Properties.Settings.Default.setPlough_isInvertOn = true;
-                nudUser1.Value = Properties.Settings.Default.setArdMac_user1;
-
-
-            }
-            else
-            {
-                Properties.Settings.Default.setPlough_isInvertOn = false;
-
-
-            }
+           
 
             if (cbManualPloughDir.Checked == true)
             {
@@ -488,31 +476,32 @@ namespace AgOpenGPS
         //        Properties.Settings.Default.Save();
         //    }
         //}
-
+      
 
         public void chbInvert_CheckedChanged(object sender, EventArgs e)
         {
 
-            
+           mf.pC.PloughDirInvert();
+            mf.pC.SaveSettingsPlough();
 
-            if (mf.isInvertOn) //Rechts
-            {              
-                nudInvert.Value = 1; // van a naar b - trekker rechts wijkt af van lijn ploeg smaller              
-                Properties.Settings.Default.setArdMac_user13 = false;
-                SaveSettingsMachine();
-                Properties.Settings.Default.Save();
+            //if (mf.isInvertOn) //Rechts
+            //{              
+            //    nudInvert.Value = 1; // van a naar b - trekker rechts wijkt af van lijn ploeg smaller              
+            //    Properties.Settings.Default.setArdMac_user14 = false;
+            //    SaveSettingsMachine();
+            //    Properties.Settings.Default.Save();
                 
 
-            }
-            else //Links
-            {           
+            //}
+            //else //Links
+            //{           
                 
-                nudInvert.Value = 0;  //van b naar a - trekker rechts wijkt af van lijn ploeg breder              
-                Properties.Settings.Default.setArdMac_user13 = true;
-                SaveSettingsMachine();
-                Properties.Settings.Default.Save();
+            //    nudInvert.Value = 0;  //van b naar a - trekker rechts wijkt af van lijn ploeg breder              
+            //   Properties.Settings.Default.setArdMac_user14 = true;
+             SaveSettingsMachine();
+            //    Properties.Settings.Default.Save();
                                 
-            }
+            //}
         }
 
         

@@ -387,7 +387,7 @@ namespace AgOpenGPS
                     if (bnd.bndList.Count > 0 && yt.isYouTurnBtnOn) DrawUTurnBtn();
 
                     if ((isBtnAutoSteerOn || yt.isYouTurnBtnOn) && !ct.isContourBtnOn) DrawManUTurnBtn();
-
+                
                     //if (isCompassOn) DrawCompass();
                     DrawCompassText();
 
@@ -396,7 +396,7 @@ namespace AgOpenGPS
                     {
                         if (isPlougOn)
                         {
-                            Plougcontrol();
+                            pC.Plougcontrol();
                             //btnPloughControl.Visible = true;
                             btnFlag.Visible = false;
                             btnHeadlandOnOff.Visible = false;
@@ -2594,95 +2594,95 @@ namespace AgOpenGPS
 
         #region plough control
 
-        private void Plougcontrol()
-        {
+        //private void Plougcontrol()
+        //{
 
-            String PloughControl = (gStr.gsPloughControl);
-            String DesiredPloughWidth = (gStr.gsDesiredPloughWidth);
-            String CurrentPloughWidth = (gStr.gsCurrentPloughWidth);
-            String Deadzone = (gStr.gsDeadzoneinmm);
-            String AutoConfig = (gStr.gsAutoConfigOff);
-            String AutoSwitch = (gStr.gsAutoSwitchOff);
-            String Hold = (gStr.gsHoldPlough);
-            String Wider = (gStr.gsWider);
-            String Max = (gStr.gsMax);
-            String Min = (gStr.gsMin);
-            String Narrow = (gStr.gsSmaller);
-            String Abline = (gStr.gsNoline);
-            String SectionOff = (gStr.gsSectionoff);
-            String Both = (gStr.gsBoth);
+        //    String PloughControl = (gStr.gsPloughControl);
+        //    String DesiredPloughWidth = (gStr.gsDesiredPloughWidth);
+        //    String CurrentPloughWidth = (gStr.gsCurrentPloughWidth);
+        //    String Deadzone = (gStr.gsDeadzoneinmm);
+        //    String AutoConfig = (gStr.gsAutoConfigOff);
+        //    String AutoSwitch = (gStr.gsAutoSwitchOff);
+        //    String Hold = (gStr.gsHoldPlough);
+        //    String Wider = (gStr.gsWider);
+        //    String Max = (gStr.gsMax);
+        //    String Min = (gStr.gsMin);
+        //    String Narrow = (gStr.gsSmaller);
+        //    String Abline = (gStr.gsNoline);
+        //    String SectionOff = (gStr.gsSectionoff);
+        //    String Both = (gStr.gsBoth);
          
 
 
 
-            int center = oglMain.Width / -2 + 10;
-            //font.DrawText(center - 8, 40, "^", 0.8);
-            GL.Color3(0.9652f, 0.9752f, 0.1f); //Yellow
+        //    int center = oglMain.Width / -2 + 10;
+        //    //font.DrawText(center - 8, 40, "^", 0.8);
+        //    GL.Color3(0.9652f, 0.9752f, 0.1f); //Yellow
 
-            font.DrawText(center + 10, 150, PloughControl, .9); // 
-            font.DrawText(center + 10, 180, DesiredPloughWidth + ": " + (decimal)Properties.Settings.Default.setArdMac_user1 + "cm", 0.7);
-            font.DrawText(center + 10, 210, CurrentPloughWidth + ": " + ploughWidth.ToString() + "cm", 0.7);
-            font.DrawText(center + 10, 240, Deadzone + ": " + (decimal)Properties.Settings.Default.setArdMac_user5 + "mm", 0.7);
+        //    font.DrawText(center + 10, 150, PloughControl, .9); // 
+        //    font.DrawText(center + 10, 180, DesiredPloughWidth + ": " + (decimal)Properties.Settings.Default.setArdMac_user1 + "cm", 0.7);
+        //    font.DrawText(center + 10, 210, CurrentPloughWidth + ": " + ploughWidth.ToString() + "cm", 0.7);
+        //    font.DrawText(center + 10, 240, Deadzone + ": " + (decimal)Properties.Settings.Default.setArdMac_user5 + "mm", 0.7);
 
-            if (ploughMode == 0) font.DrawText(center + 10, 270, SectionOff, 0.7);
-            else if (ploughMode == 1) font.DrawText(center + 10, 270, AutoConfig, 1);
-            else if (ploughMode == 2) font.DrawText(center + 10, 270, AutoSwitch, 1);
-            else if (ploughMode == 3) font.DrawText(center + 10, 270, Hold + "  (A)", 1);
-            else if (ploughMode == 4) font.DrawText(center + 10, 270, Wider + " (A)", 1);
-            else if (ploughMode == 5) font.DrawText(center + 10, 270, Max + "  (A)", 1);
-            else if (ploughMode == 6) font.DrawText(center + 10, 270, Narrow + "  (A)", 1);
-            else if (ploughMode == 7) font.DrawText(center + 10, 270, Min, 1);
-            else if (ploughMode == 8) font.DrawText(center + 10, 270, Abline, 1);
-            else if (ploughMode == 9) font.DrawText(center + 10, 270, Both, 1);
-            else if (ploughMode == 10) font.DrawText(center + 10, 270, "Breder (M)", 1);
-            else if (ploughMode == 11) font.DrawText(center + 10, 270, "Smaller (M)", 1);
-            else if (ploughMode == 12) font.DrawText(center + 10, 270, "Stop (M)", 1);
-            font.DrawText(center + 25, 310, "" + Wider + "  " + Narrow, 0.8);
-            PlougPwmMinus();
-            PlougPwmPlus();
-            Omkeer();
+        //    if (ploughMode == 0) font.DrawText(center + 10, 270, SectionOff, 0.7);
+        //    else if (ploughMode == 1) font.DrawText(center + 10, 270, AutoConfig, 1);
+        //    else if (ploughMode == 2) font.DrawText(center + 10, 270, AutoSwitch, 1);
+        //    else if (ploughMode == 3) font.DrawText(center + 10, 270, Hold + "  (A)", 1);
+        //    else if (ploughMode == 4) font.DrawText(center + 10, 270, Wider + " (A)", 1);
+        //    else if (ploughMode == 5) font.DrawText(center + 10, 270, Max + "  (A)", 1);
+        //    else if (ploughMode == 6) font.DrawText(center + 10, 270, Narrow + "  (A)", 1);
+        //    else if (ploughMode == 7) font.DrawText(center + 10, 270, Min, 1);
+        //    else if (ploughMode == 8) font.DrawText(center + 10, 270, Abline, 1);
+        //    else if (ploughMode == 9) font.DrawText(center + 10, 270, Both, 1);
+        //    else if (ploughMode == 10) font.DrawText(center + 10, 270, "Breder (M)", 1);
+        //    else if (ploughMode == 11) font.DrawText(center + 10, 270, "Smaller (M)", 1);
+        //    else if (ploughMode == 12) font.DrawText(center + 10, 270, "Stop (M)", 1);
+        //    font.DrawText(center + 25, 310, "" + Wider + "  " + Narrow, 0.8);
+        //    PlougPwmMinus();
+        //    PlougPwmPlus();
+        //    Omkeer();
 
-        }
+        //}
 
-        private void Omkeer()
-        {
+        //private void Omkeer()
+        //{
 
-            String invert = (gStr.gsInvert);
-            String pwmInvert = (gStr.gsPwmInvert);
+        //    String invert = (gStr.gsInvert);
+        //    String pwmInvert = (gStr.gsPwmInvert);
 
-            int center = oglMain.Width / -2 + 10;
+        //    int center = oglMain.Width / -2 + 10;
 
-            if (Properties.Settings.Default.setPlough_AblineFlip == false)
-            {
-                GL.Color3(0.9652f, 0.9752f, 0.1f); //Yellow
-                font.DrawText(center + 10, 410, invert + ": " + "L", 0.8);
-            }
-            else 
-            {
-                GL.Color3(0.9652f, 0.9752f, 0.1f); //Yellow
-                font.DrawText(center + 10, 410, invert + ": " + "R", 0.8);
-            }
+        //    if (Properties.Settings.Default.setPlough_AblineFlip == false)
+        //    {
+        //        GL.Color3(0.9652f, 0.9752f, 0.1f); //Yellow
+        //        font.DrawText(center + 10, 410, invert + ": " + "L", 0.8);
+        //    }
+        //    else 
+        //    {
+        //        GL.Color3(0.9652f, 0.9752f, 0.1f); //Yellow
+        //        font.DrawText(center + 10, 410, invert + ": " + "R", 0.8);
+        //    }
             
 
 
 
 
 
-            if (Properties.Settings.Default.setArdMac_user13 == true)
-            {
+        //    if (Properties.Settings.Default.setArdMac_user14 == true)
+        //    {
 
-                GL.Color3(0.9652f, 0.9752f, 0.1f); //Yellow
-                font.DrawText(center + 10, 440, pwmInvert + ": " + "Nee", 0.8);
-            }
-            else if (Properties.Settings.Default.setArdMac_user13 == false)
-            {
+        //        GL.Color3(0.9652f, 0.9752f, 0.1f); //Yellow
+        //        font.DrawText(center + 10, 440, pwmInvert + ": " + "Nee", 0.8);
+        //    }
+        //    else if (Properties.Settings.Default.setArdMac_user14 == false)
+        //    {
 
 
-                GL.Color3(0.9652f, 0.9752f, 0.1f); //Yellow
-                font.DrawText(center + 10, 440, pwmInvert + ": " + "Ja", 0.8);
-            }
+        //        GL.Color3(0.9652f, 0.9752f, 0.1f); //Yellow
+        //        font.DrawText(center + 10, 440, pwmInvert + ": " + "Ja", 0.8);
+        //    }
 
-        }
+        //}
 
         private void PlougPwmMinus()
         {

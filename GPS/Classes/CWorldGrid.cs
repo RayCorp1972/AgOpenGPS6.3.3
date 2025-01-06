@@ -62,6 +62,8 @@ namespace AgOpenGPS
             eastingMinRate = -300;
         }
 
+
+
         public void DrawFieldSurface()
         {
             Color field = mf.fieldColorDay;
