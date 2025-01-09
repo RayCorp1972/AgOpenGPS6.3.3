@@ -199,23 +199,23 @@ namespace AgOpenGPS
             /// PGN - 238 - EE 
             /// raiseTime=5  lowerTime=6   enableHyd= 7 set0 = 8
             /// </summary>
-            public byte[] pgn = new byte[] { 0x80, 0x81, 0x7f, 0xEE, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0xCC };
+            public byte[] pgn = new byte[] { 0x80, 0x81, 0x7f, 0xEE, 8, 0, 0, 0, 0, 0, 0, 0, 0,  0xCC };
             public int raiseTime = 5;
             public int lowerTime = 6;
             public int enableHyd = 7;
             public int set0 = 8;  //reverse left/right
-            public int user1 = 9;       //Target width (+200cm)                                            5  
+            public int user1 = 9;       //Target width (+200cm)                                             
             public int user2 = 10;      //Calabration command instrction                                   
             public int user3 = 11;      //Set value L
             public int user4 = 12;      //Set value H
-            public int user5 = 13;      //deadBand
-            public int user6 = 14;      //Pwm High
-            public int user7 = 15;      //Pwm Low
-            public int user8 = 16;      //Pwm / Black-White
-            public int user9 = 17;      //Auto + Button wider
-            public int user10 = 18;      //Auto - button smaller
-            public int user12 = 19;      //Manual wider/smaller
-            public int user13 = 20;      //ploughdirection 
+            public int DeadZone = 5;      //DeadZone
+            public int PwmMax = 6;      //Pwm High
+            public int PwmMin = 7;      //Pwm Low
+            public int PwmSet = 8;      //Pwm / Black-White
+            public int AutoButtonWider = 9;      //Auto + Button wider
+            public int AutoButtonSmaller = 9;      //Auto - button smaller
+            public int ManualWiderSmaller = 10;      //Manual wider/smaller
+            public int PloughDirection = 11;      //ploughdirection 
 
 
             // PGN  - 127.239 0x7FEF
@@ -227,20 +227,18 @@ namespace AgOpenGPS
                 pgn[lowerTime] = Properties.Settings.Default.setArdMac_hydLowerTime;
                 pgn[enableHyd] = Properties.Settings.Default.setArdMac_isHydEnabled;
                 pgn[set0] = Properties.Settings.Default.setArdMac_setting0;
-
                 pgn[user1] = Properties.Settings.Default.setArdMac_user1;
                 pgn[user2] = Properties.Settings.Default.setArdMac_user2;
                 pgn[user3] = Properties.Settings.Default.setArdMac_user3;
                 pgn[user4] = Properties.Settings.Default.setArdMac_user4;
-                pgn[user5] = Properties.Settings.Default.setArdMac_user5;
-                pgn[user6] = Properties.Settings.Default.setArdMac_user6;
-                pgn[user7] = Properties.Settings.Default.setArdMac_user7;
-                pgn[user8] = Properties.Settings.Default.setArdMac_user8;
-                pgn[user9] = Properties.Settings.Default.setArdMac_user9;
-                pgn[user10] = Properties.Settings.Default.setArdMac_user10;
-                pgn[user12] = Properties.Settings.Default.setArdMac_user12;
-                pgn[user13] = Properties.Settings.Default.setArdMac_user13;
-
+                pgn[DeadZone] = Properties.Settings.Default.setArdMac_deadZone;
+                pgn[PwmMax] = Properties.Settings.Default.setArdMac_pwmMax;
+                pgn[PwmMin] = Properties.Settings.Default.setArdMac_pwmMin;
+                pgn[PwmSet] = Properties.Settings.Default.setArdMac_pwmSet;
+                pgn[AutoButtonWider] = Properties.Settings.Default.setArdMac_AutoButtonWider;
+                pgn[AutoButtonSmaller] = Properties.Settings.Default.setArdMac_AutoButtonSmaller;
+                pgn[ManualWiderSmaller] = Properties.Settings.Default.setArdMac_ManualWiderSmaller;
+                pgn[PloughDirection] = Properties.Settings.Default.setArdMac_PloughDirection;
             }
 
             public void MakeCRC()
@@ -463,162 +461,10 @@ namespace AgOpenGPS
             //public int  = 12;
         }
 
-        ////ISOBUS TC-SC CONTROL
-        //public class CPGN_E6
-        //{
-        //    /// <summary>
-        //    /// PGN - 240 - EG
-        //    /// numberofsections,Sectionwidth(The width of each section in mm), 
-        //    /// </summary>
-        //    public byte[] pgn = new byte[] { 0x80, 0x81, 0x7f, 0xE6, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  0xCC };
-        //    public int numberOfSections = 5;       //Number of sections                                            
-        //    public int workingWidth = 6;      //The width of each section in mm                             
-        //    public int actualSectionStates = 7;      //The actual operation state each section currently has  (0=off, 1=on, 2=error, 3 =unknown / not-installed)
-        //    public int SetPointSectionStates = 8;      //The desired state for each section  (0=off, 1=on, 2=reserved, 3 = not-installed), a section can for any reason not adhere to this setpoint. The reason will most of the times be communicated to the operator via a notification on the VT
-        //    public int Section1 = 9;
-        //    public int Section2 = 10;
-        //    public int Section3 = 11;
-        //    public int Section4 = 12;
-        //    public int Section5 = 13;
-        //    public int Section6 = 14;
-        //    public int Section7 = 15;
-        //    public int Section8 = 16;
-        //    public int Section9 = 17;
-        //    public int Section10 = 18;
-        //    public int Section11 = 19;
-        //    public int Section12 = 20;
-        //    public int Section13 = 21;
-        //    public int Section14 = 22;
-        //    public int Section15 = 23;
+       
 
-        //    // PGN  - 127.240 0x7FEF
-        //    int crc = 0;
-
-        //    public CPGN_E6()
-        //    {
-        //        pgn[numberOfSections] = 0;               
-        //        pgn[actualSectionStates] = 0;
-        //        pgn[SetPointSectionStates] = 0;
-        //        pgn[Section1] = 0;
-        //        pgn[Section2] = 0;
-        //        pgn[Section3] = 0;
-        //        pgn[Section4] = 0;
-        //        pgn[Section5] = 0;
-        //        pgn[Section6] = 0;
-        //        pgn[Section7] = 0;
-        //        pgn[Section8] = 0;
-        //        pgn[Section9] = 0;
-        //        pgn[Section10] = 0;
-        //        pgn[Section11] = 0;
-        //        pgn[Section12] = 0;
-        //        pgn[Section13] = 0;
-        //        pgn[Section14] = 0;
-        //        pgn[Section15] = 0;
-        //    }
-
-        //    public void MakeCRC()
-        //    {
-        //        crc = 0;
-        //        for (int i = 2; i < pgn.Length - 1; i++)
-        //        {
-        //            crc += pgn[i];
-        //        }
-        //        pgn[pgn.Length - 1] = (byte)crc;
-        //    }
-
-        //    public void Reset()
-        //    {
-        //    }
-        //}
-
-        public class CPGN_E6
-        {
-            /// <summary>
-            /// PGN - 240 - E6
-            /// </summary>
-            public byte[] pgn = new byte[]
-            {
-            0x80, 0x81, 0x7F, 0xE6, 36, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  0xCC
-            };
-            public int numberOfSections = 5; // Number of sections
-            public int actualSectionStates = 6;
-            public int SetPointSectionStates = 7;
-
-            // Section offsets in the PGN
-            public int Section1 = 8;
-            public int Section2 = 10;
-            public int Section3 = 12;
-            public int Section4 = 14;
-            public int Section5 = 16;
-            public int Section6 = 18;
-            public int Section7 = 20;
-            public int Section8 = 22;
-            public int Section9 = 24;
-            public int Section10 = 26;
-            public int Section11 = 28;
-            public int Section12 = 30;
-            public int Section13 = 32;
-            public int Section14 = 34;
-            public int Section15 = 36;
-
-            public CPGN_E6()
-            {
-                
-
-                // Reset sections to default values
-                ResetSections();
-            }
-
-            /// <summary>
-            /// Reset all section widths to 0 within the predefined PGN structure
-            /// </summary>
-            public void ResetSections()
-            {
-                for (int i = 8; i < pgn.Length - 1; i += 2) // Exclude the CRC byte
-                {
-                    pgn[i] = 0;       // LSB
-                    pgn[i + 1] = 0;   // MSB
-                }
-            }
-
-            /// <summary>
-            /// Set section widths based on incoming data
-            /// </summary>
-            /// <param name="incomingData">Incoming data (2 bytes per section width)</param>
-            public void SetSectionsFromIncoming(byte[] incomingData)
-            {
-                if (incomingData.Length % 2 != 0)
-                    throw new ArgumentException("Invalid incoming data length");
-
-                int offsetBase = Section1; // Starting position for Section1 in PGN
-                int sectionsToSet = incomingData.Length / 2;
-
-                for (int i = 0; i < sectionsToSet; i++)
-                {
-                    int offset = offsetBase + i * 2;
-                    if (offset + 1 >= pgn.Length - 1) break; // Prevent overflow, leave CRC intact
-
-                    int sectionWidth = incomingData[i * 2] + (incomingData[i * 2 + 1] << 8);
-
-                    // Set the section width in the PGN
-                    pgn[offset] = (byte)(sectionWidth & 0xFF);        // LSB
-                    pgn[offset + 1] = (byte)((sectionWidth >> 8) & 0xFF); // MSB
-                }
-            }
-
-            /// <summary>
-            /// Compute CRC and update the last byte in the PGN
-            /// </summary>
-            public void MakeCRC()
-            {
-                int crc = 0;
-                for (int i = 2; i < pgn.Length - 1; i++) // CRC calculation excludes the last byte
-                {
-                    crc += pgn[i];
-                }
-                pgn[pgn.Length - 1] = (byte)(crc & 0xFF);
-            }
-        }
+        
+           
 
 
 
@@ -671,9 +517,9 @@ namespace AgOpenGPS
         public CPGN_E5 p_229 = new CPGN_E5();
 
         /// <summary>
-        ///  TC-SC (section control)
+        ///  Plough control (NOT WORKING YET)
         /// </summary>
-        public CPGN_E6 p_240 = new CPGN_E6();
+       // public CPGN_PL p_238 = new CPGN_PL();
 
     }
 }

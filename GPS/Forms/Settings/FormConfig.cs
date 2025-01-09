@@ -125,7 +125,7 @@ namespace AgOpenGPS
             mf.SaveFormGPSWindowSettings();
             
             nudUser1.Value = Properties.Settings.Default.setArdMac_user1;
-            nudPwmSet.Value = Properties.Settings.Default.setArdMac_user8;
+            nudPwmSet.Value = Properties.Settings.Default.setArdMac_pwmSet;
 
             //Plough Control
             chbPloeg.Checked = mf.isPlougOn;
@@ -133,7 +133,7 @@ namespace AgOpenGPS
             //chbBlackWhite.Checked = mf.isBlackWhiteOn;
             chbRotationSensor.Checked = mf.isRotationSensorOn;
             //chbInvert.Checked = mf.isInvertOn;
-            nudDeadzone.Value = Properties.Settings.Default.setArdMac_user5;
+            nudDeadzone.Value = Properties.Settings.Default.setArdMac_deadZone;
             cbManualPloughDir.Checked = Properties.Settings.Default.setPlough_AblineFlipManual;
             cbManualPloughDir.BackgroundImage = Properties.Resources.PlRight;
 
@@ -400,21 +400,21 @@ namespace AgOpenGPS
 
         private void btnSetPwmMax_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.setArdMac_user6 = (byte)nudPwmMax.Value;
+            Properties.Settings.Default.setArdMac_pwmMax = (byte)nudPwmMax.Value;
             SaveSettingsMachine();
             Properties.Settings.Default.Save();
         }
 
         private void btnSetPwmMin_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.setArdMac_user7 = (byte)nudPwmMin.Value;
+            Properties.Settings.Default.setArdMac_pwmMin = (byte)nudPwmMin.Value;
             SaveSettingsMachine();
             Properties.Settings.Default.Save();
         }
 
         private void btnSetPwm_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.setArdMac_user8 = (byte)nudPwmSet.Value;
+            Properties.Settings.Default.setArdMac_pwmSet = (byte)nudPwmSet.Value;
             SaveSettingsMachine();
             Properties.Settings.Default.Save();
 
@@ -480,49 +480,28 @@ namespace AgOpenGPS
 
         public void chbInvert_CheckedChanged(object sender, EventArgs e)
         {
-
-           mf.pC.PloughDirInvert();
-            mf.pC.SaveSettingsPlough();
-
-            //if (mf.isInvertOn) //Rechts
-            //{              
-            //    nudInvert.Value = 1; // van a naar b - trekker rechts wijkt af van lijn ploeg smaller              
-            //    Properties.Settings.Default.setArdMac_user14 = false;
-            //    SaveSettingsMachine();
-            //    Properties.Settings.Default.Save();
-                
-
-            //}
-            //else //Links
-            //{           
-                
-            //    nudInvert.Value = 0;  //van b naar a - trekker rechts wijkt af van lijn ploeg breder              
-            //   Properties.Settings.Default.setArdMac_user14 = true;
-             SaveSettingsMachine();
-            //    Properties.Settings.Default.Save();
-                                
-            //}
+           mf.pC.PloughDirInvert();      
         }
 
         
 
         // Werkt
-        private void cbManualPloughDir_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cbManualPloughDir.Checked == true)
-            {
-                cbManualPloughDir.BackgroundImage = Properties.Resources.PlRight;
-                Properties.Settings.Default.setPlough_AblineFlipManual = false;
-                mf.btnPloughDir.BackgroundImage = Properties.Resources.PlRight;
+        //private void cbManualPloughDir_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    if (cbManualPloughDir.Checked == true)
+        //    {
+        //        cbManualPloughDir.BackgroundImage = Properties.Resources.PlRight;
+        //        Properties.Settings.Default.setPlough_AblineFlipManual = false;
+        //        mf.btnPloughDir.BackgroundImage = Properties.Resources.PlRight;
 
-            }
-            else
-            {
-                cbManualPloughDir.BackgroundImage = Properties.Resources.PlLeft;                    ;
-                Properties.Settings.Default.setPlough_AblineFlipManual = true;
-                mf.btnPloughDir.BackgroundImage = Properties.Resources.PlLeft;
-            }
-        }
+        //    }
+        //    else
+        //    {
+        //        cbManualPloughDir.BackgroundImage = Properties.Resources.PlLeft;                    ;
+        //        Properties.Settings.Default.setPlough_AblineFlipManual = true;
+        //        mf.btnPloughDir.BackgroundImage = Properties.Resources.PlLeft;
+        //    }
+        //}
         #endregion
 
         private void btnRemote_Click(object sender, EventArgs e)

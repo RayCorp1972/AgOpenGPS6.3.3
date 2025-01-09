@@ -250,9 +250,9 @@ namespace AgOpenGPS
 
                     case 0xED: //return from machine module (Plough)
                         {
-                            ploughWidth = (Int16)((data[6] << 8) + data[5]);
-                            ploughMode = data[7];
-                            deadBand = data[13];
+                            pC.ploughWidth = (Int16)((data[6] << 8) + data[5]);
+                            pC.ploughMode = data[7];
+                            pC.deadBand = data[13];
                             //AOG[14] = (uint8_t)pwmMax 
                             //AOG[15] = (uint8_t)pwmMin;
                             //AOG[16] = (uint8_t)pwmSet;

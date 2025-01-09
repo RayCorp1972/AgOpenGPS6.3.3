@@ -3075,72 +3075,72 @@ namespace AgOpenGPS.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("20")]
-        public byte setArdMac_user5 {
+        public byte setArdMac_deadZone {
             get {
-                return ((byte)(this["setArdMac_user5"]));
+                return ((byte)(this["setArdMac_deadZone"]));
             }
             set {
-                this["setArdMac_user5"] = value;
+                this["setArdMac_deadZone"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("6")]
-        public byte setArdMac_user6 {
+        public byte setArdMac_pwmMax {
             get {
-                return ((byte)(this["setArdMac_user6"]));
+                return ((byte)(this["setArdMac_pwmMax"]));
             }
             set {
-                this["setArdMac_user6"] = value;
+                this["setArdMac_pwmMax"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("7")]
-        public byte setArdMac_user7 {
+        public byte setArdMac_pwmMin {
             get {
-                return ((byte)(this["setArdMac_user7"]));
+                return ((byte)(this["setArdMac_pwmMin"]));
             }
             set {
-                this["setArdMac_user7"] = value;
+                this["setArdMac_pwmMin"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("8")]
-        public byte setArdMac_user8 {
+        public byte setArdMac_pwmSet {
             get {
-                return ((byte)(this["setArdMac_user8"]));
+                return ((byte)(this["setArdMac_pwmSet"]));
             }
             set {
-                this["setArdMac_user8"] = value;
+                this["setArdMac_pwmSet"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("9")]
-        public byte setArdMac_user9 {
+        public byte setArdMac_AutoButtonWider {
             get {
-                return ((byte)(this["setArdMac_user9"]));
+                return ((byte)(this["setArdMac_AutoButtonWider"]));
             }
             set {
-                this["setArdMac_user9"] = value;
+                this["setArdMac_AutoButtonWider"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("10")]
-        public byte setArdMac_user10 {
+        public byte setArdMac_AutoButtonSmaller {
             get {
-                return ((byte)(this["setArdMac_user10"]));
+                return ((byte)(this["setArdMac_AutoButtonSmaller"]));
             }
             set {
-                this["setArdMac_user10"] = value;
+                this["setArdMac_AutoButtonSmaller"] = value;
             }
         }
         
@@ -3159,12 +3159,12 @@ namespace AgOpenGPS.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("12")]
-        public byte setArdMac_user12 {
+        public byte setArdMac_ManualWiderSmaller {
             get {
-                return ((byte)(this["setArdMac_user12"]));
+                return ((byte)(this["setArdMac_ManualWiderSmaller"]));
             }
             set {
-                this["setArdMac_user12"] = value;
+                this["setArdMac_ManualWiderSmaller"] = value;
             }
         }
         
@@ -3183,12 +3183,12 @@ namespace AgOpenGPS.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public byte setArdMac_user13 {
+        public byte setArdMac_PloughDirection {
             get {
-                return ((byte)(this["setArdMac_user13"]));
+                return ((byte)(this["setArdMac_PloughDirection"]));
             }
             set {
-                this["setArdMac_user13"] = value;
+                this["setArdMac_PloughDirection"] = value;
             }
         }
         

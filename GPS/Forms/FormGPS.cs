@@ -384,31 +384,7 @@ namespace AgOpenGPS
 
         private void btnPloughControl_Click(object sender, EventArgs e)
         {
-            if (isPlougOn)
-            {
-                // Load images from resources
-                Image plAuto1 = Resources.plAuto1;
-                Image plMan = Resources.plMan;
-
-
-                if (IsSameImage(btnPloughControl.BackgroundImage, plAuto1))
-                {
-                    btnPloughControl.BackgroundImage = plMan;
-                    PlAuto = false;
-
-                    
-
-                }
-
-                else if (IsSameImage(btnPloughControl.BackgroundImage, plMan))
-                {
-
-                    btnPloughControl.BackgroundImage = plAuto1;
-                    PlAuto = true;
-                    p_238.pgn[p_238.user12] = 0;
-                    SendPgnToLoop(p_238.pgn);
-                }
-            }
+            pC.AutoButtonPlough();
         }
 
 
@@ -797,70 +773,13 @@ namespace AgOpenGPS
 
         public void btnInvertDir_Click(object sender, EventArgs e)
         {
-            isInvertOn = true;
-            
-
-            nudlessNumericUpDown1.Value = 0;
-            // Wissel de status van isInvertOn
-            isInvertOn1 = !isInvertOn1;
-
-
-            if (isInvertOn1)
-            {
-                
-                btnInvertDir.Text = "Uit";
-                nudlessNumericUpDown1.Value = 1;
-                Properties.Settings.Default.setArdMac_user14 = true;
-                Properties.Settings.Default.setArdMac_user13 = (byte)nudlessNumericUpDown1.Value;
-                p_238.pgn[p_238.user13] = Properties.Settings.Default.setArdMac_user13;
-                SendPgnToLoop(p_238.pgn);
-               
-
-            }
-            else
-            {
-                btnInvertDir.Text = "Aan";
-                nudlessNumericUpDown1.Value = 0;
-                Properties.Settings.Default.setArdMac_user14 = false;
-                Properties.Settings.Default.setArdMac_user13 = (byte)nudlessNumericUpDown1.Value;
-                p_238.pgn[p_238.user13] = Properties.Settings.Default.setArdMac_user13;
-                SendPgnToLoop(p_238.pgn);
-               
-            }
-            
-
-
-
-
-
-
+            pC.ChangeploughDirection();
         }
 
 
         private void btnPloughDir_Click(object sender, EventArgs e)
         {
-            
-                // Load images from resources
-                Image plLeft = Resources.PlLeft;
-                Image plRight = Resources.PlRight;
-
-
-                if (IsSameImage(btnPloughDir.BackgroundImage, plLeft))
-                {
-                        btnPloughDir.BackgroundImage = plRight;
-                        Properties.Settings.Default.setPlough_AblineFlipManual = false;
-
-
-
-            }
-
-                else if (IsSameImage(btnPloughDir.BackgroundImage, plRight))
-                {
-
-                    btnPloughDir.BackgroundImage = plLeft;
-                    Properties.Settings.Default.setPlough_AblineFlipManual = true;
-            }
-            
+            pC.AblineFlip();
         }
 
         // Return True if a certain percent of a rectangle is shown across the total screen area of all monitors, otherwise return False.
@@ -1010,14 +929,14 @@ namespace AgOpenGPS
         
         public async Task SetPgnWithDelayAsync()
         {
-            p_238.pgn[p_238.user12] = 1;
+            p_238.pgn[p_238.ManualWiderSmaller] = 1;
             SendPgnToLoop(p_238.pgn);
            
 
             // Delay for 1 second (1000 ms)
             await Task.Delay(500);
 
-            p_238.pgn[p_238.user12] = 0;
+            p_238.pgn[p_238.ManualWiderSmaller] = 0;
             SendPgnToLoop(p_238.pgn);
             
         }
@@ -1025,22 +944,7 @@ namespace AgOpenGPS
         public void PwmPloughManualSetPlus()
         {
 
-            if (PlAuto == true)
-            {
-                ploughWidth = Properties.Settings.Default.setArdMac_user1;
-                byte incrementAmount = Properties.Settings.Default.setArdMac_user8; // You can adjust this value to change the increment amount
-                ploughWidth += incrementAmount;
-                Properties.Settings.Default.setArdMac_user1 = (byte)ploughWidth;
-                p_238.pgn[p_238.user1] = (byte)ploughWidth;
-                SendPgnToLoop(p_238.pgn);
-                Properties.Settings.Default.Save();
-            }
-            else
-            {
-                p_238.pgn[p_238.user12] = 1;
-                SendPgnToLoop(p_238.pgn);
-                
-            }
+            pC.PwmPloughManualSetPlus();
 
         }
 
@@ -1048,23 +952,7 @@ namespace AgOpenGPS
         public void PwmPloughManualSetMin()
         {
 
-            if (PlAuto == true)
-            {
-                ploughWidth = Properties.Settings.Default.setArdMac_user1;
-                byte decrementAmount = Properties.Settings.Default.setArdMac_user8;
-                ploughWidth -= decrementAmount;
-                Properties.Settings.Default.setArdMac_user1 = (byte)ploughWidth;
-                p_238.pgn[p_238.user12] = (byte)ploughWidth;
-                SendPgnToLoop(p_238.pgn);
-                Properties.Settings.Default.Save();
-            }
-            else
-            {
-
-                p_238.pgn[p_238.user12] = 2;
-                SendPgnToLoop(p_238.pgn);
-
-            }
+            pC.PwmPloughManualSetMin();
         }
 
        

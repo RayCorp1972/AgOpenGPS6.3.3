@@ -764,34 +764,34 @@
     <Setting Name="setPlough_isInvertOn" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="setArdMac_user5" Type="System.Byte" Scope="User">
+    <Setting Name="setArdMac_deadZone" Type="System.Byte" Scope="User">
       <Value Profile="(Default)">20</Value>
     </Setting>
-    <Setting Name="setArdMac_user6" Type="System.Byte" Scope="User">
+    <Setting Name="setArdMac_pwmMax" Type="System.Byte" Scope="User">
       <Value Profile="(Default)">6</Value>
     </Setting>
-    <Setting Name="setArdMac_user7" Type="System.Byte" Scope="User">
+    <Setting Name="setArdMac_pwmMin" Type="System.Byte" Scope="User">
       <Value Profile="(Default)">7</Value>
     </Setting>
-    <Setting Name="setArdMac_user8" Type="System.Byte" Scope="User">
+    <Setting Name="setArdMac_pwmSet" Type="System.Byte" Scope="User">
       <Value Profile="(Default)">8</Value>
     </Setting>
-    <Setting Name="setArdMac_user9" Type="System.Byte" Scope="User">
+    <Setting Name="setArdMac_AutoButtonWider" Type="System.Byte" Scope="User">
       <Value Profile="(Default)">9</Value>
     </Setting>
-    <Setting Name="setArdMac_user10" Type="System.Byte" Scope="User">
+    <Setting Name="setArdMac_AutoButtonSmaller" Type="System.Byte" Scope="User">
       <Value Profile="(Default)">10</Value>
     </Setting>
     <Setting Name="setArdMac_user11" Type="System.Byte" Scope="User">
       <Value Profile="(Default)">11</Value>
     </Setting>
-    <Setting Name="setArdMac_user12" Type="System.Byte" Scope="User">
+    <Setting Name="setArdMac_ManualWiderSmaller" Type="System.Byte" Scope="User">
       <Value Profile="(Default)">12</Value>
     </Setting>
     <Setting Name="setPlough_AblineFlip" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="setArdMac_user13" Type="System.Byte" Scope="User">
+    <Setting Name="setArdMac_PloughDirection" Type="System.Byte" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="setPlough_Richting" Type="System.Boolean" Scope="User">

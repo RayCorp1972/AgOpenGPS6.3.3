@@ -1429,7 +1429,6 @@
             this.cbManualPloughDir.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.cbManualPloughDir.UseVisualStyleBackColor = false;
             this.cbManualPloughDir.Visible = false;
-            this.cbManualPloughDir.CheckedChanged += new System.EventHandler(this.cbManualPloughDir_CheckedChanged);
             // 
             // label179
             // 
@@ -1784,6 +1783,7 @@
             this.chbInvert.TabIndex = 544;
             this.chbInvert.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.chbInvert.UseVisualStyleBackColor = false;
+            this.chbInvert.Visible = false;
             this.chbInvert.CheckedChanged += new System.EventHandler(this.chbInvert_CheckedChanged);
             // 
             // chbRotationSensor

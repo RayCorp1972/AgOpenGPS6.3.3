@@ -30,13 +30,13 @@ namespace AgOpenGPS
             nudUser1.Value = Properties.Settings.Default.setArdMac_user1;
             nudUser3.Value = 0;
             nudUser4.Value = 0;
-            nudPwmMax.Value = Properties.Settings.Default.setArdMac_user6;
-            nudPwmMin.Value = Properties.Settings.Default.setArdMac_user7;
+            nudPwmMax.Value = Properties.Settings.Default.setArdMac_pwmMax;
+            nudPwmMin.Value = Properties.Settings.Default.setArdMac_pwmMin;
            // nudDeadzone.Value = Properties.Settings.Default.setArdMac_user5;
-            nudPwmSet.Value = Properties.Settings.Default.setArdMac_user8;
+            nudPwmSet.Value = Properties.Settings.Default.setArdMac_pwmSet;
             //nudInvert.Value = Properties.Settings.Default.setArdMac_setting0;
 
-            mf.p_238.pgn[mf.p_238.user2] = 0;
+            //mf.p_238.pgn[mf.p_238.user2] = 0;
 
             btnSendMachinePGN.Focus();
 
@@ -223,7 +223,7 @@ namespace AgOpenGPS
             reset <<= 1;
             reset += 1;
 
-
+               //PGN 238
                 Properties.Settings.Default.setArdMac_setting0 = (byte)sett;
                 Properties.Settings.Default.setArdMac_hydRaiseTime = (byte)nudRaiseTime.Value;
                 Properties.Settings.Default.setArdMac_hydLowerTime = (byte)nudLowerTime.Value;
@@ -232,12 +232,7 @@ namespace AgOpenGPS
                 Properties.Settings.Default.setArdMac_user1 = (byte)(nudUser1.Value);
                 Properties.Settings.Default.setArdMac_user2 = 0;
                 Properties.Settings.Default.setArdMac_user3 = 0;
-                Properties.Settings.Default.setArdMac_user4 = 0;
-                Properties.Settings.Default.setArdMac_user5 = (byte)nudDeadzone.Value; // Deadzone
-                Properties.Settings.Default.setArdMac_user6 = (byte)nudPwmMax.Value; // Pwm max
-                Properties.Settings.Default.setArdMac_user7 = (byte)nudPwmMin.Value; // Pwm Min
-                Properties.Settings.Default.setArdMac_user8 = (byte)nudPwmSet.Value; // PwmSet
-            
+                Properties.Settings.Default.setArdMac_user4 = 0;             
 
                 Properties.Settings.Default.setVehicle_hydraulicLiftLookAhead = (double)nudHydLiftLookAhead.Value;
                 mf.vehicle.hydLiftLookAheadTime = Properties.Settings.Default.setVehicle_hydraulicLiftLookAhead;
@@ -245,30 +240,31 @@ namespace AgOpenGPS
                 mf.p_238.pgn[mf.p_238.set0] = (byte)sett;
                 mf.p_238.pgn[mf.p_238.raiseTime] = (byte)nudRaiseTime.Value;
                 mf.p_238.pgn[mf.p_238.lowerTime] = (byte)nudLowerTime.Value;
-
                 mf.p_238.pgn[mf.p_238.user1] = (byte)(nudUser1.Value);                        //Target width cm 
-                mf.p_238.pgn[mf.p_238.user5] = (byte)nudDeadzone.Value;
-                mf.p_238.pgn[mf.p_238.user6] = (byte)nudPwmMax.Value;
-                mf.p_238.pgn[mf.p_238.user7] = (byte)nudPwmMin.Value;
-                mf.p_238.pgn[mf.p_238.user8] = (byte)nudPwmSet.Value;
+
+              
+
+          
+                mf.p_238.pgn[mf.p_238.DeadZone] = (byte)nudDeadzone.Value;
+                mf.p_238.pgn[mf.p_238.PwmMax] = (byte)nudPwmMax.Value;
+                mf.p_238.pgn[mf.p_238.PwmMin] = (byte)nudPwmMin.Value;
+                mf.p_238.pgn[mf.p_238.PwmSet] = (byte)nudPwmSet.Value;
             //mf.p_238.pgn[mf.p_238.set0] = (byte)nudInvert.Value;
-                mf.p_238.pgn[mf.p_238.user13] = Properties.Settings.Default.setArdMac_user8;
+            // mf.p_238.pgn[mf.p_238.PloughDirection] = Properties.Settings.Default.setArdMac_pwmSet;
 
 
-            int calValue = (int)nudUser4.Value;
-            
-                mf.p_238.pgn[mf.p_238.user3] = (byte)calValue;                      //Calabration value L
-                mf.p_238.pgn[mf.p_238.user4] = (byte)(calValue >> 8);               //Calabration value H
+                 int calValue = (int)nudUser4.Value;
+
+                 mf.p_238.pgn[mf.p_238.user3] = (byte)calValue;                      //Calabration value L
+                 mf.p_238.pgn[mf.p_238.user4] = (byte)(calValue >> 8);               //Calabration value H
+
+                mf.SendPgnToLoop(mf.p_238.pgn);
+                mf.p_238.pgn[mf.p_238.user2] = 0;
 
 
 
 
 
-                 mf.SendPgnToLoop(mf.p_238.pgn);
-                pboxSendMachine.Visible = false;
-                mf.p_238.pgn[mf.p_238.user2] = 0;                                   //mf.p_238.pgn[mf.p_238.user2] = (byte)nudUser2.Value;              //Calabration instruction
-
-            
         }
 
         private void btnSendMachinePGN_Click(object sender, EventArgs e)
