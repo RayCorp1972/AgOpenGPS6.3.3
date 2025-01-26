@@ -125,28 +125,14 @@ namespace AgOpenGPS
                 }
             }
 
-            //if (abShiftLeftHigh)
-            //{
-            //    MessageBox.Show("High");
-            //   // mf.Cr.AblineSkipLeft(); 
-            //}
-            //else
-            //{
-            //    MessageBox.Show("LOW");
-            //}
-
-
+          
             if (abShiftLeftHigh == 0)
             {
               
                 mf.Cr.AblineSkipLeft();
                
             }
-            //else if (abShiftLeftHigh == 6)
-            //{
-            //    mf.lblSpeed.Text = "LL";
-            //    // mf.Cr.AblineSkipLeft();
-            //}
+           
 
 
             if (abShiftRightHigh == 0)
@@ -155,16 +141,7 @@ namespace AgOpenGPS
                 mf.Cr.AblineSkipRight();
 
             }
-            //else if (abShiftRightHigh == 6)
-            //{
-               
-            //}
-
-
-
-
-
-
+           
         }
     }
 }
