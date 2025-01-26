@@ -58,7 +58,7 @@ namespace AgOpenGPS
             /// <summary>
             /// From steer module
             /// </summary>
-            public byte[] pgn = new byte[] { 0x80, 0x81, 0x7f, 0xFD, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0xCC };
+            public byte[] pgn = new byte[] { 0x80, 0x81, 0x7f, 0xFD, 8, 0, 0, 0, 0, 0, 0, 0, 0,  0xCC };
             public int actualLo = 5;
             public int actualHi = 6;
             public int headLo = 7;
@@ -67,6 +67,8 @@ namespace AgOpenGPS
             public int rollHi = 10;
             public int switchStatus = 11;
             public int pwm = 12;
+            public int abShiftLeft = 13;
+            //public int abShiftRight = 14;
 
             public void Reset()
             {
@@ -199,7 +201,7 @@ namespace AgOpenGPS
             /// PGN - 238 - EE 
             /// raiseTime=5  lowerTime=6   enableHyd= 7 set0 = 8
             /// </summary>
-            public byte[] pgn = new byte[] { 0x80, 0x81, 0x7f, 0xEE, 8, 0, 0, 0, 0, 0, 0, 0, 0,  0xCC };
+            public byte[] pgn = new byte[] { 0x80, 0x81, 0x7f, 0xEE, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0xCC };
             public int raiseTime = 5;
             public int lowerTime = 6;
             public int enableHyd = 7;
@@ -208,14 +210,14 @@ namespace AgOpenGPS
             public int user2 = 10;      //Calabration command instrction                                   
             public int user3 = 11;      //Set value L
             public int user4 = 12;      //Set value H
-            public int DeadZone = 5;      //DeadZone
-            public int PwmMax = 6;      //Pwm High
-            public int PwmMin = 7;      //Pwm Low
-            public int PwmSet = 8;      //Pwm / Black-White
-            public int AutoButtonWider = 9;      //Auto + Button wider
-            public int AutoButtonSmaller = 9;      //Auto - button smaller
-            public int ManualWiderSmaller = 10;      //Manual wider/smaller
-            public int PloughDirection = 11;      //ploughdirection 
+            public int DeadZone = 13;      //DeadZone
+            public int PwmMax = 14;      //Pwm High
+            public int PwmMin = 15;      //Pwm Low
+            public int PwmSet = 16;      //Pwm / Black-White
+            public int AutoButtonWider = 17;      //Auto + Button wider
+            public int AutoButtonSmaller = 18;      //Auto - button smaller
+            public int ManualWiderSmaller = 19;      //Manual wider/smaller
+            public int PloughDirection = 20;      //ploughdirection 
 
 
             // PGN  - 127.239 0x7FEF

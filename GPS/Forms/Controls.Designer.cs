@@ -1042,12 +1042,12 @@ namespace AgOpenGPS
             trk.SnapToPivot();
         }
 
-        private void btnAdjRight_Click(object sender, EventArgs e)
+        public void btnAdjRight_Click(object sender, EventArgs e)
         {
             trk.NudgeTrack(Properties.Settings.Default.setAS_snapDistance*0.01);
         }
 
-        private void btnAdjLeft_Click(object sender, EventArgs e)
+        public void btnAdjLeft_Click(object sender, EventArgs e)
         {
             trk.NudgeTrack(-Properties.Settings.Default.setAS_snapDistance*0.01);
         }

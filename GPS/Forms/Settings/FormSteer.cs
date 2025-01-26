@@ -342,6 +342,7 @@ namespace AgOpenGPS
                     lblPercentFS.Text = ((int)((double)mf.mc.sensorData * 0.3921568627)).ToString() + "%";
                 else
                     lblPercentFS.Text = mf.mc.sensorData.ToString();
+                    
             }
         }
 

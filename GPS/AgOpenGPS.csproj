@@ -86,6 +86,9 @@
   <PropertyGroup>
     <SignManifests>true</SignManifests>
   </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ColorPicker, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -210,6 +213,7 @@
     </Compile>
     <Compile Include="Classes\CTool.cs" />
     <Compile Include="Classes\FileSyncProgram.cs" />
+    <Compile Include="Classes\CRemoteControl.cs" />
     <Compile Include="Forms\Field\FormSyncData.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -1195,7 +1195,7 @@
             this.steerWizardMenuItem.Image = global::AgOpenGPS.Properties.Resources.AutoSteerOn;
             this.steerWizardMenuItem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.steerWizardMenuItem.Name = "steerWizardMenuItem";
-            this.steerWizardMenuItem.Size = new System.Drawing.Size(301, 44);
+            this.steerWizardMenuItem.Size = new System.Drawing.Size(305, 44);
             this.steerWizardMenuItem.Text = "Steer Wizard";
             this.steerWizardMenuItem.Click += new System.EventHandler(this.steerWizardMenuItem_Click);
             // 
@@ -1215,7 +1215,7 @@
             // 
             this.steerChartToolStripMenuItem.Image = global::AgOpenGPS.Properties.Resources.AutoSteerOn;
             this.steerChartToolStripMenuItem.Name = "steerChartToolStripMenuItem";
-            this.steerChartToolStripMenuItem.Size = new System.Drawing.Size(322, 44);
+            this.steerChartToolStripMenuItem.Size = new System.Drawing.Size(326, 44);
             this.steerChartToolStripMenuItem.Text = "Steer Chart";
             this.steerChartToolStripMenuItem.Click += new System.EventHandler(this.toolStripAutoSteerChart_Click);
             // 
@@ -1223,7 +1223,7 @@
             // 
             this.headingChartToolStripMenuItem.Image = global::AgOpenGPS.Properties.Resources.ConS_SourcesHeading;
             this.headingChartToolStripMenuItem.Name = "headingChartToolStripMenuItem";
-            this.headingChartToolStripMenuItem.Size = new System.Drawing.Size(322, 44);
+            this.headingChartToolStripMenuItem.Size = new System.Drawing.Size(326, 44);
             this.headingChartToolStripMenuItem.Text = "Heading Chart";
             this.headingChartToolStripMenuItem.Click += new System.EventHandler(this.headingChartToolStripMenuItem_Click);
             // 
@@ -1231,14 +1231,14 @@
             // 
             this.xTEChartToolStripMenuItem.Image = global::AgOpenGPS.Properties.Resources.AutoManualIsAuto;
             this.xTEChartToolStripMenuItem.Name = "xTEChartToolStripMenuItem";
-            this.xTEChartToolStripMenuItem.Size = new System.Drawing.Size(322, 44);
+            this.xTEChartToolStripMenuItem.Size = new System.Drawing.Size(326, 44);
             this.xTEChartToolStripMenuItem.Text = "XTE Chart";
             this.xTEChartToolStripMenuItem.Click += new System.EventHandler(this.xTEChartToolStripMenuItem_Click);
             // 
             // rollCheckToolStripMenuItem
             // 
             this.rollCheckToolStripMenuItem.Name = "rollCheckToolStripMenuItem";
-            this.rollCheckToolStripMenuItem.Size = new System.Drawing.Size(322, 44);
+            this.rollCheckToolStripMenuItem.Size = new System.Drawing.Size(326, 44);
             this.rollCheckToolStripMenuItem.Text = "Roll Check";
             this.rollCheckToolStripMenuItem.Click += new System.EventHandler(this.correctionToolStrip_Click);
             // 
@@ -1305,7 +1305,7 @@
             this.panelSim.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.panelSim.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 58F));
             this.panelSim.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.panelSim.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 139F));
+            this.panelSim.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 163F));
             this.panelSim.Controls.Add(this.btnSpeedDn, 5, 0);
             this.panelSim.Controls.Add(this.btnSimSpeedUp, 7, 0);
             this.panelSim.Controls.Add(this.btnResetSim, 0, 0);
@@ -1330,7 +1330,7 @@
             this.btnSpeedDn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSpeedDn.Location = new System.Drawing.Point(404, 4);
             this.btnSpeedDn.Name = "btnSpeedDn";
-            this.btnSpeedDn.Size = new System.Drawing.Size(72, 34);
+            this.btnSpeedDn.Size = new System.Drawing.Size(60, 34);
             this.btnSpeedDn.TabIndex = 533;
             this.btnSpeedDn.UseVisualStyleBackColor = false;
             this.btnSpeedDn.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnSpeedDn_MouseDown);
@@ -1343,9 +1343,9 @@
             this.btnSimSpeedUp.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnSimSpeedUp.FlatAppearance.BorderSize = 0;
             this.btnSimSpeedUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSimSpeedUp.Location = new System.Drawing.Point(542, 4);
+            this.btnSimSpeedUp.Location = new System.Drawing.Point(530, 4);
             this.btnSimSpeedUp.Name = "btnSimSpeedUp";
-            this.btnSimSpeedUp.Size = new System.Drawing.Size(72, 34);
+            this.btnSimSpeedUp.Size = new System.Drawing.Size(60, 34);
             this.btnSimSpeedUp.TabIndex = 532;
             this.btnSimSpeedUp.UseVisualStyleBackColor = false;
             this.btnSimSpeedUp.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnSimSpeedUp_MouseDown);
@@ -1359,7 +1359,7 @@
             this.btnSimSetSpeedToZero.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSimSetSpeedToZero.Font = new System.Drawing.Font("Tahoma", 9.75F);
             this.btnSimSetSpeedToZero.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSimSetSpeedToZero.Location = new System.Drawing.Point(483, 4);
+            this.btnSimSetSpeedToZero.Location = new System.Drawing.Point(471, 4);
             this.btnSimSetSpeedToZero.Name = "btnSimSetSpeedToZero";
             this.btnSimSetSpeedToZero.Size = new System.Drawing.Size(51, 34);
             this.btnSimSetSpeedToZero.TabIndex = 453;
@@ -1376,7 +1376,7 @@
             this.btnSimReverseDirection.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSimReverseDirection.Font = new System.Drawing.Font("Tahoma", 9.75F);
             this.btnSimReverseDirection.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSimReverseDirection.Location = new System.Drawing.Point(670, 4);
+            this.btnSimReverseDirection.Location = new System.Drawing.Point(658, 4);
             this.btnSimReverseDirection.Name = "btnSimReverseDirection";
             this.btnSimReverseDirection.Size = new System.Drawing.Size(35, 34);
             this.btnSimReverseDirection.TabIndex = 537;
@@ -3096,7 +3096,6 @@
         private System.Windows.Forms.Button btnSection3Man;
         private System.Windows.Forms.Button btnSection4Man;
         private System.Windows.Forms.Button btnSection5Man;
-        private System.Windows.Forms.Label lblSpeed;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripFlag;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFlagRed;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuFlagGrn;
@@ -3265,6 +3264,7 @@
         public System.Windows.Forms.Button btnInvertDir;
         public System.Windows.Forms.Button btnPloughDir;
         public NudlessNumericUpDown nudlessNumericUpDown1;
+        public System.Windows.Forms.Label lblSpeed;
     }
 }
 

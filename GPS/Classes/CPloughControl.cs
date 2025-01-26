@@ -28,8 +28,9 @@ namespace AgOpenGPS
         public int steerModuleConnectedCounter = 0;
         public bool plusPressed = false;
         public bool minPressed = false;
-       
 
+        Image plLeft = Resources.PlLeft;
+        Image plRight = Resources.PlRight;
         private readonly FormGPS mf;
 
         public CPloughControl(FormGPS _f)
@@ -53,7 +54,7 @@ namespace AgOpenGPS
             }
             else //Left
             {
-               // nudInvert.Value = 0;  //van b naar a - trekker rechts wijkt af van lijn ploeg breder              
+               //nudInvert.Value = 0;  //van b naar a - trekker rechts wijkt af van lijn ploeg breder              
                 Properties.Settings.Default.setArdMac_user14 = true;
                 SaveSettingsPlough();
                 Properties.Settings.Default.Save();
@@ -98,7 +99,8 @@ namespace AgOpenGPS
             else if (ploughMode == 10) mf.font.DrawText(center + 10, 270, "Breder (M)", 1);
             else if (ploughMode == 11) mf.font.DrawText(center + 10, 270, "Smaller (M)", 1);
             else if (ploughMode == 12) mf.font.DrawText(center + 10, 270, "Stop (M)", 1);
-            mf.font.DrawText(center + 25, 310, "" + Wider + "     " + Narrow, 0.8);
+            else if (ploughMode == 13) mf.font.DrawText(center + 10, 270, "Geeft signaal", 1);
+            mf.font.DrawText(center + 25, 310, "" + Wider + "   " + Narrow, 0.8);
             PlougPwmMinus();
             PlougPwmPlus();
             Omkeer();
@@ -113,15 +115,19 @@ namespace AgOpenGPS
 
             int center = mf.oglMain.Width / -2 + 10;
 
-            if (Properties.Settings.Default.setPlough_AblineFlip == false)
+            if (Properties.Settings.Default.setPlough_AblineFlip == false )
             {
                 GL.Color3(0.9652f, 0.9752f, 0.1f); //Yellow
-                mf.font.DrawText(center + 10, 410, invert + ": " + "L", 0.8);
+                mf.font.DrawText(center + 10, 410, invert + ": " + "L", 1);
+                mf.btnPloughDir.BackgroundImage = plRight;
+
             }
             else
             {
                 GL.Color3(0.9652f, 0.9752f, 0.1f); //Yellow
-                mf.font.DrawText(center + 10, 410, invert + ": " + "R", 0.8);
+                mf.font.DrawText(center + 10, 410, invert + ": " + "R", 1);
+                mf.btnPloughDir.BackgroundImage = plLeft;
+
             }
             if (Properties.Settings.Default.setArdMac_user14 == true)
             {
@@ -174,16 +180,7 @@ namespace AgOpenGPS
         public void SaveSettingsPlough() //wat kunnen we hiermee?
 
         {  
-            mf.p_238.pgn[mf.p_238.user1] = (byte)Properties.Settings.Default.setArdMac_user1;                       //Target width cm 
-            mf.p_238.pgn[mf.p_238.DeadZone] = (byte)Properties.Settings.Default.setArdMac_deadZone;
-            mf.p_238.pgn[mf.p_238.PwmMax] = (byte)Properties.Settings.Default.setArdMac_pwmMax; 
-            mf.p_238.pgn[mf.p_238.PwmMin] = (byte)Properties.Settings.Default.setArdMac_pwmMin; 
-            mf.p_238.pgn[mf.p_238.PwmSet] = (byte)Properties.Settings.Default.setArdMac_pwmSet;           
-            mf.p_238.pgn[mf.p_238.PloughDirection] = Properties.Settings.Default.setArdMac_PloughDirection;
 
-            
-            mf.SendPgnToLoop(mf.p_238.pgn);
-            mf.p_238.pgn[mf.p_238.user2] = 0;                                  
         }
 
         public void PwmPloughManualSetPlus()
@@ -232,33 +229,60 @@ namespace AgOpenGPS
        
         public void ChangeploughDirection()
         {
-           mf.nudlessNumericUpDown1.Value = 0;
-            // Wissel de status van isInvertOn
+
+            int set = 1;
+            int reset = 2046;
+            int sett = 0;
+
+            if (mf.isInvertOn) sett |= set;
+            else sett &= reset;
+
+            set <<= 1;
+            reset <<= 1;
+            reset += 1;
+           
             isInvertOn1 = !isInvertOn1;
 
 
-            if (isInvertOn1)
+            if (mf.isInvertOn1)
             {
-
                 mf.btnInvertDir.Text = "Uit";
-                mf.nudlessNumericUpDown1.Value = 1;
                 Properties.Settings.Default.setArdMac_user14 = true;
-                Properties.Settings.Default.setArdMac_PloughDirection = (byte)mf.nudlessNumericUpDown1.Value;
-                mf.p_238.pgn[mf.p_238.PloughDirection] = Properties.Settings.Default.setArdMac_PloughDirection;
+                sett |= set;
+                Properties.Settings.Default.setArdMac_setting0 = (byte)sett;
+                mf.p_238.pgn[mf.p_238.set0] = (byte)sett;
                 mf.SendPgnToLoop(mf.p_238.pgn);
 
-
             }
+
             else
             {
                 mf.btnInvertDir.Text = "Aan";
-                mf.nudlessNumericUpDown1.Value = 0;
                 Properties.Settings.Default.setArdMac_user14 = false;
-                Properties.Settings.Default.setArdMac_PloughDirection = (byte)mf.nudlessNumericUpDown1.Value;
-                mf.p_238.pgn[mf.p_238.PloughDirection] = Properties.Settings.Default.setArdMac_PloughDirection;
+                sett &= reset;
+                Properties.Settings.Default.setArdMac_setting0 = (byte)sett;
+                mf.p_238.pgn[mf.p_238.set0] = (byte)sett;
                 mf.SendPgnToLoop(mf.p_238.pgn);
-                mf.isInvertOn = false;
             }
+            //     mf.btnInvertDir.Text = "Uit";
+            //     mf.nudlessNumericUpDown1.Value = 0;
+            //     Properties.Settings.Default.setArdMac_user14 = true;
+            //     Properties.Settings.Default.setArdMac_PloughDirection = (byte)mf.nudlessNumericUpDown1.Value;
+            //     //mf.p_238.pgn[mf.p_238.PloughDirection] = (byte)mf.nudlessNumericUpDown1.Value;
+            //     //mf.SendPgnToLoop(mf.p_238.pgn);
+
+
+            // }
+            // else
+            // {
+            //     mf.btnInvertDir.Text = "Aan";
+            //     mf.nudlessNumericUpDown1.Value = 1;
+            //     Properties.Settings.Default.setArdMac_user14 = false;
+            //     Properties.Settings.Default.setArdMac_PloughDirection = (byte)mf.nudlessNumericUpDown1.Value;
+            //     //mf.p_238.pgn[mf.p_238.PloughDirection] = (byte)mf.nudlessNumericUpDown1.Value;
+            //     //mf.SendPgnToLoop(mf.p_238.pgn);
+            //    // mf.isInvertOn = false;
+            // }
 
 
         }
@@ -276,7 +300,8 @@ namespace AgOpenGPS
                 {
                     mf.btnPloughControl.BackgroundImage = plMan;
                     mf.PlAuto = false;
-
+                    mf.p_238.pgn[mf.p_238.ManualWiderSmaller] = 1;
+                    mf.SendPgnToLoop(mf.p_238.pgn);
 
 
                 }

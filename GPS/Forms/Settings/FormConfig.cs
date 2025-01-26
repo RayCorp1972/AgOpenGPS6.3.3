@@ -394,7 +394,7 @@ namespace AgOpenGPS
         private void btnSetDeadzone_Click(object sender, EventArgs e)
         {
             SaveSettingsMachine();
-
+           
             Properties.Settings.Default.Save();
         }
 
@@ -427,7 +427,7 @@ namespace AgOpenGPS
 
             Properties.Settings.Default.Save();
 
-            mf.TimedMessageBox(1000, gStr.gsMachinePort, gStr.gsSentToMachineModule);
+           // mf.TimedMessageBox(1000, gStr.gsMachinePort, gStr.gsSentToMachineModule);
 
 
         }
@@ -480,7 +480,7 @@ namespace AgOpenGPS
 
         public void chbInvert_CheckedChanged(object sender, EventArgs e)
         {
-           mf.pC.PloughDirInvert();      
+        
         }
 
         
@@ -523,6 +523,18 @@ namespace AgOpenGPS
         private void chbPloeg_CheckedChanged(object sender, EventArgs e)
         {
            
+        }
+
+        private void btnSetPwmMin_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void EasyModeBtn_Click(object sender, EventArgs e)
+        {
+            
+
+
         }
     }
 

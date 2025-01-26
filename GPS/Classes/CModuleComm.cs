@@ -1,4 +1,6 @@
-﻿namespace AgOpenGPS
+﻿using System.Windows.Forms;
+using System;
+namespace AgOpenGPS
 {
     public class CModuleComm
     {
@@ -7,7 +9,7 @@
 
         //Critical Safety Properties
         public bool isOutOfBounds = true;
-
+       
         // ---- Section control switches to AOG  ---------------------------------------------------------
         //PGN - 32736 - 127.249 0x7FF9
         public byte[] ss = new byte[9];
@@ -33,8 +35,9 @@
         public bool isWorkSwitchActiveLow, isRemoteWorkSystemOn, isWorkSwitchEnabled,
             isWorkSwitchManualSections, isSteerWorkSwitchManualSections, isSteerWorkSwitchEnabled;
 
-        public bool workSwitchHigh, oldWorkSwitchHigh, steerSwitchHigh, oldSteerSwitchHigh, oldSteerSwitchRemote;
-
+        public bool workSwitchHigh, oldWorkSwitchHigh, steerSwitchHigh, oldSteerSwitchHigh, oldSteerSwitchRemote, abShiftLeftLoW;
+        public int abShiftLeftHigh = 0;
+        public int abShiftRightHigh = 0;
         //constructor
         public CModuleComm(FormGPS _f)
         {
@@ -44,11 +47,17 @@
 
             //does a low, grounded out, mean on
             isWorkSwitchActiveLow = true;
+
+            
+
+
+
         }
 
         //Called from "OpenGL.Designer.cs" when requied
         public void CheckWorkAndSteerSwitch()
         {
+            
             //AutoSteerAuto button enable - Ray Bear inspired code - Thx Ray!
             if (mf.ahrs.isAutoSteerAuto && steerSwitchHigh != oldSteerSwitchRemote)
             {
@@ -115,6 +124,47 @@
                     }
                 }
             }
+
+            //if (abShiftLeftHigh)
+            //{
+            //    MessageBox.Show("High");
+            //   // mf.Cr.AblineSkipLeft(); 
+            //}
+            //else
+            //{
+            //    MessageBox.Show("LOW");
+            //}
+
+
+            if (abShiftLeftHigh == 0)
+            {
+              
+                mf.Cr.AblineSkipLeft();
+               
+            }
+            //else if (abShiftLeftHigh == 6)
+            //{
+            //    mf.lblSpeed.Text = "LL";
+            //    // mf.Cr.AblineSkipLeft();
+            //}
+
+
+            if (abShiftRightHigh == 0)
+            {
+                
+                mf.Cr.AblineSkipRight();
+
+            }
+            //else if (abShiftRightHigh == 6)
+            //{
+               
+            //}
+
+
+
+
+
+
         }
     }
 }

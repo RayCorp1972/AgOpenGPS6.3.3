@@ -563,6 +563,8 @@
             this.btnOK = new System.Windows.Forms.Button();
             this.label22 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.EasyModeBtn = new System.Windows.Forms.CheckBox();
+            this.easymodelabel = new System.Windows.Forms.Label();
             this.panelLeftSideMenu.SuspendLayout();
             this.panelArduinoSubMenu.SuspendLayout();
             this.panelDataSourcesSubMenu.SuspendLayout();
@@ -1503,6 +1505,7 @@
             this.btnSetPwmMin.TabIndex = 534;
             this.btnSetPwmMin.Text = "Set";
             this.btnSetPwmMin.UseVisualStyleBackColor = true;
+            this.btnSetPwmMin.Click += new System.EventHandler(this.btnSetPwmMin_Click_1);
             // 
             // btnSetPwmMax
             // 
@@ -8619,6 +8622,8 @@
             // tabDisplay
             // 
             this.tabDisplay.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tabDisplay.Controls.Add(this.easymodelabel);
+            this.tabDisplay.Controls.Add(this.EasyModeBtn);
             this.tabDisplay.Controls.Add(this.label159);
             this.tabDisplay.Controls.Add(this.btnRemote);
             this.tabDisplay.Controls.Add(this.label79);
@@ -9921,6 +9926,39 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // EasyModeBtn
+            // 
+            this.EasyModeBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.EasyModeBtn.Appearance = System.Windows.Forms.Appearance.Button;
+            this.EasyModeBtn.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.EasyModeBtn.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.EasyModeBtn.FlatAppearance.BorderSize = 2;
+            this.EasyModeBtn.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
+            this.EasyModeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.EasyModeBtn.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EasyModeBtn.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.EasyModeBtn.Image = global::AgOpenGPS.Properties.Resources.ConD_ExtraGuides;
+            this.EasyModeBtn.Location = new System.Drawing.Point(680, 276);
+            this.EasyModeBtn.Name = "EasyModeBtn";
+            this.EasyModeBtn.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.EasyModeBtn.Size = new System.Drawing.Size(100, 69);
+            this.EasyModeBtn.TabIndex = 534;
+            this.EasyModeBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.EasyModeBtn.UseVisualStyleBackColor = false;
+            this.EasyModeBtn.Click += new System.EventHandler(this.EasyModeBtn_Click);
+           
+            // 
+            // easymodelabel
+            // 
+            this.easymodelabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.easymodelabel.BackColor = System.Drawing.Color.Transparent;
+            this.easymodelabel.ForeColor = System.Drawing.Color.Black;
+            this.easymodelabel.Location = new System.Drawing.Point(684, 349);
+            this.easymodelabel.Name = "easymodelabel";
+            this.easymodelabel.Size = new System.Drawing.Size(90, 18);
+            this.easymodelabel.TabIndex = 535;
+            this.easymodelabel.Text = "EasyMode";
+            // 
             // FormConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -10625,5 +10663,7 @@
         private System.Windows.Forms.CheckBox cbManualPloughDir;
         private System.Windows.Forms.Label label160;
         public System.Windows.Forms.CheckBox chbInvert;
+        private System.Windows.Forms.Label easymodelabel;
+        private System.Windows.Forms.CheckBox EasyModeBtn;
     }
 }

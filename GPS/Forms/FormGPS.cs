@@ -206,6 +206,11 @@ namespace AgOpenGPS
         public CPloughControl pC;
 
         /// <summary>
+        /// Remotecontrol
+        /// </summary>
+        public CRemoteControl Cr;
+
+        /// <summary>
         /// Just the tool attachment that includes the sections
         /// </summary>
         public CTool tool;
@@ -307,6 +312,8 @@ namespace AgOpenGPS
             pC = new CPloughControl(this);
 
 
+            Cr = new CRemoteControl(this);
+
             //create a new section and set left and right positions
             //created whether used or not, saves restarting program
 
@@ -407,7 +414,7 @@ namespace AgOpenGPS
 
         private void FormGPS_Load(object sender, EventArgs e)
         {
-            
+            //Console.WriteLine("Program started!");
 
 
             btnInvertDir.BackgroundImage = Properties.Resources.Invert;
@@ -773,6 +780,7 @@ namespace AgOpenGPS
 
         public void btnInvertDir_Click(object sender, EventArgs e)
         {
+            isInvertOn = true;
             pC.ChangeploughDirection();
         }
 

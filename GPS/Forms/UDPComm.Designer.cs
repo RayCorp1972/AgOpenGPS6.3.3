@@ -232,6 +232,11 @@ namespace AgOpenGPS
                             //switch status
                             mc.workSwitchHigh = (data[11] & 1) == 1;
                             mc.steerSwitchHigh = (data[11] & 2) == 2;
+                            
+                            //abLine nudge status
+                            mc.abShiftLeftHigh = data[13];
+                            //Console.WriteLine($"abShiftLeftHigh: {mc.workSwitchHigh}");
+
 
                             //the pink steer dot reset
                             steerModuleConnectedCounter = 0;
@@ -253,12 +258,7 @@ namespace AgOpenGPS
                             pC.ploughWidth = (Int16)((data[6] << 8) + data[5]);
                             pC.ploughMode = data[7];
                             pC.deadBand = data[13];
-                            //AOG[14] = (uint8_t)pwmMax 
-                            //AOG[15] = (uint8_t)pwmMin;
-                            //AOG[16] = (uint8_t)pwmSet;
-                            //AOG[17] = (uint8_t)pwmManualPlus;
-                            //AOG[18] = (uint8_t)pwmManualMin;
-                        }
+                        } 
                         break;
 
                     case 250:
@@ -266,7 +266,10 @@ namespace AgOpenGPS
                             if (data.Length != 14)
                                 break;
                             mc.sensorData = data[5];
+                            mc.abShiftLeftHigh = data[6];
+                            mc.abShiftRightHigh = data[7];
                             break;
+                            
                         }
 
                     #region Remote Switches

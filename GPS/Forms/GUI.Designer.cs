@@ -391,13 +391,13 @@ namespace AgOpenGPS
                 //the main formgps window
                 if (isMetric)  //metric or imperial
                 {
-                    lblSpeed.Text = SpeedKPH;
+                   lblSpeed.Text = SpeedKPH;
                     //btnContour.Text = XTE; //cross track error
 
                 }
                 else  //Imperial Measurements
                 {
-                    lblSpeed.Text = SpeedMPH;
+                   lblSpeed.Text = SpeedMPH;
                     //btnContour.Text = InchXTE; //cross track error
                 }
 

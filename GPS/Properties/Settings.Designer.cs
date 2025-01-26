@@ -3086,7 +3086,7 @@ namespace AgOpenGPS.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("6")]
+        [global::System.Configuration.DefaultSettingValueAttribute("255")]
         public byte setArdMac_pwmMax {
             get {
                 return ((byte)(this["setArdMac_pwmMax"]));
@@ -3098,7 +3098,7 @@ namespace AgOpenGPS.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("7")]
+        [global::System.Configuration.DefaultSettingValueAttribute("255")]
         public byte setArdMac_pwmMin {
             get {
                 return ((byte)(this["setArdMac_pwmMin"]));
