@@ -84,7 +84,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <NoWin32Manifest>true</NoWin32Manifest>
@@ -195,6 +195,7 @@
     <Compile Include="Classes\CSim.cs" />
     <Compile Include="Classes\CTrack.cs" />
     <Compile Include="Classes\CTram.cs" />
+    <Compile Include="Classes\CTreePt.cs" />
     <Compile Include="Classes\CYouTurn.cs" />
     <Compile Include="Classes\CFlag.cs" />
     <Compile Include="Classes\CABLine.cs" />
@@ -273,6 +274,12 @@
     </Compile>
     <Compile Include="Forms\FormMap.Designer.cs">
       <DependentUpon>FormMap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormTreePlant.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormTreePlant.designer.cs">
+      <DependentUpon>FormTreePlant.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormYes.cs">
       <SubType>Form</SubType>
@@ -750,6 +757,9 @@
     <EmbeddedResource Include="Forms\FormMap.resx">
       <DependentUpon>FormMap.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormTreePlant.resx">
+      <DependentUpon>FormTreePlant.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormYes.resx">
       <DependentUpon>FormYes.cs</DependentUpon>
     </EmbeddedResource>
@@ -987,7 +997,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="AgOpenGPS_TemporaryKey.pfx" />
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
@@ -1055,6 +1064,7 @@
     <None Include="Resources\data-sync-icon-vector-37625019-removebg-preview1.png" />
     <None Include="Resources\data-sync-icon-vector-37625019-removebg-preview-removebg-preview.png" />
     <None Include="btnImages\Images\t.png" />
+    <None Include="Resources\clearly.wav" />
     <Content Include="Resources\TF012.WAV" />
     <None Include="Resources\SectionOn.wav" />
     <None Include="Resources\SectionOff.wav" />

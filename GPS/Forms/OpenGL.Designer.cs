@@ -10,6 +10,9 @@ namespace AgOpenGPS
     {
         //extracted Near, Far, Right, Left clipping planes of frustum
         public double[] frustum = new double[24];
+        // tree
+        public vec2 lasttree = new vec2(0, 0);
+
 
         private bool isInit = false;
         private double fovy = 0.7;
@@ -299,9 +302,12 @@ namespace AgOpenGPS
                             GL.Color3(0.960f, 0.96232f, 0.30f);
                             bnd.bndList[0].hdLine.DrawPolygon();
                         }
+
+                        
                     }
 
                     if (flagPts.Count > 0) DrawFlags();
+                    if (Tree.ptList.Count > 0) Tree.DrawTrees();
 
                     //Direct line to flag if flag selected
                     try
@@ -474,7 +480,7 @@ namespace AgOpenGPS
                         oglBack.Refresh();
 
                         //p_239.pgn[p_239.geoStop] = mc.isOutOfBounds ? (byte)1 : (byte)0;
-
+                        p_239.pgn[p_239.tree] = treeTrigger == 1 ? (byte)1 : (byte)0;
                         SendPgnToLoop(p_239.pgn);
 
                         SendPgnToLoop(p_229.pgn);

@@ -15,6 +15,7 @@ namespace AgOpenGPS
         public readonly SoundPlayer sndRTKAlarm = new SoundPlayer(Properties.Resources.rtk_lost);
         public readonly SoundPlayer sndSectionOn = new SoundPlayer(Properties.Resources.SectionOn);
         public readonly SoundPlayer sndSectionOff = new SoundPlayer(Properties.Resources.SectionOff);
+        public readonly SoundPlayer treeBeep = new SoundPlayer(Properties.Resources.clearly);
 
         public bool isBoundAlarming, isRTKAlarming;
 

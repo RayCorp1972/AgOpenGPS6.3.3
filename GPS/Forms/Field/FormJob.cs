@@ -32,8 +32,8 @@ namespace AgOpenGPS
 
         private void FormJob_Load(object sender, EventArgs e)
         {
+            //mf.Tree.ptList?.Clear();
 
-            
             //check if directory and file exists, maybe was deleted etc
             if (String.IsNullOrEmpty(mf.currentFieldDirectory)) btnJobResume.Enabled = false;
             string directoryName = mf.fieldsDirectory + mf.currentFieldDirectory + "\\";
@@ -83,12 +83,13 @@ namespace AgOpenGPS
             //back to FormGPS
             DialogResult = DialogResult.Yes;
             Close();
+           //mf.Tree.ptList?.Clear();
         }
 
         private void btnJobResume_Click(object sender, EventArgs e)
         {
             if (mf.isJobStarted) mf.FileSaveEverythingBeforeClosingField();
-
+           // mf.Tree.ptList?.Clear();
             //open the Resume.txt and continue from last exit
             mf.FileOpenField("Resume");
 
@@ -109,6 +110,7 @@ namespace AgOpenGPS
                     if (mf.isJobStarted) mf.FileSaveEverythingBeforeClosingField();
                     mf.FileOpenField(mf.filePickerFileAndDirectory);
                     Close();
+                   // mf.Tree.ptList?.Clear();
                 }
                 else
                 {
@@ -119,6 +121,7 @@ namespace AgOpenGPS
 
         private void btnInField_Click(object sender, EventArgs e)
         {
+            //mf.Tree.ptList?.Clear();
             string infieldList = "";
             int numFields = 0;
 
@@ -227,6 +230,7 @@ namespace AgOpenGPS
             //back to FormGPS
             DialogResult = DialogResult.No;
             Close();
+            //mf.Tree.ptList?.Clear();
         }
 
         private void btnFromExisting_Click(object sender, EventArgs e)
@@ -234,6 +238,7 @@ namespace AgOpenGPS
             //back to FormGPS
             DialogResult = DialogResult.Retry;
             Close();
+           // mf.Tree.ptList?.Clear();
         }
 
         private void btnJobClose_Click(object sender, EventArgs e)
@@ -241,6 +246,7 @@ namespace AgOpenGPS
             if (mf.isJobStarted) mf.FileSaveEverythingBeforeClosingField();
             //back to FormGPS
             DialogResult = DialogResult.OK;
+            mf.Tree.ptList?.Clear();
             Close();
         }
 
@@ -249,6 +255,7 @@ namespace AgOpenGPS
             Properties.Settings.Default.setJobMenu_location = Location;
             Properties.Settings.Default.setJobMenu_size = Size;
             Properties.Settings.Default.Save();
+            //mf.Tree.ptList?.Clear();
         }
 
         private void btnFromISOXML_Click(object sender, EventArgs e)
@@ -259,6 +266,7 @@ namespace AgOpenGPS
             //back to FormGPS
             DialogResult = DialogResult.Abort;
             Close();
+            mf.Tree.ptList?.Clear();
         }
 
         private void btnDeleteAB_Click(object sender, EventArgs e)

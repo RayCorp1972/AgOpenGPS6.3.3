@@ -3263,5 +3263,29 @@ namespace AgOpenGPS.Properties {
                 this["setArdMac_user14"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double SetTreeSpace_User {
+            get {
+                return ((double)(this["SetTreeSpace_User"]));
+            }
+            set {
+                this["SetTreeSpace_User"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int SetTreeRadius_User {
+            get {
+                return ((int)(this["SetTreeRadius_User"]));
+            }
+            set {
+                this["SetTreeRadius_User"] = value;
+            }
+        }
     }
 }

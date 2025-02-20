@@ -22,6 +22,7 @@ using System.Reflection;
 using System.Resources;
 using System.Windows.Forms;
 using System.Threading.Tasks;
+using System.Reflection.Emit;
 
 
 namespace AgOpenGPS
@@ -31,10 +32,11 @@ namespace AgOpenGPS
     public partial class FormGPS : Form
     {
 
-       
 
 
-
+        // Tree plant module
+        public double treeSpacingCounter = 0.00;
+        public int treeTrigger = 0;
 
         //To bring forward AgIO if running
         [System.Runtime.InteropServices.DllImport("User32.dll")]
@@ -149,9 +151,11 @@ namespace AgOpenGPS
         /// </summary>
         public CNMEA pn;
 
-      
-       
-             
+        /// <summary>
+        /// Treeplant module
+        /// </summary>
+        public CTree Tree;
+
         /// <summary>
         /// an array of sections
         /// </summary>
@@ -387,6 +391,9 @@ namespace AgOpenGPS
 
             //shape file object
             shape = new ShapeFile(this);
+
+            Tree = new CTree(this);
+            Tree.ptList?.Clear();
         }
 
         private void btnPloughControl_Click(object sender, EventArgs e)
@@ -454,7 +461,8 @@ namespace AgOpenGPS
 
             //boundaryToolStripBtn.Enabled = false;
             FieldMenuButtonEnableDisable(false);
-
+            //load tree points
+            Tree.ptList?.Clear();
             panelRight.Enabled = false;
 
             oglMain.Left = 75;
@@ -809,6 +817,28 @@ namespace AgOpenGPS
             return PixelsVisible >= (Rec.Width * Rec.Height) * MinPercentOnScreen;
         }
 
+        private void toolStripBtnFieldTools_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void treePlamntingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //label3.Visible = true;
+            //label3.BackColor = ButtonColor;
+            //check if window already exists
+            Form fc = Application.OpenForms["FormTreePlant"];
+
+            if (fc != null)
+            {
+                fc.Focus();
+                return;
+            }
+
+            //
+            Form form = new FormTreePlant(this);
+            form.Show();
+        }
 
         private void FormGPS_Move(object sender, EventArgs e)
         {

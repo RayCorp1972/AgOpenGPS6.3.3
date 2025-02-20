@@ -8,7 +8,8 @@ namespace AgOpenGPS
     public class CVehicle
     {
         private readonly FormGPS mf;
-
+        //tree plant module
+        public double treeSpacing;
         public bool isSteerAxleAhead;
         public bool isPivotBehindAntenna;
 

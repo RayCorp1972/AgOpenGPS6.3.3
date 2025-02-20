@@ -536,6 +536,11 @@ namespace AgOpenGPS
 
 
         }
+
+        private void nudPwmSet_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }

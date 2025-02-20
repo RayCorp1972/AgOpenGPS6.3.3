@@ -149,16 +149,18 @@ namespace AgOpenGPS
             /// PGN - 239 - EF 
             /// uturn=5  tree=6  hydLift = 8 
             /// </summary>
-            public byte[] pgn = new byte[] { 0x80, 0x81, 0x7f, 0xEF, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0xCC };
+            public byte[] pgn = new byte[] { 0x80, 0x81, 0x7f, 0xEF, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  0xCC };
             public int uturn = 5;
             public int speed = 6;
             public int hydLift = 7;
-            public int tram = 8;
+            public int tree = 8;
             //public int geoStop = 9; //out of bounds etc
             public int lineDistanceL = 9;       //extra mm +/- needed on working width (mm to the line, *-1 if heading is not same way as ABline)
             public int lineDistanceH = 10;
             public int sc1to8 = 11;
             public int sc9to16 = 12;
+            public int tram = 13;
+
 
             public CPGN_EF()
             {

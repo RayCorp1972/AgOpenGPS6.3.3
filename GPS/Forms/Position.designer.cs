@@ -1140,8 +1140,33 @@ namespace AgOpenGPS
             //positions and headings 
             CalculatePositionHeading();
 
-            //calculate lookahead at full speed, no sentence misses
-            CalculateSectionLookAhead(toolPos.northing, toolPos.easting, cosSectionHeading, sinSectionHeading);
+            //tree spacing
+            if (Tree.isPlanting)
+            {
+                if (vehicle.treeSpacing != 0) treeSpacingCounter = (int)(glm.Distance(toolPos, lasttree) * 100);
+
+                //keep the distance below spacing
+                if (treeSpacingCounter > vehicle.treeSpacing && vehicle.treeSpacing != 0)
+                {
+                    vec2 temp = new vec2();
+                    temp.easting = toolPos.easting;
+                    temp.northing = toolPos.northing;
+                    if (Tree.isSound) sounds.treeBeep.Play();
+                    Tree.AddPoint(toolPos.easting, toolPos.northing);
+                    lasttree = temp;
+
+                }
+                if (treeSpacingCounter < Tree.treeRadi || Math.Abs(treeSpacingCounter - vehicle.treeSpacing) < Tree.treeRadi)
+                {
+                    treeTrigger = 1;
+                }
+                else
+                {
+                    treeTrigger = 0;
+                }
+            }
+                //calculate lookahead at full speed, no sentence misses
+                CalculateSectionLookAhead(toolPos.northing, toolPos.easting, cosSectionHeading, sinSectionHeading);
 
             //To prevent drawing high numbers of triangles, determine and test before drawing vertex
             sectionTriggerDistance = glm.Distance(pn.fix, prevSectionPos);

@@ -483,6 +483,8 @@
             this.cboxFeatureHeadland = new System.Windows.Forms.CheckBox();
             this.cboxFeatureTram = new System.Windows.Forms.CheckBox();
             this.tabDisplay = new System.Windows.Forms.TabPage();
+            this.easymodelabel = new System.Windows.Forms.Label();
+            this.EasyModeBtn = new System.Windows.Forms.CheckBox();
             this.label159 = new System.Windows.Forms.Label();
             this.btnRemote = new System.Windows.Forms.Button();
             this.label79 = new System.Windows.Forms.Label();
@@ -563,8 +565,6 @@
             this.btnOK = new System.Windows.Forms.Button();
             this.label22 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.EasyModeBtn = new System.Windows.Forms.CheckBox();
-            this.easymodelabel = new System.Windows.Forms.Label();
             this.panelLeftSideMenu.SuspendLayout();
             this.panelArduinoSubMenu.SuspendLayout();
             this.panelDataSourcesSubMenu.SuspendLayout();
@@ -706,7 +706,7 @@
             this.panelLeftSideMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelLeftSideMenu.Location = new System.Drawing.Point(4, 4);
             this.panelLeftSideMenu.Name = "panelLeftSideMenu";
-            this.panelLeftSideMenu.Size = new System.Drawing.Size(120, 693);
+            this.panelLeftSideMenu.Size = new System.Drawing.Size(120, 699);
             this.panelLeftSideMenu.TabIndex = 110;
             // 
             // btnFeatureHides
@@ -1348,7 +1348,7 @@
             this.tab1.Name = "tab1";
             this.tab1.Padding = new System.Drawing.Point(0, 0);
             this.tab1.SelectedIndex = 0;
-            this.tab1.Size = new System.Drawing.Size(862, 632);
+            this.tab1.Size = new System.Drawing.Size(862, 627);
             this.tab1.TabIndex = 0;
             // 
             // aPlough
@@ -1357,8 +1357,8 @@
             this.aPlough.Controls.Add(this.chbRotationSensor);
             this.aPlough.Location = new System.Drawing.Point(4, 44);
             this.aPlough.Name = "aPlough";
-            this.aPlough.Padding = new System.Windows.Forms.Padding(3);
-            this.aPlough.Size = new System.Drawing.Size(854, 584);
+            this.aPlough.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.aPlough.Size = new System.Drawing.Size(854, 579);
             this.aPlough.TabIndex = 28;
             this.aPlough.Text = "aPlough";
             this.aPlough.UseVisualStyleBackColor = true;
@@ -1483,6 +1483,7 @@
             this.nudPwmSet.Size = new System.Drawing.Size(114, 52);
             this.nudPwmSet.TabIndex = 539;
             this.nudPwmSet.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudPwmSet.ValueChanged += new System.EventHandler(this.nudPwmSet_ValueChanged);
             this.nudPwmSet.Click += new System.EventHandler(this.nudPwmSet_Click);
             // 
             // btnSetWidth
@@ -1841,7 +1842,7 @@
             this.tabSummary.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.tabSummary.Location = new System.Drawing.Point(4, 44);
             this.tabSummary.Name = "tabSummary";
-            this.tabSummary.Padding = new System.Windows.Forms.Padding(3);
+            this.tabSummary.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.tabSummary.Size = new System.Drawing.Size(854, 584);
             this.tabSummary.TabIndex = 0;
             this.tabSummary.Text = "tSum";
@@ -3237,7 +3238,7 @@
             this.tabToolPivot.Controls.Add(this.nudTrailingToolToPivotLength);
             this.tabToolPivot.Location = new System.Drawing.Point(4, 44);
             this.tabToolPivot.Name = "tabToolPivot";
-            this.tabToolPivot.Padding = new System.Windows.Forms.Padding(3);
+            this.tabToolPivot.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.tabToolPivot.Size = new System.Drawing.Size(854, 584);
             this.tabToolPivot.TabIndex = 27;
             this.tabToolPivot.Text = "tPivot";
@@ -6266,7 +6267,7 @@
             this.tabRelay.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.tabRelay.Location = new System.Drawing.Point(4, 44);
             this.tabRelay.Name = "tabRelay";
-            this.tabRelay.Padding = new System.Windows.Forms.Padding(3);
+            this.tabRelay.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.tabRelay.Size = new System.Drawing.Size(854, 584);
             this.tabRelay.TabIndex = 24;
             this.tabRelay.Text = "aRelay";
@@ -8653,12 +8654,44 @@
             this.tabDisplay.Controls.Add(this.chkDisplayExtraGuides);
             this.tabDisplay.Location = new System.Drawing.Point(4, 44);
             this.tabDisplay.Name = "tabDisplay";
-            this.tabDisplay.Padding = new System.Windows.Forms.Padding(3);
+            this.tabDisplay.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.tabDisplay.Size = new System.Drawing.Size(854, 584);
             this.tabDisplay.TabIndex = 25;
             this.tabDisplay.Text = "fDisp";
             this.tabDisplay.Enter += new System.EventHandler(this.tabDisplay_Enter);
             this.tabDisplay.Leave += new System.EventHandler(this.tabDisplay_Leave);
+            // 
+            // easymodelabel
+            // 
+            this.easymodelabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.easymodelabel.BackColor = System.Drawing.Color.Transparent;
+            this.easymodelabel.ForeColor = System.Drawing.Color.Black;
+            this.easymodelabel.Location = new System.Drawing.Point(684, 349);
+            this.easymodelabel.Name = "easymodelabel";
+            this.easymodelabel.Size = new System.Drawing.Size(90, 18);
+            this.easymodelabel.TabIndex = 535;
+            this.easymodelabel.Text = "EasyMode";
+            // 
+            // EasyModeBtn
+            // 
+            this.EasyModeBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.EasyModeBtn.Appearance = System.Windows.Forms.Appearance.Button;
+            this.EasyModeBtn.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.EasyModeBtn.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.EasyModeBtn.FlatAppearance.BorderSize = 2;
+            this.EasyModeBtn.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
+            this.EasyModeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.EasyModeBtn.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EasyModeBtn.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.EasyModeBtn.Image = global::AgOpenGPS.Properties.Resources.ConD_ExtraGuides;
+            this.EasyModeBtn.Location = new System.Drawing.Point(680, 276);
+            this.EasyModeBtn.Name = "EasyModeBtn";
+            this.EasyModeBtn.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.EasyModeBtn.Size = new System.Drawing.Size(100, 69);
+            this.EasyModeBtn.TabIndex = 534;
+            this.EasyModeBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.EasyModeBtn.UseVisualStyleBackColor = false;
+            this.EasyModeBtn.Click += new System.EventHandler(this.EasyModeBtn_Click);
             // 
             // label159
             // 
@@ -9872,7 +9905,7 @@
             this.panelBottom.Controls.Add(this.label22);
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelBottom.ForeColor = System.Drawing.Color.Lime;
-            this.panelBottom.Location = new System.Drawing.Point(124, 631);
+            this.panelBottom.Location = new System.Drawing.Point(124, 637);
             this.panelBottom.Name = "panelBottom";
             this.panelBottom.Size = new System.Drawing.Size(862, 66);
             this.panelBottom.TabIndex = 112;
@@ -9926,45 +9959,12 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // EasyModeBtn
-            // 
-            this.EasyModeBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.EasyModeBtn.Appearance = System.Windows.Forms.Appearance.Button;
-            this.EasyModeBtn.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.EasyModeBtn.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.EasyModeBtn.FlatAppearance.BorderSize = 2;
-            this.EasyModeBtn.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGreen;
-            this.EasyModeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.EasyModeBtn.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EasyModeBtn.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.EasyModeBtn.Image = global::AgOpenGPS.Properties.Resources.ConD_ExtraGuides;
-            this.EasyModeBtn.Location = new System.Drawing.Point(680, 276);
-            this.EasyModeBtn.Name = "EasyModeBtn";
-            this.EasyModeBtn.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.EasyModeBtn.Size = new System.Drawing.Size(100, 69);
-            this.EasyModeBtn.TabIndex = 534;
-            this.EasyModeBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.EasyModeBtn.UseVisualStyleBackColor = false;
-            this.EasyModeBtn.Click += new System.EventHandler(this.EasyModeBtn_Click);
-           
-            // 
-            // easymodelabel
-            // 
-            this.easymodelabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.easymodelabel.BackColor = System.Drawing.Color.Transparent;
-            this.easymodelabel.ForeColor = System.Drawing.Color.Black;
-            this.easymodelabel.Location = new System.Drawing.Point(684, 349);
-            this.easymodelabel.Name = "easymodelabel";
-            this.easymodelabel.Size = new System.Drawing.Size(90, 18);
-            this.easymodelabel.TabIndex = 535;
-            this.easymodelabel.Text = "EasyMode";
-            // 
             // FormConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(990, 701);
+            this.ClientSize = new System.Drawing.Size(990, 707);
             this.ControlBox = false;
             this.Controls.Add(this.tab1);
             this.Controls.Add(this.panelBottom);
@@ -9972,11 +9972,11 @@
             this.Font = new System.Drawing.Font("Tahoma", 9.75F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.HelpButton = true;
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormConfig";
-            this.Padding = new System.Windows.Forms.Padding(4);
+            this.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Configuration";
