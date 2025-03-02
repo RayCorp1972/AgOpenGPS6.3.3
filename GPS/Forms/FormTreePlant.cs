@@ -8,8 +8,9 @@ namespace AgOpenGPS
     {
         private readonly FormGPS mf = null;
         private double lastDist;
-        private bool wasRed, isRunning;
+        private bool wasRed, isRunning, AutoAan;
         private int trees;
+     
         
         public FormTreePlant(Form callingForm)
         {
@@ -43,57 +44,175 @@ namespace AgOpenGPS
             //Properties.Settings.Default.setDistance_TreeSpacing = mf.vehicle.treeSpacing;
             //Properties.Settings.Default.Save();
             //mf.vehicle.treeSpacing = 0;
+            mf.Tree.isPlanting = false;
             Close();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             isRunning = mf.Tree.isPlanting;
-            
-            if (isRunning)
+
+            if (mf.AutoAanTree)
             {
-                lblDistanceTree.Text = ((UInt16)mf.treeSpacingCounter * 0.01).ToString();
-                if (lastDist > mf.treeSpacingCounter)
+
+                if (mf.Buiten) // Binnen perceel grens
                 {
-                    //lblSpacing.Text = mf.vehicle.treeSpacing.ToString();
-                    wasRed = !wasRed;                    
-                    if (wasRed) btnZeroDistance.BackColor = Color.DarkSeaGreen;
-                    
-                    else btnZeroDistance.BackColor = Color.LightGreen;
-                   
+
+
+                    if (isRunning)
+                    {
+                        //mf.Tree.isPlanting = true;
+                        lblDistanceTree.Text = ((UInt16)mf.treeSpacingCounter * 0.01).ToString();
+                        if (lastDist > mf.treeSpacingCounter)
+                        {
+
+                            wasRed = !wasRed;
+                            if (wasRed) btnZeroDistance.BackColor = Color.DarkSeaGreen;
+
+                            else btnZeroDistance.BackColor = Color.LightGreen;
+
+                        }
+                        btnZeroDistance.Text = "Stop";
+
+                    }
+                    else
+                    {
+                        btnZeroDistance.Text = "Start";
+
+                    }
+                    if (mf.Tree.isSound)
+                    {
+                        button1.BackColor = Color.DarkGreen;
+                        this.BackColor = Color.Black;
+                    }
+                    else
+                    {
+                        button1.BackColor = Color.Orange;
+
+                    }
+                    if (mf.treeTrigger == 1) pictureBox1.Image = Properties.Resources.SwitchOn;
+                    if (mf.treeTrigger == 1) this.BackColor = Color.Red;
+                    else pictureBox1.Image = Properties.Resources.SwitchOff;
+                    lblStepDistance.Text = (mf.distanceCurrentStepFix * 100).ToString("N1");
+                    lblSpeed.Text = mf.pn.speed.ToString("N1");
+                    lblTrees.Text = mf.Tree.ptList.Count.ToString();
+                    lastDist = mf.treeSpacingCounter;
+
+                    this.lblTrees.TextChanged += new System.EventHandler(this.lblTrees_TextChanged);
+                    mf.Tree.isPlanting = true;
+
                 }
-                btnZeroDistance.Text = "Stop";
-                
-            }
-            else
-            {
-                btnZeroDistance.Text = "Start";
-               
-            }
-            if(mf.Tree.isSound)
-            {
-                button1.BackColor = Color.DarkGreen;
-                this.BackColor = Color.Black;
-            }
-            else
-            {
-                button1.BackColor = Color.Orange;
-                
-            }
-            if (mf.treeTrigger == 1) pictureBox1.Image = Properties.Resources.SwitchOn;
-            if (mf.treeTrigger == 1) this.BackColor = Color.Red;
-            else pictureBox1.Image = Properties.Resources.SwitchOff;
-            lblStepDistance.Text = (mf.distanceCurrentStepFix * 100).ToString("N1");
-            lblSpeed.Text = mf.pn.speed.ToString("N1");
-            lblTrees.Text = mf.Tree.ptList.Count.ToString();
-            lastDist = mf.treeSpacingCounter;
-            
-            this.lblTrees.TextChanged += new System.EventHandler(this.lblTrees_TextChanged);
+                else
+                {
+                    lastDist = 0;
+                    mf.treeSpacingCounter = 0;
+                    lblDistanceTree.Text = ((UInt16)mf.treeSpacingCounter * 0.01).ToString();
+                    btnZeroDistance.Text = "Standby";
+                    mf.Tree.isPlanting = false;
+
+                }
 
 
+            }
 
+            if (!mf.AutoAanTree)
+            {
+                if (isRunning)
+                {
+                    //mf.Tree.isPlanting = true;
+                    lblDistanceTree.Text = ((UInt16)mf.treeSpacingCounter * 0.01).ToString();
+                    if (lastDist > mf.treeSpacingCounter)
+                    {
+
+                        wasRed = !wasRed;
+                        if (wasRed) btnZeroDistance.BackColor = Color.DarkSeaGreen;
+
+                        else btnZeroDistance.BackColor = Color.LightGreen;
+
+                    }
+                    btnZeroDistance.Text = "Stop";
+
+                }
+                else
+                {
+                    btnZeroDistance.Text = "Start";
+
+                }
+                if (mf.Tree.isSound)
+                {
+                    button1.BackColor = Color.DarkGreen;
+                    this.BackColor = Color.Black;
+                }
+                else
+                {
+                    button1.BackColor = Color.Orange;
+
+                }
+                if (mf.treeTrigger == 1) pictureBox1.Image = Properties.Resources.SwitchOn;
+                if (mf.treeTrigger == 1) this.BackColor = Color.Red;
+                else pictureBox1.Image = Properties.Resources.SwitchOff;
+                lblStepDistance.Text = (mf.distanceCurrentStepFix * 100).ToString("N1");
+                lblSpeed.Text = mf.pn.speed.ToString("N1");
+                lblTrees.Text = mf.Tree.ptList.Count.ToString();
+                lastDist = mf.treeSpacingCounter;
+
+                this.lblTrees.TextChanged += new System.EventHandler(this.lblTrees_TextChanged);
+                //mf.Tree.isPlanting = true;
+
+            }
         }
         
+
+
+
+        //else
+        //{
+        //lastDist = 0;
+        //mf.treeSpacingCounter = 0;
+        //lblDistanceTree.Text = ((UInt16)mf.treeSpacingCounter * 0.01).ToString();
+        //btnZeroDistance.Text = "Standby";
+        ////mf.Tree.isPlanting = false;
+
+        //}
+        //isRunning = mf.Tree.isPlanting;
+    
+            //else
+
+            //{
+
+            //    if (isRunning)
+            //    {
+            //        lastDist = 0;
+            //        mf.treeSpacingCounter = 0;
+
+            //        mf.distanceCurrentStepFix = 0;
+            //        lblDistanceTree.Text = ((UInt16)mf.treeSpacingCounter).ToString();
+            //        lblStepDistance.Text = (mf.distanceCurrentStepFix * 100).ToString("N1");
+            //        btnZeroDistance.BackColor = Color.OrangeRed;
+
+            //        //mf.Tree.isPlanting = false;
+            //    }
+            //    else
+            //    {
+            //        lastDist = 0;
+            //        trees = 0;
+            //        mf.treeSpacingCounter = 0;
+
+            //        mf.distanceCurrentStepFix = 0;
+            //        lblDistanceTree.Text = ((UInt16)mf.treeSpacingCounter).ToString();
+            //        lblStepDistance.Text = (mf.distanceCurrentStepFix * 100).ToString("N1");
+            //        btnZeroDistance.BackColor = Color.LightGreen;
+            //      // mf.Tree.isPlanting = true;
+
+
+
+            //    }
+
+
+            //    isRunning = mf.Tree.isPlanting;
+        //    }
+
+        //}
 
         private void lblTrees_TextChanged(object sender, EventArgs e)
         {
@@ -112,17 +231,14 @@ namespace AgOpenGPS
                 btnZeroDistance.BackColor = Color.OrangeRed;
                 
                 mf.Tree.isPlanting = false;
-                // mf.vehicle.treeSpacing = 0;
+               
             }
             else
             {
                 lastDist = 0;
                 trees = 0;
                 mf.treeSpacingCounter = 0;
-               //if (mf.manualBtnState == AgOpenGPS.FormGPS.btnStates.Off)
-                //{
-                //    mf.btnManualOffOn.PerformClick();
-                //}
+              
 
                 mf.distanceCurrentStepFix = 0;
                 lblDistanceTree.Text = ((UInt16)mf.treeSpacingCounter).ToString();
@@ -131,7 +247,7 @@ namespace AgOpenGPS
                 
                 mf.Tree.isPlanting = true;
 
-                //mf.vehicle.treeSpacing = Properties.Settings.Default.setDistance_TreeSpacing;
+               
             }
 
 
@@ -164,7 +280,7 @@ namespace AgOpenGPS
         {
 
             mf.KeypadToNUD((NudlessNumericUpDown)sender, this);
-            Properties.Settings.Default.SetTreeSpace_User = (int)nudRadius.Value;
+            Properties.Settings.Default.SetTreeRadius_User = (int)nudRadius.Value;
 
             mf.Tree.treeRadi = (int)nudRadius.Value;
 
@@ -183,16 +299,37 @@ namespace AgOpenGPS
             if (result == DialogResult.OK)
             {
                 mf.Tree.ptList?.Clear();
+                lblTrees.Text = "0";
             }
             else if (result == DialogResult.Cancel)
             {
                 return;
             }
      }
-        
+        // hij flikkert
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (button3.BackColor == Color.Green)
+            {
+                button3.BackColor = Color.WhiteSmoke;
+                label6.Text = "Auto Uit";
+                mf.AutoAanTree = false;
+
+
+            }
+            else
+            {
+                button3.BackColor = Color.Green;
+                label6.Text = "Auto Aan";
+                mf.AutoAanTree = true;
+            }
+        }
 
         private void FormTreePlant_Load(object sender, EventArgs e)
         {
+            nudTreeSpacing.Value = (decimal)Properties.Settings.Default.SetTreeSpace_User;
+            nudRadius.Value = Properties.Settings.Default.SetTreeRadius_User;
+
 
             mf.vehicle.treeSpacing = Properties.Settings.Default.SetTreeSpace_User;
             nudTreeSpacing.Value = (decimal)mf.vehicle.treeSpacing;

@@ -207,7 +207,6 @@ namespace AgOpenGPS
 
         }
 
-
         public void DrawTrees()
         {
 
@@ -215,14 +214,14 @@ namespace AgOpenGPS
             int ptCount = ptList.Count;
 
 
-            GL.LineWidth(1);
+            GL.PointSize(8);
 
 
             ptCount = ptList.Count;
             if (ptCount > 0)
             {
 
-                double toole = 2;
+                double toole = 1;
 
                 for (int i = 0; i < ptCount; i++)
                 {
@@ -235,8 +234,8 @@ namespace AgOpenGPS
                     sinSectionHeading90 = Math.Sin(-ptList[i].heading);
                     cosSectionHeading90 = Math.Cos(-ptList[i].heading);
 
-                    if (ptList[i].isSelected) GL.LineWidth(2);
-                    else GL.LineWidth(2);
+                    if (ptList[i].isSelected) GL.LineWidth(5);
+                    else GL.LineWidth(6);
 
                     GL.Color3(0.98f, 0.98f, 0.70f);
 
@@ -258,14 +257,14 @@ namespace AgOpenGPS
                         if (i == whenself)
                         {
                             GL.Color3(.8f, .8f, .9f);
-                            GL.PointSize(5);
-                            GL.Begin(PrimitiveType.Points);
+                            GL.PointSize(8);
+                            GL.Begin(PrimitiveType.Lines);
                             GL.Vertex3(ptList[i].easting, ptList[i].northing, 0);
                             GL.End();
 
                             GL.Color3(0f, 0f, .8f);
-                            GL.PointSize(2);
-                            GL.Begin(PrimitiveType.Points);
+                            GL.PointSize(8);
+                            GL.Begin(PrimitiveType.Lines);
                             GL.Vertex3(ptList[i].easting, ptList[i].northing, 0);
                             GL.End();
                         }
@@ -274,13 +273,81 @@ namespace AgOpenGPS
                 }
 
             }
+        }
+
+            //public void DrawTrees()
+            //{
 
 
+            //    int ptCount = ptList.Count;
+
+
+            //    GL.LineWidth(1);
+
+
+            //    ptCount = ptList.Count;
+            //    if (ptCount > 0)
+            //    {
+
+            //        double toole = 2;
+
+            //        for (int i = 0; i < ptCount; i++)
+            //        {
+
+            //            float green = Convert.ToSingle(256 / 256);
+            //            float red = Convert.ToSingle(256 / 256);
+            //            float blue = Convert.ToSingle(256 / 256);
+            //            sinSectionHeading = Math.Sin(ptList[i].heading);
+            //            cosSectionHeading = Math.Cos(ptList[i].heading);
+            //            sinSectionHeading90 = Math.Sin(-ptList[i].heading);
+            //            cosSectionHeading90 = Math.Cos(-ptList[i].heading);
+
+            //            if (ptList[i].isSelected) GL.LineWidth(2);
+            //            else GL.LineWidth(2);
+
+            //            GL.Color3(0.98f, 0.98f, 0.70f);
+
+
+
+            //            GL.Begin(PrimitiveType.Lines);
+            //            GL.Vertex3((cosSectionHeading * -toole / 2) + ptList[i].easting,
+            //               (sinSectionHeading * -toole / 2) + ptList[i].northing, 0);
+            //            GL.Vertex3((cosSectionHeading * toole / 2) + ptList[i].easting,
+            //               (sinSectionHeading * toole / 2) + ptList[i].northing, 0);
+            //            GL.Vertex3((sinSectionHeading90 * -toole / 2) + ptList[i].easting,
+            //           (cosSectionHeading90 * -toole / 2) + ptList[i].northing, 0);
+            //            GL.Vertex3((sinSectionHeading90 * toole / 2) + ptList[i].easting,
+            //               (cosSectionHeading90 * toole / 2) + ptList[i].northing, 0);
+            //            GL.End();
+
+            //            if (istrolling)
+            //            {
+            //                if (i == whenself)
+            //                {
+            //                    GL.Color3(.8f, .8f, .9f);
+            //                    GL.PointSize(5);
+            //                    GL.Begin(PrimitiveType.Points);
+            //                    GL.Vertex3(ptList[i].easting, ptList[i].northing, 0);
+            //                    GL.End();
+
+            //                    GL.Color3(0f, 0f, .8f);
+            //                    GL.PointSize(2);
+            //                    GL.Begin(PrimitiveType.Points);
+            //                    GL.Vertex3(ptList[i].easting, ptList[i].northing, 0);
+            //                    GL.End();
+            //                }
+            //            }
+
+            //        }
+
+            //    }
+
+
+
+
+            //}
 
 
         }
-
-
-    }
 
 }

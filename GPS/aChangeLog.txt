@@ -1,4 +1,25 @@
-﻿v3.0.8 December 2019
+﻿V6.3.3 PLoeg besturing + remote line shift + boomplant module
+* remote lineschift  line 128 / CmoduleComms / activatie remote control config scherm
+* Treeplant / toevoegen treeplanner
+* Ploeg besturing / nog afmaken!!!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+v3.0.8 December 2019
 * Add fonts
 * Add Tramlines
 * Add Speedo and Compass

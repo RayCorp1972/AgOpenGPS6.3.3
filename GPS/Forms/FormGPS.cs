@@ -37,6 +37,7 @@ namespace AgOpenGPS
         // Tree plant module
         public double treeSpacingCounter = 0.00;
         public int treeTrigger = 0;
+        public bool AutoAanTree = false;
 
         //To bring forward AgIO if running
         [System.Runtime.InteropServices.DllImport("User32.dll")]

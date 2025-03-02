@@ -125,22 +125,26 @@ namespace AgOpenGPS
                 }
             }
 
-          
-            if (abShiftLeftHigh == 0)
+            if (Properties.Settings.Default.SetIsRemoteOn == true)
             {
-              
-                mf.Cr.AblineSkipLeft();
-               
+                if (abShiftLeftHigh == 0)
+                {
+
+                    mf.Cr.AblineSkipLeft();
+
+                }
+
+
+
+                if (abShiftRightHigh == 0)
+                {
+
+                    mf.Cr.AblineSkipRight();
+
+                }
+
             }
-           
-
-
-            if (abShiftRightHigh == 0)
-            {
-                
-                mf.Cr.AblineSkipRight();
-
-            }
+            
            
         }
     }

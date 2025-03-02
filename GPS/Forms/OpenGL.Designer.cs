@@ -12,7 +12,7 @@ namespace AgOpenGPS
         public double[] frustum = new double[24];
         // tree
         public vec2 lasttree = new vec2(0, 0);
-
+        public bool Buiten = false;
 
         private bool isInit = false;
         private double fovy = 0.7;
@@ -479,11 +479,26 @@ namespace AgOpenGPS
                     {
                         oglBack.Refresh();
 
-                        //p_239.pgn[p_239.geoStop] = mc.isOutOfBounds ? (byte)1 : (byte)0;
-                        p_239.pgn[p_239.tree] = treeTrigger == 1 ? (byte)1 : (byte)0;
-                        SendPgnToLoop(p_239.pgn);
+                        if (AutoAanTree)
+                        {
+                            if (Buiten)
+                            {
+                                //p_239.pgn[p_239.geoStop] = mc.isOutOfBounds ? (byte)1 : (byte)0;
+                                p_239.pgn[p_239.tree] = treeTrigger == 1 ? (byte)1 : (byte)0;
+                                SendPgnToLoop(p_239.pgn);
 
-                        SendPgnToLoop(p_229.pgn);
+                                SendPgnToLoop(p_229.pgn);
+
+                            }
+                        }
+                        else
+                        {
+                            //p_239.pgn[p_239.geoStop] = mc.isOutOfBounds ? (byte)1 : (byte)0;
+                            p_239.pgn[p_239.tree] = treeTrigger == 1 ? (byte)1 : (byte)0;
+                            SendPgnToLoop(p_239.pgn);
+
+                            SendPgnToLoop(p_229.pgn);
+                        }
                     }
 
                     //draw the zoom window
@@ -791,6 +806,7 @@ namespace AgOpenGPS
                         if (!isLeftIn || !isRightIn) section[j].isInBoundary = false;
                         else section[j].isInBoundary = true;
                     }
+                    Buiten = section[j].isInBoundary;
                 }
             }
 

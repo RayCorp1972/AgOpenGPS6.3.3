@@ -184,14 +184,14 @@ namespace AgOpenGPS
                 mf.btnPloughControl.Visible = false;
             }
 
-            //if (chbPwm.Checked)
-            //{
-            //    Properties.Settings.Default.setPlough_isPwmOn = true;
-            //}
-            //else
-            //{
-            //    Properties.Settings.Default.setPlough_isPwmOn = false;
-            //}
+            if (chbInvert.Checked)
+            {
+                Properties.Settings.Default.SetIsRemoteOn = true;
+            }
+            else
+            {
+                Properties.Settings.Default.SetIsRemoteOn = false;
+            }
 
             //if (chbBlackWhite.Checked)
             //{

@@ -3287,5 +3287,17 @@ namespace AgOpenGPS.Properties {
                 this["SetTreeRadius_User"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SetIsRemoteOn {
+            get {
+                return ((bool)(this["SetIsRemoteOn"]));
+            }
+            set {
+                this["SetIsRemoteOn"] = value;
+            }
+        }
     }
 }
