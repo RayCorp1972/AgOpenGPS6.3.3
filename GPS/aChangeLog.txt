@@ -1,5 +1,6 @@
-﻿V6.3.3 PLoeg besturing + remote line shift + boomplant module
+﻿V6.3.3_H001 PLoeg besturing + remote line shift + boomplant module
 * remote lineschift  line 128 / CmoduleComms / activatie remote control config scherm
+* remote lineshift Links op pin 26 recht 27 teensy
 * Treeplant / toevoegen treeplanner
 * Ploeg besturing / nog afmaken!!!
 
