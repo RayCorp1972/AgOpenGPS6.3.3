@@ -235,6 +235,7 @@ namespace AgOpenGPS
                             
                             //abLine nudge status
                             mc.abShiftLeftHigh = data[13];
+                            mc.abShiftLeftHigh = data[14];
                             //Console.WriteLine($"abShiftLeftHigh: {mc.workSwitchHigh}");
 
 

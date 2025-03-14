@@ -618,7 +618,7 @@ namespace AgOpenGPS
             }
             else
             {
-                nudTractorHitchLength.Visible = false;
+                nudTractorHitchLength.Visible = true;
                 label94.Visible = false;
                 label27.Visible = false;
             }

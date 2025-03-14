@@ -440,7 +440,7 @@ namespace AgOpenGPS
             }
 
             //draw current AB Line
-            GL.LineWidth(lineWidth);
+            GL.LineWidth(4);
             GL.Begin(PrimitiveType.Lines);
             GL.Color3(0.95f, 0.20f, 0.950f);
             GL.Vertex3(currentLinePtA.easting, currentLinePtA.northing, 0.0);
@@ -454,7 +454,7 @@ namespace AgOpenGPS
                 double toolWidth = mf.tool.width - mf.tool.overlap;
                 double cosHeading = Math.Cos(-abHeading);
                 double sinHeading = Math.Sin(-abHeading);
-
+                //GL.Color4(0.55, 0.55, 0.55, 0.3);
                 GL.Color3(0.756f, 0.7650f, 0.7650f);
                 GL.Enable(EnableCap.LineStipple);
                 GL.LineStipple(1, 0x0303);

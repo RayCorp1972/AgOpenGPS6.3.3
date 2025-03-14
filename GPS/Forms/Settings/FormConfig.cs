@@ -118,7 +118,7 @@ namespace AgOpenGPS
             label179.Text = Invert;
             label113.Text = Distance;
 
-
+            nudTractorHitchLength.Visible = true;
 
 
             //since we reset, save current state
@@ -538,6 +538,11 @@ namespace AgOpenGPS
         }
 
         private void nudPwmSet_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblSummaryVehicleName_Click(object sender, EventArgs e)
         {
 
         }

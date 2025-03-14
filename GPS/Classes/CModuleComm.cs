@@ -127,7 +127,7 @@ namespace AgOpenGPS
 
             if (Properties.Settings.Default.SetIsRemoteOn == true)
             {
-                if (abShiftLeftHigh == 0)
+                if (abShiftLeftHigh == 1)
                 {
 
                     mf.Cr.AblineSkipLeft();
@@ -136,7 +136,7 @@ namespace AgOpenGPS
 
 
 
-                if (abShiftRightHigh == 0)
+                if (abShiftRightHigh == 1)
                 {
 
                     mf.Cr.AblineSkipRight();

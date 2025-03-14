@@ -58,7 +58,7 @@ namespace AgOpenGPS
             /// <summary>
             /// From steer module
             /// </summary>
-            public byte[] pgn = new byte[] { 0x80, 0x81, 0x7f, 0xFD, 8, 0, 0, 0, 0, 0, 0, 0, 0,  0xCC };
+            public byte[] pgn = new byte[] { 0x80, 0x81, 0x7f, 0xFD, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0xCC };
             public int actualLo = 5;
             public int actualHi = 6;
             public int headLo = 7;
@@ -68,7 +68,7 @@ namespace AgOpenGPS
             public int switchStatus = 11;
             public int pwm = 12;
             public int abShiftLeft = 13;
-            //public int abShiftRight = 14;
+            public int abShiftRight = 14;
 
             public void Reset()
             {

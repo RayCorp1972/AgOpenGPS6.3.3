@@ -16,12 +16,12 @@ namespace AgOpenGPS
     {
         public uint[] texture;
 
+        // Plough variables
+
         public bool PloughControl = false;
         public bool InvertPloughWiderSmaller = false;
         public bool InvertPloughDirection = false;
         public bool isInvertOn1 = false;
-
-        // Plough variables
         public Int16 ploughWidth = 0;
         public byte ploughMode = 255;
         public byte deadBand = 0;
